@@ -5,7 +5,7 @@ PROJECT EXPORT FOR LLMs
 PROJECT INFORMATION:
 --------------------------------------------------
 Project Name: myproject
-Generated On: 2026-05-15 20:41:45 (Asia/Riyadh / GMT+03:00)
+Generated On: 2026-05-15 21:29:50 (Asia/Riyadh / GMT+03:00)
 Total Files Processed: 40
 Export Tool: Easy Whole Project to Single Text File for LLMs v1.1.0
 Tool Author: Jota / José Guilherme Pandolfi
@@ -65,7 +65,7 @@ PROJECT STRUCTURE
 │   │   ├── 📄 0002_cart_cartitem.py (1.3 KB)
 │   │   └── 📄 0003_order_orderitem_payment.py (2.44 KB)
 │   ├── 📄 __init__.py
-│   ├── 📄 admin.py (367 B)
+│   ├── 📄 admin.py (399 B)
 │   ├── 📄 apps.py (90 B)
 │   ├── 📄 models.py (3.18 KB)
 │   ├── 📄 tests.py (63 B)
@@ -82,7 +82,7 @@ Total Files: 40
 Total Directories: 12
 Text Files: 21
 Binary Files: 19
-Total Size: 174.75 KB
+Total Size: 174.78 KB
 
 FILE TYPES DISTRIBUTION:
 ------------------------------
@@ -765,15 +765,15 @@ FILE: store/admin.py
 
 FILE INFORMATION:
 ----------------------------------------
-Size: 367 B
+Size: 399 B
 Extension: .py
 Language: python
 Location: store/admin.py
 Relative Path: store
 Created: 2026-05-11 17:44:09 (Asia/Riyadh / GMT+03:00)
-Modified: 2026-05-11 18:22:13 (Asia/Riyadh / GMT+03:00)
-MD5: b30d83ef74bf047bed1033c70a2630f9
-SHA256: 01d2fd8415ca12f6c5bbc94aae41608b96f5601bfe6d5b1b9c5316bc51464ca4
+Modified: 2026-05-15 21:29:50 (Asia/Riyadh / GMT+03:00)
+MD5: a13173573ae0b8cc707f6d0887a3bef6
+SHA256: cbda50de49a41e15e873e49877ba2bbacbe867ea3d71e071402a27f691a46846
 Encoding: ASCII
 
 FILE CONTENT:
@@ -789,6 +789,7 @@ from .models import (
     OrderItem,
     Payment
 )
+#admin.site.register(Category)
 
 admin.site.register(Category)
 admin.site.register(Product)

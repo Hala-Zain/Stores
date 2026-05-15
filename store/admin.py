@@ -9,6 +9,7 @@ from .models import (
     OrderItem,
     Payment
 )
+#admin.site.register(Category)
 
 admin.site.register(Category)
 admin.site.register(Product)
