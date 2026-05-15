@@ -1,0 +1,1417 @@
+# 📁 PROJECT EXPORT FOR LLMs
+
+## 📊 Project Information
+
+- **Project Name**: `myproject`
+- **Generated On**: 2026-05-15 20:41:45 (Asia/Riyadh / GMT+03:00)
+- **Total Files Processed**: 40
+- **Export Tool**: Easy Whole Project to Single Text File for LLMs v1.1.0
+- **Tool Author**: Jota / José Guilherme Pandolfi
+
+### ⚙️ Export Configuration
+
+| Setting | Value |
+|---------|-------|
+| Language | `en` |
+| Max File Size | `1 MB` |
+| Include Hidden Files | `false` |
+| Output Format | `both` |
+
+## 🌳 Project Structure
+
+```
+├── 📁 __pycache__/
+│   └── 📄 locustfile.cpython-313.pyc (764 B)
+├── 📁 main/
+├── 📁 myproject/
+│   ├── 📁 __pycache__/
+│   │   ├── 📄 __init__.cpython-313.pyc (151 B)
+│   │   ├── 📄 settings.cpython-313.pyc (2.44 KB)
+│   │   ├── 📄 urls.cpython-313.pyc (430 B)
+│   │   └── 📄 wsgi.cpython-313.pyc (643 B)
+│   ├── 📄 __init__.py
+│   ├── 📄 asgi.py (411 B)
+│   ├── 📄 settings.py (3.16 KB)
+│   ├── 📄 urls.py (171 B)
+│   └── 📄 wsgi.py (411 B)
+├── 📁 store/
+│   ├── 📁 __pycache__/
+│   │   ├── 📄 __init__.cpython-313.pyc (147 B)
+│   │   ├── 📄 admin.cpython-313.pyc (876 B)
+│   │   ├── 📄 apps.cpython-313.pyc (448 B)
+│   │   ├── 📄 models.cpython-313.pyc (5.45 KB)
+│   │   ├── 📄 urls.cpython-313.pyc (486 B)
+│   │   └── 📄 views.cpython-313.pyc (6.23 KB)
+│   ├── 📁 management/
+│   │   ├── 📁 __pycache__/
+│   │   │   └── 📄 __init__.cpython-313.pyc (158 B)
+│   │   ├── 📁 commands/
+│   │   │   ├── 📁 __pycache__/
+│   │   │   │   ├── 📄 __init__.cpython-313.pyc (167 B)
+│   │   │   │   └── 📄 seed.cpython-313.pyc (1.91 KB)
+│   │   │   ├── 📄 __init__.py
+│   │   │   └── 📄 seed.py (1.11 KB)
+│   │   └── 📄 __init__.py
+│   ├── 📁 migrations/
+│   │   ├── 📁 __pycache__/
+│   │   │   ├── 📄 __init__.cpython-313.pyc (158 B)
+│   │   │   ├── 📄 0001_initial.cpython-313.pyc (1.76 KB)
+│   │   │   ├── 📄 0002_cart_cartitem.cpython-313.pyc (1.96 KB)
+│   │   │   └── 📄 0003_order_orderitem_payment.cpython-313.pyc (3.08 KB)
+│   │   ├── 📄 __init__.py
+│   │   ├── 📄 0001_initial.py (1.23 KB)
+│   │   ├── 📄 0002_cart_cartitem.py (1.3 KB)
+│   │   └── 📄 0003_order_orderitem_payment.py (2.44 KB)
+│   ├── 📄 __init__.py
+│   ├── 📄 admin.py (367 B)
+│   ├── 📄 apps.py (90 B)
+│   ├── 📄 models.py (3.18 KB)
+│   ├── 📄 tests.py (63 B)
+│   ├── 📄 urls.py (370 B)
+│   └── 📄 views.py (4.48 KB)
+├── 📄 db.sqlite3 (128 KB)
+├── 📄 locustfile.py (193 B)
+└── 📄 manage.py (687 B)
+```
+
+## 📑 Table of Contents
+
+**Project Files:**
+
+- [📄 myproject/__init__.py](#📄-myproject-init-py)
+- [📄 myproject/asgi.py](#📄-myproject-asgi-py)
+- [📄 myproject/settings.py](#📄-myproject-settings-py)
+- [📄 myproject/urls.py](#📄-myproject-urls-py)
+- [📄 myproject/wsgi.py](#📄-myproject-wsgi-py)
+- [📄 store/management/commands/__init__.py](#📄-store-management-commands-init-py)
+- [📄 store/management/commands/seed.py](#📄-store-management-commands-seed-py)
+- [📄 store/management/__init__.py](#📄-store-management-init-py)
+- [📄 store/migrations/__init__.py](#📄-store-migrations-init-py)
+- [📄 store/migrations/0001_initial.py](#📄-store-migrations-0001-initial-py)
+- [📄 store/migrations/0002_cart_cartitem.py](#📄-store-migrations-0002-cart-cartitem-py)
+- [📄 store/migrations/0003_order_orderitem_payment.py](#📄-store-migrations-0003-order-orderitem-payment-py)
+- [📄 store/__init__.py](#📄-store-init-py)
+- [📄 store/admin.py](#📄-store-admin-py)
+- [📄 store/apps.py](#📄-store-apps-py)
+- [📄 store/models.py](#📄-store-models-py)
+- [📄 store/tests.py](#📄-store-tests-py)
+- [📄 store/urls.py](#📄-store-urls-py)
+- [📄 store/views.py](#📄-store-views-py)
+- [📄 locustfile.py](#📄-locustfile-py)
+- [📄 manage.py](#📄-manage-py)
+
+---
+
+## 📈 Project Statistics
+
+| Metric | Count |
+|--------|-------|
+| Total Files | 40 |
+| Total Directories | 12 |
+| Text Files | 21 |
+| Binary Files | 19 |
+| Total Size | 174.75 KB |
+
+### 📄 File Types Distribution
+
+| Extension | Count |
+|-----------|-------|
+| `.py` | 21 |
+| `.pyc` | 18 |
+| `.sqlite3` | 1 |
+
+## 💻 File Code Contents
+
+## 🚫 Binary/Excluded Files
+
+The following files were not included in the text content:
+
+- `__pycache__/locustfile.cpython-313.pyc`
+
+## 🚫 Binary/Excluded Files
+
+The following files were not included in the text content:
+
+- `myproject/__pycache__/__init__.cpython-313.pyc`
+- `myproject/__pycache__/settings.cpython-313.pyc`
+- `myproject/__pycache__/urls.cpython-313.pyc`
+- `myproject/__pycache__/wsgi.cpython-313.pyc`
+
+### <a id="📄-myproject-init-py"></a>📄 `myproject/__init__.py`
+
+**File Info:**
+- **Size**: 0 B
+- **Extension**: `.py`
+- **Language**: `python`
+- **Location**: `myproject/__init__.py`
+- **Relative Path**: `myproject`
+- **Created**: 2026-05-10 13:31:05 (Asia/Riyadh / GMT+03:00)
+- **Modified**: 2026-05-10 13:31:05 (Asia/Riyadh / GMT+03:00)
+- **MD5**: `d41d8cd98f00b204e9800998ecf8427e`
+- **SHA256**: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```python
+
+```
+
+---
+
+### <a id="📄-myproject-asgi-py"></a>📄 `myproject/asgi.py`
+
+**File Info:**
+- **Size**: 411 B
+- **Extension**: `.py`
+- **Language**: `python`
+- **Location**: `myproject/asgi.py`
+- **Relative Path**: `myproject`
+- **Created**: 2026-05-10 13:31:05 (Asia/Riyadh / GMT+03:00)
+- **Modified**: 2026-05-11 09:39:57 (Asia/Riyadh / GMT+03:00)
+- **MD5**: `ff66aa093a382cd9c79d644c7ce34364`
+- **SHA256**: `283d5066b75993f0d71327b79e35a3c8bb333a2716a43c9c5c19cf221c5bf967`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```python
+"""
+ASGI config for myproject project.
+
+It exposes the ASGI callable as a module-level variable named ``application``.
+
+For more information on this file, see
+https://docs.djangoproject.com/en/6.0/howto/deployment/asgi/
+"""
+
+import os
+
+from django.core.asgi import get_asgi_application
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'myproject.settings')
+
+application = get_asgi_application()
+
+```
+
+---
+
+### <a id="📄-myproject-settings-py"></a>📄 `myproject/settings.py`
+
+**File Info:**
+- **Size**: 3.16 KB
+- **Extension**: `.py`
+- **Language**: `python`
+- **Location**: `myproject/settings.py`
+- **Relative Path**: `myproject`
+- **Created**: 2026-05-10 13:31:05 (Asia/Riyadh / GMT+03:00)
+- **Modified**: 2026-05-11 18:00:24 (Asia/Riyadh / GMT+03:00)
+- **MD5**: `0accf5b13791b4f088bdb27ca51e813b`
+- **SHA256**: `e39d71ce97a82a8b891bd480b0c97380bae18382df6610ff9fa672139ff909f3`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```python
+"""
+Django settings for myproject project.
+
+Generated by 'django-admin startproject' using Django 6.0.5.
+
+For more information on this file, see
+https://docs.djangoproject.com/en/6.0/topics/settings/
+
+For the full list of settings and their values, see
+https://docs.djangoproject.com/en/6.0/ref/settings/
+"""
+
+from pathlib import Path
+
+# Build paths inside the project like this: BASE_DIR / 'subdir'.
+BASE_DIR = Path(__file__).resolve().parent.parent
+
+
+# Quick-start development settings - unsuitable for production
+# See https://docs.djangoproject.com/en/6.0/howto/deployment/checklist/
+
+# SECURITY WARNING: keep the secret key used in production secret!
+SECRET_KEY = 'django-insecure-3b146)=1@e22syh)-o)ion1&utgsygvg+$c#7+2h)d9))c&+!7'
+
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = True
+
+ALLOWED_HOSTS = []
+
+
+# Application definition
+
+INSTALLED_APPS = [
+        'store',
+    'django.contrib.admin',
+    'django.contrib.auth',
+    'django.contrib.contenttypes',
+    'django.contrib.sessions',
+    'django.contrib.messages',
+    'django.contrib.staticfiles',
+]
+
+MIDDLEWARE = [
+    'django.middleware.security.SecurityMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'django.middleware.common.CommonMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.contrib.messages.middleware.MessageMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+]
+
+ROOT_URLCONF = 'myproject.urls'
+
+TEMPLATES = [
+    {
+        'BACKEND': 'django.template.backends.django.DjangoTemplates',
+        'DIRS': [],
+        'APP_DIRS': True,
+        'OPTIONS': {
+            'context_processors': [
+                'django.template.context_processors.request',
+                'django.contrib.auth.context_processors.auth',
+                'django.contrib.messages.context_processors.messages',
+            ],
+        },
+    },
+]
+
+WSGI_APPLICATION = 'myproject.wsgi.application'
+
+
+# Database
+# https://docs.djangoproject.com/en/6.0/ref/settings/#databases
+
+DATABASES = {
+    'default': {
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'django',
+        'USER': 'root',
+        'PASSWORD': 'password',
+        'HOST': 'localhost',
+        'PORT': '3306',
+    }
+}
+
+
+# Password validation
+# https://docs.djangoproject.com/en/6.0/ref/settings/#auth-password-validators
+
+AUTH_PASSWORD_VALIDATORS = [
+    {
+        'NAME': 'django.contrib.auth.password_validation.UserAttributeSimilarityValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
+    },
+    {
+        'NAME': 'django.contrib.auth.password_validation.NumericPasswordValidator',
+    },
+]
+
+
+# Internationalization
+# https://docs.djangoproject.com/en/6.0/topics/i18n/
+
+LANGUAGE_CODE = 'en-us'
+
+TIME_ZONE = 'UTC'
+
+USE_I18N = True
+
+USE_TZ = True
+
+
+# Static files (CSS, JavaScript, Images)
+# https://docs.djangoproject.com/en/6.0/howto/static-files/
+
+STATIC_URL = 'static/'
+
+```
+
+---
+
+### <a id="📄-myproject-urls-py"></a>📄 `myproject/urls.py`
+
+**File Info:**
+- **Size**: 171 B
+- **Extension**: `.py`
+- **Language**: `python`
+- **Location**: `myproject/urls.py`
+- **Relative Path**: `myproject`
+- **Created**: 2026-05-10 13:31:05 (Asia/Riyadh / GMT+03:00)
+- **Modified**: 2026-05-11 18:47:55 (Asia/Riyadh / GMT+03:00)
+- **MD5**: `c4896d651fe3f97716401b60e83e1239`
+- **SHA256**: `95bb88a532c1e1fa2e8d4e081fd69faf5b91341bfa68336c5da9f748db4239ef`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```python
+from django.contrib import admin
+from django.urls import path, include
+
+urlpatterns = [
+    path('admin/', admin.site.urls),
+    path('', include('store.urls')),
+
+]
+```
+
+---
+
+### <a id="📄-myproject-wsgi-py"></a>📄 `myproject/wsgi.py`
+
+**File Info:**
+- **Size**: 411 B
+- **Extension**: `.py`
+- **Language**: `python`
+- **Location**: `myproject/wsgi.py`
+- **Relative Path**: `myproject`
+- **Created**: 2026-05-10 13:31:05 (Asia/Riyadh / GMT+03:00)
+- **Modified**: 2026-05-11 09:40:01 (Asia/Riyadh / GMT+03:00)
+- **MD5**: `67c568b93a8a511b885a55884d148172`
+- **SHA256**: `dc9753e9ecf2a28256d3723f9bdca1f67984a1f5884d64b04c8611cacc67c4b5`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```python
+"""
+WSGI config for myproject project.
+
+It exposes the WSGI callable as a module-level variable named ``application``.
+
+For more information on this file, see
+https://docs.djangoproject.com/en/6.0/howto/deployment/wsgi/
+"""
+
+import os
+
+from django.core.wsgi import get_wsgi_application
+
+os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'myproject.settings')
+
+application = get_wsgi_application()
+
+```
+
+---
+
+## 🚫 Binary/Excluded Files
+
+The following files were not included in the text content:
+
+- `store/__pycache__/__init__.cpython-313.pyc`
+- `store/__pycache__/admin.cpython-313.pyc`
+- `store/__pycache__/apps.cpython-313.pyc`
+- `store/__pycache__/models.cpython-313.pyc`
+- `store/__pycache__/urls.cpython-313.pyc`
+- `store/__pycache__/views.cpython-313.pyc`
+
+## 🚫 Binary/Excluded Files
+
+The following files were not included in the text content:
+
+- `store/management/__pycache__/__init__.cpython-313.pyc`
+
+## 🚫 Binary/Excluded Files
+
+The following files were not included in the text content:
+
+- `store/management/commands/__pycache__/__init__.cpython-313.pyc`
+- `store/management/commands/__pycache__/seed.cpython-313.pyc`
+
+### <a id="📄-store-management-commands-init-py"></a>📄 `store/management/commands/__init__.py`
+
+**File Info:**
+- **Size**: 0 B
+- **Extension**: `.py`
+- **Language**: `python`
+- **Location**: `store/management/commands/__init__.py`
+- **Relative Path**: `store/management/commands`
+- **Created**: 2026-05-11 18:33:04 (Asia/Riyadh / GMT+03:00)
+- **Modified**: 2026-05-11 18:33:04 (Asia/Riyadh / GMT+03:00)
+- **MD5**: `d41d8cd98f00b204e9800998ecf8427e`
+- **SHA256**: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```python
+
+```
+
+---
+
+### <a id="📄-store-management-commands-seed-py"></a>📄 `store/management/commands/seed.py`
+
+**File Info:**
+- **Size**: 1.11 KB
+- **Extension**: `.py`
+- **Language**: `python`
+- **Location**: `store/management/commands/seed.py`
+- **Relative Path**: `store/management/commands`
+- **Created**: 2026-05-11 18:33:04 (Asia/Riyadh / GMT+03:00)
+- **Modified**: 2026-05-11 18:34:18 (Asia/Riyadh / GMT+03:00)
+- **MD5**: `ee8a7c11198cd9d3fe404b618f91d92a`
+- **SHA256**: `f31c0c79a229f2f2b0368217ea88fac919b1867a82d4fdc1f50ee127f3f5b7fa`
+- **Encoding**: UTF-8
+
+**File code content:**
+
+```python
+from django.core.management.base import BaseCommand
+from django.contrib.auth.models import User
+
+from store.models import Category, Product
+
+import random
+
+
+class Command(BaseCommand):
+
+    help = 'Seed database with fake data'
+
+    def handle(self, *args, **kwargs):
+
+        # حذف البيانات القديمة
+        Product.objects.all().delete()
+        Category.objects.all().delete()
+
+        # إنشاء تصنيفات
+        categories = []
+
+        for name in ['Electronics', 'Books', 'Clothes']:
+
+            category = Category.objects.create(
+                name=name
+            )
+
+            categories.append(category)
+
+        # إنشاء منتجات
+        for i in range(20):
+
+            Product.objects.create(
+                category=random.choice(categories),
+                name=f'Product {i}',
+                description='Test description',
+                price=random.randint(10, 500),
+                stock_quantity=random.randint(1, 100)
+            )
+
+        self.stdout.write(
+            self.style.SUCCESS('Database seeded successfully!')
+        )
+```
+
+---
+
+### <a id="📄-store-management-init-py"></a>📄 `store/management/__init__.py`
+
+**File Info:**
+- **Size**: 0 B
+- **Extension**: `.py`
+- **Language**: `python`
+- **Location**: `store/management/__init__.py`
+- **Relative Path**: `store/management`
+- **Created**: 2026-05-11 18:33:04 (Asia/Riyadh / GMT+03:00)
+- **Modified**: 2026-05-11 18:33:04 (Asia/Riyadh / GMT+03:00)
+- **MD5**: `d41d8cd98f00b204e9800998ecf8427e`
+- **SHA256**: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```python
+
+```
+
+---
+
+## 🚫 Binary/Excluded Files
+
+The following files were not included in the text content:
+
+- `store/migrations/__pycache__/__init__.cpython-313.pyc`
+- `store/migrations/__pycache__/0001_initial.cpython-313.pyc`
+- `store/migrations/__pycache__/0002_cart_cartitem.cpython-313.pyc`
+- `store/migrations/__pycache__/0003_order_orderitem_payment.cpython-313.pyc`
+
+### <a id="📄-store-migrations-init-py"></a>📄 `store/migrations/__init__.py`
+
+**File Info:**
+- **Size**: 0 B
+- **Extension**: `.py`
+- **Language**: `python`
+- **Location**: `store/migrations/__init__.py`
+- **Relative Path**: `store/migrations`
+- **Created**: 2026-05-11 17:44:09 (Asia/Riyadh / GMT+03:00)
+- **Modified**: 2026-05-11 17:44:09 (Asia/Riyadh / GMT+03:00)
+- **MD5**: `d41d8cd98f00b204e9800998ecf8427e`
+- **SHA256**: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```python
+
+```
+
+---
+
+### <a id="📄-store-migrations-0001-initial-py"></a>📄 `store/migrations/0001_initial.py`
+
+**File Info:**
+- **Size**: 1.23 KB
+- **Extension**: `.py`
+- **Language**: `python`
+- **Location**: `store/migrations/0001_initial.py`
+- **Relative Path**: `store/migrations`
+- **Created**: 2026-05-11 17:46:59 (Asia/Riyadh / GMT+03:00)
+- **Modified**: 2026-05-11 17:46:59 (Asia/Riyadh / GMT+03:00)
+- **MD5**: `966dd4675ab5a55810280f7521128575`
+- **SHA256**: `a4532de09c639935ea177afb6a3601a2317de78ec46d1a6c477a554a7e646d0f`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```python
+# Generated by Django 6.0.5 on 2026-05-11 17:46
+
+import django.db.models.deletion
+from django.db import migrations, models
+
+
+class Migration(migrations.Migration):
+
+    initial = True
+
+    dependencies = [
+    ]
+
+    operations = [
+        migrations.CreateModel(
+            name='Category',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('name', models.CharField(max_length=100)),
+            ],
+        ),
+        migrations.CreateModel(
+            name='Product',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('name', models.CharField(max_length=200)),
+                ('description', models.TextField()),
+                ('price', models.DecimalField(decimal_places=2, max_digits=10)),
+                ('stock_quantity', models.IntegerField(default=0)),
+                ('created_at', models.DateTimeField(auto_now_add=True)),
+                ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='products', to='store.category')),
+            ],
+        ),
+    ]
+
+```
+
+---
+
+### <a id="📄-store-migrations-0002-cart-cartitem-py"></a>📄 `store/migrations/0002_cart_cartitem.py`
+
+**File Info:**
+- **Size**: 1.3 KB
+- **Extension**: `.py`
+- **Language**: `python`
+- **Location**: `store/migrations/0002_cart_cartitem.py`
+- **Relative Path**: `store/migrations`
+- **Created**: 2026-05-11 17:50:24 (Asia/Riyadh / GMT+03:00)
+- **Modified**: 2026-05-11 17:50:24 (Asia/Riyadh / GMT+03:00)
+- **MD5**: `74726386dcb375eec90e3e202f51544a`
+- **SHA256**: `146015dc4311fd4d4819e956b2906cd236a6077f6783fe43714ddba92a8b0085`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```python
+# Generated by Django 6.0.5 on 2026-05-11 17:50
+
+import django.db.models.deletion
+from django.conf import settings
+from django.db import migrations, models
+
+
+class Migration(migrations.Migration):
+
+    dependencies = [
+        ('store', '0001_initial'),
+        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+    ]
+
+    operations = [
+        migrations.CreateModel(
+            name='Cart',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('created_at', models.DateTimeField(auto_now_add=True)),
+                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+            ],
+        ),
+        migrations.CreateModel(
+            name='CartItem',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('quantity', models.IntegerField(default=1)),
+                ('cart', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='items', to='store.cart')),
+                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='store.product')),
+            ],
+        ),
+    ]
+
+```
+
+---
+
+### <a id="📄-store-migrations-0003-order-orderitem-payment-py"></a>📄 `store/migrations/0003_order_orderitem_payment.py`
+
+**File Info:**
+- **Size**: 2.44 KB
+- **Extension**: `.py`
+- **Language**: `python`
+- **Location**: `store/migrations/0003_order_orderitem_payment.py`
+- **Relative Path**: `store/migrations`
+- **Created**: 2026-05-11 18:22:24 (Asia/Riyadh / GMT+03:00)
+- **Modified**: 2026-05-11 18:22:24 (Asia/Riyadh / GMT+03:00)
+- **MD5**: `833256df437cccc4c56aa33a625e16dc`
+- **SHA256**: `f15fdff636529ccb0878f5da6ff2223827159869df17b9e532405fc5754e8b3b`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```python
+# Generated by Django 6.0.5 on 2026-05-11 18:22
+
+import django.db.models.deletion
+from django.conf import settings
+from django.db import migrations, models
+
+
+class Migration(migrations.Migration):
+
+    dependencies = [
+        ('store', '0002_cart_cartitem'),
+        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
+    ]
+
+    operations = [
+        migrations.CreateModel(
+            name='Order',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('total_price', models.DecimalField(decimal_places=2, max_digits=10)),
+                ('status', models.CharField(choices=[('pending', 'Pending'), ('paid', 'Paid'), ('shipped', 'Shipped'), ('cancelled', 'Cancelled')], default='pending', max_length=20)),
+                ('created_at', models.DateTimeField(auto_now_add=True)),
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='orders', to=settings.AUTH_USER_MODEL)),
+            ],
+        ),
+        migrations.CreateModel(
+            name='OrderItem',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('quantity', models.IntegerField()),
+                ('price', models.DecimalField(decimal_places=2, max_digits=10)),
+                ('order', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='items', to='store.order')),
+                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='store.product')),
+            ],
+        ),
+        migrations.CreateModel(
+            name='Payment',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('amount', models.DecimalField(decimal_places=2, max_digits=10)),
+                ('payment_method', models.CharField(choices=[('cash', 'Cash'), ('card', 'Card')], max_length=20)),
+                ('payment_status', models.CharField(choices=[('pending', 'Pending'), ('completed', 'Completed'), ('failed', 'Failed')], default='pending', max_length=20)),
+                ('created_at', models.DateTimeField(auto_now_add=True)),
+                ('order', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='store.order')),
+            ],
+        ),
+    ]
+
+```
+
+---
+
+### <a id="📄-store-init-py"></a>📄 `store/__init__.py`
+
+**File Info:**
+- **Size**: 0 B
+- **Extension**: `.py`
+- **Language**: `python`
+- **Location**: `store/__init__.py`
+- **Relative Path**: `store`
+- **Created**: 2026-05-11 17:44:09 (Asia/Riyadh / GMT+03:00)
+- **Modified**: 2026-05-11 17:44:09 (Asia/Riyadh / GMT+03:00)
+- **MD5**: `d41d8cd98f00b204e9800998ecf8427e`
+- **SHA256**: `e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```python
+
+```
+
+---
+
+### <a id="📄-store-admin-py"></a>📄 `store/admin.py`
+
+**File Info:**
+- **Size**: 367 B
+- **Extension**: `.py`
+- **Language**: `python`
+- **Location**: `store/admin.py`
+- **Relative Path**: `store`
+- **Created**: 2026-05-11 17:44:09 (Asia/Riyadh / GMT+03:00)
+- **Modified**: 2026-05-11 18:22:13 (Asia/Riyadh / GMT+03:00)
+- **MD5**: `b30d83ef74bf047bed1033c70a2630f9`
+- **SHA256**: `01d2fd8415ca12f6c5bbc94aae41608b96f5601bfe6d5b1b9c5316bc51464ca4`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```python
+from django.contrib import admin
+
+from .models import (
+    Category,
+    Product,
+    Cart,
+    CartItem,
+    Order,
+    OrderItem,
+    Payment
+)
+
+admin.site.register(Category)
+admin.site.register(Product)
+admin.site.register(Cart)
+admin.site.register(CartItem)
+admin.site.register(Order)
+admin.site.register(OrderItem)
+admin.site.register(Payment)
+```
+
+---
+
+### <a id="📄-store-apps-py"></a>📄 `store/apps.py`
+
+**File Info:**
+- **Size**: 90 B
+- **Extension**: `.py`
+- **Language**: `python`
+- **Location**: `store/apps.py`
+- **Relative Path**: `store`
+- **Created**: 2026-05-11 17:44:09 (Asia/Riyadh / GMT+03:00)
+- **Modified**: 2026-05-11 17:44:09 (Asia/Riyadh / GMT+03:00)
+- **MD5**: `863289c350efe01078adb3332153b95f`
+- **SHA256**: `0bced40841d1bd763d1f0ca6222653de21d640cedf738ed29b3527b289b352c8`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```python
+from django.apps import AppConfig
+
+
+class StoreConfig(AppConfig):
+    name = 'store'
+
+```
+
+---
+
+### <a id="📄-store-models-py"></a>📄 `store/models.py`
+
+**File Info:**
+- **Size**: 3.18 KB
+- **Extension**: `.py`
+- **Language**: `python`
+- **Location**: `store/models.py`
+- **Relative Path**: `store`
+- **Created**: 2026-05-11 17:44:09 (Asia/Riyadh / GMT+03:00)
+- **Modified**: 2026-05-11 18:20:09 (Asia/Riyadh / GMT+03:00)
+- **MD5**: `456c0c65d1f53663b9cf79cf2bd39afc`
+- **SHA256**: `8e1c5a479d52a6bf72dde76482cd78dcf9bb50dfe7bd2188578016f12942ce68`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```python
+from django.db import models
+from django.contrib.auth.models import User
+
+
+class Category(models.Model):
+    name = models.CharField(max_length=100)
+
+    def __str__(self):
+        return self.name
+
+
+class Product(models.Model):
+    category = models.ForeignKey(
+        Category,
+        on_delete=models.CASCADE,
+        related_name='products'
+    )
+
+    name = models.CharField(max_length=200)
+
+    description = models.TextField()
+
+    price = models.DecimalField(
+        max_digits=10,
+        decimal_places=2
+    )
+
+    stock_quantity = models.IntegerField(default=0)
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+class Cart(models.Model):
+    user = models.OneToOneField(
+        User,
+        on_delete=models.CASCADE
+    )
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Cart - {self.user.username}"
+
+
+class CartItem(models.Model):
+    cart = models.ForeignKey(
+        Cart,
+        on_delete=models.CASCADE,
+        related_name='items'
+    )
+
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE
+    )
+
+    quantity = models.IntegerField(default=1)
+
+    def __str__(self):
+        return f"{self.product.name} x {self.quantity}"
+class Order(models.Model):
+
+    STATUS_CHOICES = [
+        ('pending', 'Pending'),
+        ('paid', 'Paid'),
+        ('shipped', 'Shipped'),
+        ('cancelled', 'Cancelled'),
+    ]
+
+    user = models.ForeignKey(
+        User,
+        on_delete=models.CASCADE,
+        related_name='orders'
+    )
+
+    total_price = models.DecimalField(
+        max_digits=10,
+        decimal_places=2
+    )
+
+    status = models.CharField(
+        max_length=20,
+        choices=STATUS_CHOICES,
+        default='pending'
+    )
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Order {self.id}"
+
+
+class OrderItem(models.Model):
+    order = models.ForeignKey(
+        Order,
+        on_delete=models.CASCADE,
+        related_name='items'
+    )
+
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.CASCADE
+    )
+
+    quantity = models.IntegerField()
+
+    price = models.DecimalField(
+        max_digits=10,
+        decimal_places=2
+    )
+
+    def __str__(self):
+        return self.product.name
+
+
+class Payment(models.Model):
+
+    PAYMENT_METHODS = [
+        ('cash', 'Cash'),
+        ('card', 'Card'),
+    ]
+
+    PAYMENT_STATUS = [
+        ('pending', 'Pending'),
+        ('completed', 'Completed'),
+        ('failed', 'Failed'),
+    ]
+
+    order = models.OneToOneField(
+        Order,
+        on_delete=models.CASCADE
+    )
+
+    amount = models.DecimalField(
+        max_digits=10,
+        decimal_places=2
+    )
+
+    payment_method = models.CharField(
+        max_length=20,
+        choices=PAYMENT_METHODS
+    )
+
+    payment_status = models.CharField(
+        max_length=20,
+        choices=PAYMENT_STATUS,
+        default='pending'
+    )
+
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return f"Payment {self.id}"
+```
+
+---
+
+### <a id="📄-store-tests-py"></a>📄 `store/tests.py`
+
+**File Info:**
+- **Size**: 63 B
+- **Extension**: `.py`
+- **Language**: `python`
+- **Location**: `store/tests.py`
+- **Relative Path**: `store`
+- **Created**: 2026-05-11 17:44:09 (Asia/Riyadh / GMT+03:00)
+- **Modified**: 2026-05-11 17:44:09 (Asia/Riyadh / GMT+03:00)
+- **MD5**: `e08f0582500f6562bf0a931ef9503b39`
+- **SHA256**: `dae0da7efdcdb3a7fb572d5e914b60631099122d4a4727ac6434c016161c5fe1`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```python
+from django.test import TestCase
+
+# Create your tests here.
+
+```
+
+---
+
+### <a id="📄-store-urls-py"></a>📄 `store/urls.py`
+
+**File Info:**
+- **Size**: 370 B
+- **Extension**: `.py`
+- **Language**: `python`
+- **Location**: `store/urls.py`
+- **Relative Path**: `store`
+- **Created**: 2026-05-11 18:46:43 (Asia/Riyadh / GMT+03:00)
+- **Modified**: 2026-05-15 18:23:32 (Asia/Riyadh / GMT+03:00)
+- **MD5**: `a246bebcdeeaf1ecbbbfd89ecbdf71c5`
+- **SHA256**: `d45f0cbd7dd445a23d412d32d5de2c5eb4346723d36399e4ef958edfdd68d8d8`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```python
+from django.urls import path
+
+from .views import buy_product 
+from .views import buy_atomic
+from .views import buy_f
+
+
+
+urlpatterns = [
+    path(
+        'buy/<int:product_id>/',
+      
+        buy_product
+    
+    ),
+    path(
+        'buy/a/<int:product_id>/',
+        buy_atomic
+    ),
+
+
+    path('buy-f/<int:product_id>/', buy_f),
+    
+
+
+]
+
+```
+
+---
+
+### <a id="📄-store-views-py"></a>📄 `store/views.py`
+
+**File Info:**
+- **Size**: 4.48 KB
+- **Extension**: `.py`
+- **Language**: `python`
+- **Location**: `store/views.py`
+- **Relative Path**: `store`
+- **Created**: 2026-05-11 17:44:09 (Asia/Riyadh / GMT+03:00)
+- **Modified**: 2026-05-15 20:41:45 (Asia/Riyadh / GMT+03:00)
+- **MD5**: `388fc4805251c0c085441eea967e9abe`
+- **SHA256**: `b14cf4a853beaed4deafde68c8597cfccabf05b2232b1b887051d5ddcf42a807`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```python
+from concurrent.futures import ThreadPoolExecutor
+
+from django.http import JsonResponse
+from django.db import transaction
+from django.db.models import F
+
+from threading import Semaphore
+import time
+
+from .models import Product
+
+
+purchase_semaphore = Semaphore(10)
+
+executor = ThreadPoolExecutor(max_workers=5)
+
+
+
+def background_task(product_id):
+
+    print("\nBACKGROUND TASK STARTED")
+
+    print(f"Processing Product {product_id}")
+
+    time.sleep(10)
+
+    print(f" TASK FINISHED FOR PRODUCT {product_id}")
+
+
+
+
+@transaction.atomic
+def buy_product(request, product_id):
+
+    acquired = purchase_semaphore.acquire(blocking=False)
+
+    if not acquired:
+
+        print("SERVER BUSY")
+
+        return JsonResponse({
+            'message': 'Server busy, try again later'
+        })
+
+    try:
+
+        print("\n===== LOCK REQUEST STARTED =====")
+
+        product = Product.objects.select_for_update().get(
+            id=product_id
+        )
+
+        print(f" Product Locked -> ID: {product.id}")
+
+        time.sleep(5)
+
+        if product.stock_quantity <= 0:
+
+            print(" OUT OF STOCK")
+
+            return JsonResponse({
+                'message': 'Out of stock'
+            })
+
+        product.stock_quantity -= 1
+
+        product.save()
+
+        print(
+            f" LOCK PURCHASE SUCCESS | Remaining: {product.stock_quantity}"
+        )
+
+        print("===== LOCK REQUEST FINISHED =====\n")
+
+        return JsonResponse({
+            'message': 'Purchase successful',
+            'remaining_stock': product.stock_quantity
+        })
+
+    finally:
+
+        purchase_semaphore.release()
+
+        print(" Semaphore Released")
+
+
+
+def buy_atomic(request, product_id):
+
+    acquired = purchase_semaphore.acquire(blocking=False)
+
+    if not acquired:
+
+        print("SERVER BUSY")
+
+        return JsonResponse({
+            'message': 'Server busy'
+        })
+
+    try:
+
+        print("\n===== ATOMIC REQUEST STARTED =====")
+
+        print(f" Trying Atomic Buy -> Product {product_id}")
+
+        updated = Product.objects.filter(
+            id=product_id,
+            stock_quantity__gt=0
+        ).update(
+            stock_quantity=F('stock_quantity') - 1
+        )
+
+        print(f"📌 Rows Updated: {updated}")
+
+        if updated == 0:
+
+            print(" OUT OF STOCK")
+
+            return JsonResponse({
+                'message': 'Out of stock'
+            })
+
+        product = Product.objects.get(id=product_id)
+
+        print(
+            f"ATOMIC PURCHASE SUCCESS | Remaining: {product.stock_quantity}"
+        )
+
+        print("===== ATOMIC REQUEST FINISHED =====\n")
+
+        return JsonResponse({
+            'message': 'Atomic purchase successful',
+            'remaining_stock': product.stock_quantity
+        })
+
+    finally:
+
+        purchase_semaphore.release()
+
+        print(" Semaphore Released")
+
+
+
+
+
+def buy_f(request, product_id):
+
+    acquired = purchase_semaphore.acquire(blocking=False)
+
+    if not acquired:
+
+        print(" SERVER OVERLOADED")
+
+        return JsonResponse({
+            'message': 'Server busy'
+        })
+
+    try:
+
+        print("\n===== NEW BUY_F REQUEST =====")
+
+        print(f" Fast Processing Product {product_id}")
+
+
+        updated = Product.objects.filter(
+            id=product_id,
+            stock_quantity__gt=0
+        ).update(
+            stock_quantity=F('stock_quantity') - 1
+        )
+
+        print(f"📌 Rows Updated: {updated}")
+
+
+
+        if updated == 0:
+
+            print(" OUT OF STOCK")
+
+            return JsonResponse({
+                'message': 'Out of stock'
+            })
+
+     
+
+        print(" Sending Task To ThreadPool")
+
+        executor.submit(
+            background_task,
+            product_id
+        )
+
+        print(" Task Submitted To ThreadPool")
+
+     
+
+        product = Product.objects.get(id=product_id)
+
+        print(
+            f" BUY_F SUCCESS | Remaining Stock: {product.stock_quantity}"
+        )
+
+        print(" FAST RESPONSE SENT")
+
+        print("===== BUY_F FINISHED =====\n")
+
+        return JsonResponse({
+            'message': 'buy_f success',
+            'remaining_stock': product.stock_quantity
+        })
+
+    except Exception as e:
+
+        print(f" ERROR: {e}")
+
+        return JsonResponse({
+            'message': 'Server error'
+        })
+
+    finally:
+
+        purchase_semaphore.release()
+
+        print(" Semaphore Released")
+```
+
+---
+
+### <a id="📄-locustfile-py"></a>📄 `locustfile.py`
+
+**File Info:**
+- **Size**: 193 B
+- **Extension**: `.py`
+- **Language**: `python`
+- **Location**: `locustfile.py`
+- **Relative Path**: `root`
+- **Created**: 2026-05-15 01:11:20 (Asia/Riyadh / GMT+03:00)
+- **Modified**: 2026-05-15 19:22:39 (Asia/Riyadh / GMT+03:00)
+- **MD5**: `a638488f43053d3758d6dd34f741505e`
+- **SHA256**: `17037e35ad50a973b361a3b9b2ebff4e7906b8df9cf9e94f17559c522c714981`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```python
+from locust import HttpUser, task, between
+
+
+class EcommerceUser(HttpUser):
+
+    wait_time = between(1, 2)
+
+    @task
+    def buy_product(self):
+
+        self.client.get("/buy-f/22/")
+```
+
+---
+
+### <a id="📄-manage-py"></a>📄 `manage.py`
+
+**File Info:**
+- **Size**: 687 B
+- **Extension**: `.py`
+- **Language**: `python`
+- **Location**: `manage.py`
+- **Relative Path**: `root`
+- **Created**: 2026-05-10 13:31:05 (Asia/Riyadh / GMT+03:00)
+- **Modified**: 2026-05-11 18:15:33 (Asia/Riyadh / GMT+03:00)
+- **MD5**: `c7b6e3a3fbaa1e607becef66da0214a4`
+- **SHA256**: `62e0ef12fbd954e870dbc2a983875e36e2bda527a10cbe8ea29994c9972d53e2`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```python
+#!/usr/bin/env python
+"""Django's command-line utility for administrative tasks."""
+import os
+import sys
+
+
+def main():
+    """Run administrative tasks."""
+    os.environ.setdefault('DJANGO_SETTINGS_MODULE', 'myproject.settings')
+    try:
+        from django.core.management import execute_from_command_line
+    except ImportError as exc:
+        raise ImportError(
+            "Couldn't import Django. Are you sure it's installed and "
+            "available on your PYTHONPATH environment variable? Did you "
+            "forget to activate a virtual environment?"
+        ) from exc
+    execute_from_command_line(sys.argv)
+
+
+if __name__ == '__main__':
+    main()
+
+```
+
+---
+
+## 🚫 Binary/Excluded Files
+
+The following files were not included in the text content:
+
+- `db.sqlite3`
+
