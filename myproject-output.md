@@ -3,7 +3,7 @@
 ## 📊 Project Information
 
 - **Project Name**: `myproject`
-- **Generated On**: 2026-05-15 21:29:50 (Asia/Riyadh / GMT+03:00)
+- **Generated On**: 2026-05-15 21:39:08 (Asia/Riyadh / GMT+03:00)
 - **Total Files Processed**: 40
 - **Export Tool**: Easy Whole Project to Single Text File for LLMs v1.1.0
 - **Tool Author**: Jota / José Guilherme Pandolfi
@@ -206,9 +206,9 @@ application = get_asgi_application()
 - **Location**: `myproject/settings.py`
 - **Relative Path**: `myproject`
 - **Created**: 2026-05-10 13:31:05 (Asia/Riyadh / GMT+03:00)
-- **Modified**: 2026-05-11 18:00:24 (Asia/Riyadh / GMT+03:00)
-- **MD5**: `0accf5b13791b4f088bdb27ca51e813b`
-- **SHA256**: `e39d71ce97a82a8b891bd480b0c97380bae18382df6610ff9fa672139ff909f3`
+- **Modified**: 2026-05-15 21:29:56 (Asia/Riyadh / GMT+03:00)
+- **MD5**: `dc45a1e2f7d2edfac9eabaa3cc20633c`
+- **SHA256**: `eca670959b05de3b32d2fdb10f462562996953511e21107adb16a1f7fcca9fdd`
 - **Encoding**: ASCII
 
 **File code content:**
@@ -247,7 +247,7 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
-        'store',
+    'main',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
