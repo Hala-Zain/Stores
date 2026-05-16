@@ -3,7 +3,7 @@
 ## 📊 Project Information
 
 - **Project Name**: `myproject`
-- **Generated On**: 2026-05-15 21:39:08 (Asia/Riyadh / GMT+03:00)
+- **Generated On**: 2026-05-16 05:26:53 (Asia/Riyadh / GMT+03:00)
 - **Total Files Processed**: 40
 - **Export Tool**: Easy Whole Project to Single Text File for LLMs v1.1.0
 - **Tool Author**: Jota / José Guilherme Pandolfi
@@ -26,22 +26,23 @@
 ├── 📁 myproject/
 │   ├── 📁 __pycache__/
 │   │   ├── 📄 __init__.cpython-313.pyc (151 B)
-│   │   ├── 📄 settings.cpython-313.pyc (2.44 KB)
-│   │   ├── 📄 urls.cpython-313.pyc (430 B)
+│   │   ├── 📄 settings.cpython-313.pyc (2.64 KB)
+│   │   ├── 📄 urls.cpython-313.pyc (708 B)
 │   │   └── 📄 wsgi.cpython-313.pyc (643 B)
 │   ├── 📄 __init__.py
 │   ├── 📄 asgi.py (411 B)
-│   ├── 📄 settings.py (3.16 KB)
-│   ├── 📄 urls.py (171 B)
+│   ├── 📄 settings.py (3.38 KB)
+│   ├── 📄 urls.py (388 B)
 │   └── 📄 wsgi.py (411 B)
 ├── 📁 store/
 │   ├── 📁 __pycache__/
 │   │   ├── 📄 __init__.cpython-313.pyc (147 B)
-│   │   ├── 📄 admin.cpython-313.pyc (876 B)
+│   │   ├── 📄 admin.cpython-313.pyc (1.01 KB)
 │   │   ├── 📄 apps.cpython-313.pyc (448 B)
-│   │   ├── 📄 models.cpython-313.pyc (5.45 KB)
-│   │   ├── 📄 urls.cpython-313.pyc (486 B)
-│   │   └── 📄 views.cpython-313.pyc (6.23 KB)
+│   │   ├── 📄 models.cpython-313.pyc (6.44 KB)
+│   │   ├── 📄 serializers.cpython-313.pyc (3.6 KB)
+│   │   ├── 📄 urls.cpython-313.pyc (2.06 KB)
+│   │   └── 📄 views.cpython-313.pyc (19.79 KB)
 │   ├── 📁 management/
 │   │   ├── 📁 __pycache__/
 │   │   │   └── 📄 __init__.cpython-313.pyc (158 B)
@@ -55,21 +56,20 @@
 │   ├── 📁 migrations/
 │   │   ├── 📁 __pycache__/
 │   │   │   ├── 📄 __init__.cpython-313.pyc (158 B)
-│   │   │   ├── 📄 0001_initial.cpython-313.pyc (1.76 KB)
+│   │   │   ├── 📄 0001_initial.cpython-313.pyc (7.91 KB)
 │   │   │   ├── 📄 0002_cart_cartitem.cpython-313.pyc (1.96 KB)
-│   │   │   └── 📄 0003_order_orderitem_payment.cpython-313.pyc (3.08 KB)
+│   │   │   ├── 📄 0003_order_orderitem_payment.cpython-313.pyc (3.08 KB)
+│   │   │   └── 📄 0004_customuser.cpython-313.pyc (4 KB)
 │   │   ├── 📄 __init__.py
-│   │   ├── 📄 0001_initial.py (1.23 KB)
-│   │   ├── 📄 0002_cart_cartitem.py (1.3 KB)
-│   │   └── 📄 0003_order_orderitem_payment.py (2.44 KB)
+│   │   └── 📄 0001_initial.py (7.39 KB)
 │   ├── 📄 __init__.py
-│   ├── 📄 admin.py (399 B)
+│   ├── 📄 admin.py (493 B)
 │   ├── 📄 apps.py (90 B)
-│   ├── 📄 models.py (3.18 KB)
+│   ├── 📄 models.py (4.79 KB)
+│   ├── 📄 serializers.py (1.46 KB)
 │   ├── 📄 tests.py (63 B)
-│   ├── 📄 urls.py (370 B)
-│   └── 📄 views.py (4.48 KB)
-├── 📄 db.sqlite3 (128 KB)
+│   ├── 📄 urls.py (1.69 KB)
+│   └── 📄 views.py (13.47 KB)
 ├── 📄 locustfile.py (193 B)
 └── 📄 manage.py (687 B)
 ```
@@ -88,12 +88,11 @@
 - [📄 store/management/__init__.py](#📄-store-management-init-py)
 - [📄 store/migrations/__init__.py](#📄-store-migrations-init-py)
 - [📄 store/migrations/0001_initial.py](#📄-store-migrations-0001-initial-py)
-- [📄 store/migrations/0002_cart_cartitem.py](#📄-store-migrations-0002-cart-cartitem-py)
-- [📄 store/migrations/0003_order_orderitem_payment.py](#📄-store-migrations-0003-order-orderitem-payment-py)
 - [📄 store/__init__.py](#📄-store-init-py)
 - [📄 store/admin.py](#📄-store-admin-py)
 - [📄 store/apps.py](#📄-store-apps-py)
 - [📄 store/models.py](#📄-store-models-py)
+- [📄 store/serializers.py](#📄-store-serializers-py)
 - [📄 store/tests.py](#📄-store-tests-py)
 - [📄 store/urls.py](#📄-store-urls-py)
 - [📄 store/views.py](#📄-store-views-py)
@@ -108,17 +107,16 @@
 |--------|-------|
 | Total Files | 40 |
 | Total Directories | 12 |
-| Text Files | 21 |
-| Binary Files | 19 |
-| Total Size | 174.78 KB |
+| Text Files | 20 |
+| Binary Files | 20 |
+| Total Size | 93.61 KB |
 
 ### 📄 File Types Distribution
 
 | Extension | Count |
 |-----------|-------|
-| `.py` | 21 |
-| `.pyc` | 18 |
-| `.sqlite3` | 1 |
+| `.pyc` | 20 |
+| `.py` | 20 |
 
 ## 💻 File Code Contents
 
@@ -200,15 +198,15 @@ application = get_asgi_application()
 ### <a id="📄-myproject-settings-py"></a>📄 `myproject/settings.py`
 
 **File Info:**
-- **Size**: 3.16 KB
+- **Size**: 3.38 KB
 - **Extension**: `.py`
 - **Language**: `python`
 - **Location**: `myproject/settings.py`
 - **Relative Path**: `myproject`
 - **Created**: 2026-05-10 13:31:05 (Asia/Riyadh / GMT+03:00)
-- **Modified**: 2026-05-15 21:29:56 (Asia/Riyadh / GMT+03:00)
-- **MD5**: `dc45a1e2f7d2edfac9eabaa3cc20633c`
-- **SHA256**: `eca670959b05de3b32d2fdb10f462562996953511e21107adb16a1f7fcca9fdd`
+- **Modified**: 2026-05-16 04:29:46 (Asia/Riyadh / GMT+03:00)
+- **MD5**: `97abe895b09b8eee30b79633483b7712`
+- **SHA256**: `6ec07f1d5f27ab0a3cd44fa215231fae19e04991add8108a2c9eed0ffe07d489`
 - **Encoding**: ASCII
 
 **File code content:**
@@ -254,6 +252,9 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'store',
+    'rest_framework',
+
 ]
 
 MIDDLEWARE = [
@@ -336,6 +337,15 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL = 'static/'
+AUTH_USER_MODEL = 'store.CustomUser'
+REST_FRAMEWORK = {
+
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+
+    ),
+}
 
 ```
 
@@ -344,15 +354,15 @@ STATIC_URL = 'static/'
 ### <a id="📄-myproject-urls-py"></a>📄 `myproject/urls.py`
 
 **File Info:**
-- **Size**: 171 B
+- **Size**: 388 B
 - **Extension**: `.py`
 - **Language**: `python`
 - **Location**: `myproject/urls.py`
 - **Relative Path**: `myproject`
 - **Created**: 2026-05-10 13:31:05 (Asia/Riyadh / GMT+03:00)
-- **Modified**: 2026-05-11 18:47:55 (Asia/Riyadh / GMT+03:00)
-- **MD5**: `c4896d651fe3f97716401b60e83e1239`
-- **SHA256**: `95bb88a532c1e1fa2e8d4e081fd69faf5b91341bfa68336c5da9f748db4239ef`
+- **Modified**: 2026-05-16 01:41:35 (Asia/Riyadh / GMT+03:00)
+- **MD5**: `948cbd2305b97464b3ab917de3cabfae`
+- **SHA256**: `c4c3a553ddb2c6ef2144ee3a5b7b7812f96355afec3b6fee1a4a9fa7a03c5755`
 - **Encoding**: ASCII
 
 **File code content:**
@@ -360,12 +370,19 @@ STATIC_URL = 'static/'
 ```python
 from django.contrib import admin
 from django.urls import path, include
+from rest_framework_simplejwt.views import (
+    TokenObtainPairView,
+    TokenRefreshView,
+)
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include('store.urls')),
+    path('api/token/', TokenObtainPairView.as_view()),
+    path('api/token/refresh/', TokenRefreshView.as_view()),
 
 ]
+
 ```
 
 ---
@@ -379,7 +396,7 @@ urlpatterns = [
 - **Location**: `myproject/wsgi.py`
 - **Relative Path**: `myproject`
 - **Created**: 2026-05-10 13:31:05 (Asia/Riyadh / GMT+03:00)
-- **Modified**: 2026-05-11 09:40:01 (Asia/Riyadh / GMT+03:00)
+- **Modified**: 2026-05-16 01:41:13 (Asia/Riyadh / GMT+03:00)
 - **MD5**: `67c568b93a8a511b885a55884d148172`
 - **SHA256**: `dc9753e9ecf2a28256d3723f9bdca1f67984a1f5884d64b04c8611cacc67c4b5`
 - **Encoding**: ASCII
@@ -416,6 +433,7 @@ The following files were not included in the text content:
 - `store/__pycache__/admin.cpython-313.pyc`
 - `store/__pycache__/apps.cpython-313.pyc`
 - `store/__pycache__/models.cpython-313.pyc`
+- `store/__pycache__/serializers.cpython-313.pyc`
 - `store/__pycache__/urls.cpython-313.pyc`
 - `store/__pycache__/views.cpython-313.pyc`
 
@@ -548,6 +566,7 @@ The following files were not included in the text content:
 - `store/migrations/__pycache__/0001_initial.cpython-313.pyc`
 - `store/migrations/__pycache__/0002_cart_cartitem.cpython-313.pyc`
 - `store/migrations/__pycache__/0003_order_orderitem_payment.cpython-313.pyc`
+- `store/migrations/__pycache__/0004_customuser.cpython-313.pyc`
 
 ### <a id="📄-store-migrations-init-py"></a>📄 `store/migrations/__init__.py`
 
@@ -574,23 +593,27 @@ The following files were not included in the text content:
 ### <a id="📄-store-migrations-0001-initial-py"></a>📄 `store/migrations/0001_initial.py`
 
 **File Info:**
-- **Size**: 1.23 KB
+- **Size**: 7.39 KB
 - **Extension**: `.py`
 - **Language**: `python`
 - **Location**: `store/migrations/0001_initial.py`
 - **Relative Path**: `store/migrations`
-- **Created**: 2026-05-11 17:46:59 (Asia/Riyadh / GMT+03:00)
-- **Modified**: 2026-05-11 17:46:59 (Asia/Riyadh / GMT+03:00)
-- **MD5**: `966dd4675ab5a55810280f7521128575`
-- **SHA256**: `a4532de09c639935ea177afb6a3601a2317de78ec46d1a6c477a554a7e646d0f`
+- **Created**: 2026-05-16 01:12:12 (Asia/Riyadh / GMT+03:00)
+- **Modified**: 2026-05-16 01:12:12 (Asia/Riyadh / GMT+03:00)
+- **MD5**: `5b95953ae9f93c4e8cdc70394208cef6`
+- **SHA256**: `e35febfeb405a9cfe219eb9c092a0aaefbe7e9569f04d8b05412f2339aa92569`
 - **Encoding**: ASCII
 
 **File code content:**
 
 ```python
-# Generated by Django 6.0.5 on 2026-05-11 17:46
+# Generated by Django 6.0.5 on 2026-05-16 01:12
 
+import django.contrib.auth.models
+import django.contrib.auth.validators
 import django.db.models.deletion
+import django.utils.timezone
+from django.conf import settings
 from django.db import migrations, models
 
 
@@ -599,6 +622,7 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
+        ('auth', '0012_alter_user_first_name_max_length'),
     ]
 
     operations = [
@@ -607,6 +631,67 @@ class Migration(migrations.Migration):
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
                 ('name', models.CharField(max_length=100)),
+            ],
+        ),
+        migrations.CreateModel(
+            name='CustomUser',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('password', models.CharField(max_length=128, verbose_name='password')),
+                ('last_login', models.DateTimeField(blank=True, null=True, verbose_name='last login')),
+                ('is_superuser', models.BooleanField(default=False, help_text='Designates that this user has all permissions without explicitly assigning them.', verbose_name='superuser status')),
+                ('username', models.CharField(error_messages={'unique': 'A user with that username already exists.'}, help_text='Required. 150 characters or fewer. Letters, digits and @/./+/-/_ only.', max_length=150, unique=True, validators=[django.contrib.auth.validators.UnicodeUsernameValidator()], verbose_name='username')),
+                ('first_name', models.CharField(blank=True, max_length=150, verbose_name='first name')),
+                ('last_name', models.CharField(blank=True, max_length=150, verbose_name='last name')),
+                ('email', models.EmailField(blank=True, max_length=254, verbose_name='email address')),
+                ('is_staff', models.BooleanField(default=False, help_text='Designates whether the user can log into this admin site.', verbose_name='staff status')),
+                ('is_active', models.BooleanField(default=True, help_text='Designates whether this user should be treated as active. Unselect this instead of deleting accounts.', verbose_name='active')),
+                ('date_joined', models.DateTimeField(default=django.utils.timezone.now, verbose_name='date joined')),
+                ('phone', models.CharField(blank=True, max_length=20, null=True, unique=True)),
+                ('address', models.TextField(blank=True, null=True)),
+                ('profile_image', models.ImageField(blank=True, null=True, upload_to='profiles/')),
+                ('is_customer', models.BooleanField(default=True)),
+                ('is_seller', models.BooleanField(default=False)),
+                ('created_at', models.DateTimeField(auto_now_add=True)),
+                ('groups', models.ManyToManyField(blank=True, help_text='The groups this user belongs to. A user will get all permissions granted to each of their groups.', related_name='user_set', related_query_name='user', to='auth.group', verbose_name='groups')),
+                ('user_permissions', models.ManyToManyField(blank=True, help_text='Specific permissions for this user.', related_name='user_set', related_query_name='user', to='auth.permission', verbose_name='user permissions')),
+            ],
+            options={
+                'verbose_name': 'user',
+                'verbose_name_plural': 'users',
+                'abstract': False,
+            },
+            managers=[
+                ('objects', django.contrib.auth.models.UserManager()),
+            ],
+        ),
+        migrations.CreateModel(
+            name='Cart',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('created_at', models.DateTimeField(auto_now_add=True)),
+                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+            ],
+        ),
+        migrations.CreateModel(
+            name='Order',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('total_price', models.DecimalField(decimal_places=2, max_digits=10)),
+                ('status', models.CharField(choices=[('pending', 'Pending'), ('paid', 'Paid'), ('shipped', 'Shipped'), ('cancelled', 'Cancelled')], default='pending', max_length=20)),
+                ('created_at', models.DateTimeField(auto_now_add=True)),
+                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='orders', to=settings.AUTH_USER_MODEL)),
+            ],
+        ),
+        migrations.CreateModel(
+            name='Payment',
+            fields=[
+                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
+                ('amount', models.DecimalField(decimal_places=2, max_digits=10)),
+                ('payment_method', models.CharField(choices=[('cash', 'Cash'), ('card', 'Card')], max_length=20)),
+                ('payment_status', models.CharField(choices=[('pending', 'Pending'), ('completed', 'Completed'), ('failed', 'Failed')], default='pending', max_length=20)),
+                ('created_at', models.DateTimeField(auto_now_add=True)),
+                ('order', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='store.order')),
             ],
         ),
         migrations.CreateModel(
@@ -621,109 +706,6 @@ class Migration(migrations.Migration):
                 ('category', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='products', to='store.category')),
             ],
         ),
-    ]
-
-```
-
----
-
-### <a id="📄-store-migrations-0002-cart-cartitem-py"></a>📄 `store/migrations/0002_cart_cartitem.py`
-
-**File Info:**
-- **Size**: 1.3 KB
-- **Extension**: `.py`
-- **Language**: `python`
-- **Location**: `store/migrations/0002_cart_cartitem.py`
-- **Relative Path**: `store/migrations`
-- **Created**: 2026-05-11 17:50:24 (Asia/Riyadh / GMT+03:00)
-- **Modified**: 2026-05-11 17:50:24 (Asia/Riyadh / GMT+03:00)
-- **MD5**: `74726386dcb375eec90e3e202f51544a`
-- **SHA256**: `146015dc4311fd4d4819e956b2906cd236a6077f6783fe43714ddba92a8b0085`
-- **Encoding**: ASCII
-
-**File code content:**
-
-```python
-# Generated by Django 6.0.5 on 2026-05-11 17:50
-
-import django.db.models.deletion
-from django.conf import settings
-from django.db import migrations, models
-
-
-class Migration(migrations.Migration):
-
-    dependencies = [
-        ('store', '0001_initial'),
-        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-    ]
-
-    operations = [
-        migrations.CreateModel(
-            name='Cart',
-            fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('user', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
-            ],
-        ),
-        migrations.CreateModel(
-            name='CartItem',
-            fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('quantity', models.IntegerField(default=1)),
-                ('cart', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='items', to='store.cart')),
-                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='store.product')),
-            ],
-        ),
-    ]
-
-```
-
----
-
-### <a id="📄-store-migrations-0003-order-orderitem-payment-py"></a>📄 `store/migrations/0003_order_orderitem_payment.py`
-
-**File Info:**
-- **Size**: 2.44 KB
-- **Extension**: `.py`
-- **Language**: `python`
-- **Location**: `store/migrations/0003_order_orderitem_payment.py`
-- **Relative Path**: `store/migrations`
-- **Created**: 2026-05-11 18:22:24 (Asia/Riyadh / GMT+03:00)
-- **Modified**: 2026-05-11 18:22:24 (Asia/Riyadh / GMT+03:00)
-- **MD5**: `833256df437cccc4c56aa33a625e16dc`
-- **SHA256**: `f15fdff636529ccb0878f5da6ff2223827159869df17b9e532405fc5754e8b3b`
-- **Encoding**: ASCII
-
-**File code content:**
-
-```python
-# Generated by Django 6.0.5 on 2026-05-11 18:22
-
-import django.db.models.deletion
-from django.conf import settings
-from django.db import migrations, models
-
-
-class Migration(migrations.Migration):
-
-    dependencies = [
-        ('store', '0002_cart_cartitem'),
-        migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-    ]
-
-    operations = [
-        migrations.CreateModel(
-            name='Order',
-            fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('total_price', models.DecimalField(decimal_places=2, max_digits=10)),
-                ('status', models.CharField(choices=[('pending', 'Pending'), ('paid', 'Paid'), ('shipped', 'Shipped'), ('cancelled', 'Cancelled')], default='pending', max_length=20)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='orders', to=settings.AUTH_USER_MODEL)),
-            ],
-        ),
         migrations.CreateModel(
             name='OrderItem',
             fields=[
@@ -735,14 +717,12 @@ class Migration(migrations.Migration):
             ],
         ),
         migrations.CreateModel(
-            name='Payment',
+            name='CartItem',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('amount', models.DecimalField(decimal_places=2, max_digits=10)),
-                ('payment_method', models.CharField(choices=[('cash', 'Cash'), ('card', 'Card')], max_length=20)),
-                ('payment_status', models.CharField(choices=[('pending', 'Pending'), ('completed', 'Completed'), ('failed', 'Failed')], default='pending', max_length=20)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('order', models.OneToOneField(on_delete=django.db.models.deletion.CASCADE, to='store.order')),
+                ('quantity', models.IntegerField(default=1)),
+                ('cart', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='items', to='store.cart')),
+                ('product', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='store.product')),
             ],
         ),
     ]
@@ -776,23 +756,25 @@ class Migration(migrations.Migration):
 ### <a id="📄-store-admin-py"></a>📄 `store/admin.py`
 
 **File Info:**
-- **Size**: 399 B
+- **Size**: 493 B
 - **Extension**: `.py`
 - **Language**: `python`
 - **Location**: `store/admin.py`
 - **Relative Path**: `store`
 - **Created**: 2026-05-11 17:44:09 (Asia/Riyadh / GMT+03:00)
-- **Modified**: 2026-05-15 21:29:50 (Asia/Riyadh / GMT+03:00)
-- **MD5**: `a13173573ae0b8cc707f6d0887a3bef6`
-- **SHA256**: `cbda50de49a41e15e873e49877ba2bbacbe867ea3d71e071402a27f691a46846`
+- **Modified**: 2026-05-16 01:19:07 (Asia/Riyadh / GMT+03:00)
+- **MD5**: `e6c853e3f060a1a242cd3c5d2a03accd`
+- **SHA256**: `ac54297cba210e2a54ba07de7293f7982f3f444e37c9412d5b42bff49543dd1d`
 - **Encoding**: ASCII
 
 **File code content:**
 
 ```python
 from django.contrib import admin
+from django.contrib.auth.admin import UserAdmin
 
 from .models import (
+    CustomUser,
     Category,
     Product,
     Cart,
@@ -801,14 +783,22 @@ from .models import (
     OrderItem,
     Payment
 )
-#admin.site.register(Category)
+
+
+admin.site.register(CustomUser, UserAdmin)
 
 admin.site.register(Category)
+
 admin.site.register(Product)
+
 admin.site.register(Cart)
+
 admin.site.register(CartItem)
+
 admin.site.register(Order)
+
 admin.site.register(OrderItem)
+
 admin.site.register(Payment)
 ```
 
@@ -844,32 +834,87 @@ class StoreConfig(AppConfig):
 ### <a id="📄-store-models-py"></a>📄 `store/models.py`
 
 **File Info:**
-- **Size**: 3.18 KB
+- **Size**: 4.79 KB
 - **Extension**: `.py`
 - **Language**: `python`
 - **Location**: `store/models.py`
 - **Relative Path**: `store`
 - **Created**: 2026-05-11 17:44:09 (Asia/Riyadh / GMT+03:00)
-- **Modified**: 2026-05-11 18:20:09 (Asia/Riyadh / GMT+03:00)
-- **MD5**: `456c0c65d1f53663b9cf79cf2bd39afc`
-- **SHA256**: `8e1c5a479d52a6bf72dde76482cd78dcf9bb50dfe7bd2188578016f12942ce68`
+- **Modified**: 2026-05-16 00:53:14 (Asia/Riyadh / GMT+03:00)
+- **MD5**: `1e112050b89689047e8160b21f3f77f1`
+- **SHA256**: `c4ecd0ad9258abc6dca3eae5293dc318d7415d7d88b14bf76b9af63241bfb83f`
 - **Encoding**: ASCII
 
 **File code content:**
 
 ```python
 from django.db import models
-from django.contrib.auth.models import User
 
+from django.conf import settings
+
+from django.contrib.auth.models import AbstractUser
+
+
+# =========================================
+# Custom User
+# =========================================
+
+class CustomUser(AbstractUser):
+
+    phone = models.CharField(
+        max_length=20,
+        unique=True,
+        null=True,
+        blank=True
+    )
+
+    address = models.TextField(
+        null=True,
+        blank=True
+    )
+
+    profile_image = models.ImageField(
+        upload_to='profiles/',
+        null=True,
+        blank=True
+    )
+
+    is_customer = models.BooleanField(
+        default=True
+    )
+
+    is_seller = models.BooleanField(
+        default=False
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    def __str__(self):
+
+        return self.username
+
+
+# =========================================
+# Category
+# =========================================
 
 class Category(models.Model):
+
     name = models.CharField(max_length=100)
 
     def __str__(self):
+
         return self.name
 
 
+# =========================================
+# Product
+# =========================================
+
 class Product(models.Model):
+
     category = models.ForeignKey(
         Category,
         on_delete=models.CASCADE,
@@ -887,23 +932,41 @@ class Product(models.Model):
 
     stock_quantity = models.IntegerField(default=0)
 
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
 
     def __str__(self):
+
         return self.name
+
+
+# =========================================
+# Cart
+# =========================================
+
 class Cart(models.Model):
+
     user = models.OneToOneField(
-        User,
+        settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE
     )
 
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
 
     def __str__(self):
+
         return f"Cart - {self.user.username}"
 
 
+# =========================================
+# Cart Item
+# =========================================
+
 class CartItem(models.Model):
+
     cart = models.ForeignKey(
         Cart,
         on_delete=models.CASCADE,
@@ -918,7 +981,14 @@ class CartItem(models.Model):
     quantity = models.IntegerField(default=1)
 
     def __str__(self):
+
         return f"{self.product.name} x {self.quantity}"
+
+
+# =========================================
+# Order
+# =========================================
+
 class Order(models.Model):
 
     STATUS_CHOICES = [
@@ -929,7 +999,7 @@ class Order(models.Model):
     ]
 
     user = models.ForeignKey(
-        User,
+        settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name='orders'
     )
@@ -945,13 +1015,21 @@ class Order(models.Model):
         default='pending'
     )
 
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
 
     def __str__(self):
+
         return f"Order {self.id}"
 
 
+# =========================================
+# Order Item
+# =========================================
+
 class OrderItem(models.Model):
+
     order = models.ForeignKey(
         Order,
         on_delete=models.CASCADE,
@@ -971,8 +1049,13 @@ class OrderItem(models.Model):
     )
 
     def __str__(self):
+
         return self.product.name
 
+
+# =========================================
+# Payment
+# =========================================
 
 class Payment(models.Model):
 
@@ -1008,10 +1091,128 @@ class Payment(models.Model):
         default='pending'
     )
 
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
 
     def __str__(self):
+
         return f"Payment {self.id}"
+```
+
+---
+
+### <a id="📄-store-serializers-py"></a>📄 `store/serializers.py`
+
+**File Info:**
+- **Size**: 1.46 KB
+- **Extension**: `.py`
+- **Language**: `python`
+- **Location**: `store/serializers.py`
+- **Relative Path**: `store`
+- **Created**: 2026-05-16 03:08:01 (Asia/Riyadh / GMT+03:00)
+- **Modified**: 2026-05-16 03:09:15 (Asia/Riyadh / GMT+03:00)
+- **MD5**: `c59f6ff22aabf6f0509b5674253d4ba7`
+- **SHA256**: `7d6ddc45fd027279df8a88ed2dd1fe08c6a21422a921b51e5f69aae80eaa0d41`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```python
+from rest_framework import serializers
+
+from .models import (
+    Category,
+    Product,
+    Cart,
+    CartItem,
+    Order,
+    OrderItem,
+    Payment
+)
+
+
+class CategorySerializer(serializers.ModelSerializer):
+
+    class Meta:
+
+        model = Category
+
+        fields = '__all__'
+
+
+class ProductSerializer(serializers.ModelSerializer):
+
+    class Meta:
+
+        model = Product
+
+        fields = '__all__'
+
+
+class CartItemSerializer(serializers.ModelSerializer):
+
+    product_name = serializers.CharField(
+        source='product.name',
+        read_only=True
+    )
+
+    class Meta:
+
+        model = CartItem
+
+        fields = '__all__'
+
+
+class CartSerializer(serializers.ModelSerializer):
+
+    items = CartItemSerializer(
+        many=True,
+        read_only=True
+    )
+
+    class Meta:
+
+        model = Cart
+
+        fields = '__all__'
+
+
+class OrderItemSerializer(serializers.ModelSerializer):
+
+    product_name = serializers.CharField(
+        source='product.name',
+        read_only=True
+    )
+
+    class Meta:
+
+        model = OrderItem
+
+        fields = '__all__'
+
+
+class OrderSerializer(serializers.ModelSerializer):
+
+    items = OrderItemSerializer(
+        many=True,
+        read_only=True
+    )
+
+    class Meta:
+
+        model = Order
+
+        fields = '__all__'
+
+
+class PaymentSerializer(serializers.ModelSerializer):
+
+    class Meta:
+
+        model = Payment
+
+        fields = '__all__'
 ```
 
 ---
@@ -1044,15 +1245,15 @@ from django.test import TestCase
 ### <a id="📄-store-urls-py"></a>📄 `store/urls.py`
 
 **File Info:**
-- **Size**: 370 B
+- **Size**: 1.69 KB
 - **Extension**: `.py`
 - **Language**: `python`
 - **Location**: `store/urls.py`
 - **Relative Path**: `store`
 - **Created**: 2026-05-11 18:46:43 (Asia/Riyadh / GMT+03:00)
-- **Modified**: 2026-05-15 18:23:32 (Asia/Riyadh / GMT+03:00)
-- **MD5**: `a246bebcdeeaf1ecbbbfd89ecbdf71c5`
-- **SHA256**: `d45f0cbd7dd445a23d412d32d5de2c5eb4346723d36399e4ef958edfdd68d8d8`
+- **Modified**: 2026-05-16 04:14:31 (Asia/Riyadh / GMT+03:00)
+- **MD5**: `c4a39ed33450f1b8b3cec472c42f7414`
+- **SHA256**: `c5d79eaebb8d3da673d528bb83abc5626a13e7ab39376098ed1fd87bed8f0500`
 - **Encoding**: ASCII
 
 **File code content:**
@@ -1060,31 +1261,86 @@ from django.test import TestCase
 ```python
 from django.urls import path
 
-from .views import buy_product 
-from .views import buy_atomic
-from .views import buy_f
+from .views import (
+    buy_product,
+    buy_atomic,
+    buy_f,
+    login_user,
+    register,
+    product_details,
+    delete_cart_item,
+    update_cart_item,
+    checkout,
+    payment_api,
+    order_details,
+    cancel_order,
+    search_products,
+    products_by_category,
+    server_status,
+    queue_status,
+    stats,
+    profile
+)
 
-
+from .views import (
+    CategoryListCreateView,
+    ProductListCreateView,
+    CartView,
+    AddToCartView,
+    OrderListView,
+    PaymentListView,
+)
 
 urlpatterns = [
-    path(
-        'buy/<int:product_id>/',
-      
-        buy_product
-    
-    ),
-    path(
-        'buy/a/<int:product_id>/',
-        buy_atomic
-    ),
 
+    
+    path('buy/<int:product_id>/', buy_product),
+
+    path('buy/a/<int:product_id>/', buy_atomic),
 
     path('buy-f/<int:product_id>/', buy_f),
-    
 
+    path('login/', login_user),
+
+    path('register/', register),
+
+    path('profile/', profile),
+    path('categories/', CategoryListCreateView.as_view()),
+
+    path('products/', ProductListCreateView.as_view()),
+
+    path('cart/', CartView.as_view()),
+
+    path('cart/add/', AddToCartView.as_view()),
+
+    path('orders/', OrderListView.as_view()),
+
+    path('payments/', PaymentListView.as_view()),
+    path('products/<int:id>/', product_details),
+
+    path('cart/item/<int:id>/', delete_cart_item),
+
+    path('cart/item/update/<int:id>/', update_cart_item),
+
+    path('checkout/', checkout),
+
+    path('payment/', payment_api),
+
+    path('orders/<int:id>/', order_details),    
+
+    path('orders/<int:id>/cancel/', cancel_order),
+
+    path('products/search/', search_products),
+
+    path('products/category/<int:id>/', products_by_category),
+
+    path('server-status/', server_status),
+
+    path('queue-status/', queue_status),
+
+    path('stats/', stats),
 
 ]
-
 ```
 
 ---
@@ -1092,37 +1348,55 @@ urlpatterns = [
 ### <a id="📄-store-views-py"></a>📄 `store/views.py`
 
 **File Info:**
-- **Size**: 4.48 KB
+- **Size**: 13.47 KB
 - **Extension**: `.py`
 - **Language**: `python`
 - **Location**: `store/views.py`
 - **Relative Path**: `store`
 - **Created**: 2026-05-11 17:44:09 (Asia/Riyadh / GMT+03:00)
-- **Modified**: 2026-05-15 20:41:45 (Asia/Riyadh / GMT+03:00)
-- **MD5**: `388fc4805251c0c085441eea967e9abe`
-- **SHA256**: `b14cf4a853beaed4deafde68c8597cfccabf05b2232b1b887051d5ddcf42a807`
+- **Modified**: 2026-05-16 04:57:35 (Asia/Riyadh / GMT+03:00)
+- **MD5**: `7d2f5bcfbee86e9978d087a0f9910181`
+- **SHA256**: `15f65562f833cbf446e07ad11b20f351958c3a1ddaab739afe4a03138e0109b7`
 - **Encoding**: ASCII
 
 **File code content:**
 
 ```python
 from concurrent.futures import ThreadPoolExecutor
-
-from django.http import JsonResponse
+from rest_framework.decorators import permission_classes
+from rest_framework.response import Response
 from django.db import transaction
 from django.db.models import F
-
+from django.contrib.auth import authenticate, login
+from django.http import JsonResponse
+import json
 from threading import Semaphore
 import time
-
+from rest_framework.decorators import api_view
 from .models import Product
+from rest_framework import generics
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.views import APIView, csrf_exempt
+from .models import (Category, Product , CustomUser,Cart, CartItem ,OrderItem, Order, Payment)
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import IsAuthenticated
+from rest_framework.response import Response
+from django.shortcuts import get_object_or_404
 
+
+
+from .serializers import (
+    CategorySerializer,
+    ProductSerializer,
+    CartSerializer,
+    CartItemSerializer,
+    OrderSerializer,
+    PaymentSerializer
+)
 
 purchase_semaphore = Semaphore(10)
 
 executor = ThreadPoolExecutor(max_workers=5)
-
-
 
 def background_task(product_id):
 
@@ -1133,9 +1407,6 @@ def background_task(product_id):
     time.sleep(10)
 
     print(f" TASK FINISHED FOR PRODUCT {product_id}")
-
-
-
 
 @transaction.atomic
 def buy_product(request, product_id):
@@ -1192,7 +1463,6 @@ def buy_product(request, product_id):
         print(" Semaphore Released")
 
 
-
 def buy_atomic(request, product_id):
 
     acquired = purchase_semaphore.acquire(blocking=False)
@@ -1246,10 +1516,6 @@ def buy_atomic(request, product_id):
         purchase_semaphore.release()
 
         print(" Semaphore Released")
-
-
-
-
 
 def buy_f(request, product_id):
 
@@ -1330,6 +1596,468 @@ def buy_f(request, product_id):
         purchase_semaphore.release()
 
         print(" Semaphore Released")
+
+def login_user(request):
+
+    if request.method != 'POST':
+
+        return JsonResponse({
+            'message': 'POST request required'
+        })
+
+    data = json.loads(request.body)
+
+    username = data.get('username')
+
+    password = data.get('password')
+
+    user = authenticate(
+        request,
+        username=username,
+        password=password
+    )
+
+    if user is not None:
+
+        login(request, user)
+
+        print(f"USER LOGGED IN -> {user.username}")
+
+        return JsonResponse({
+            'message': 'Login successful',
+            'username': user.username
+        })
+
+    print("INVALID LOGIN")
+
+    return JsonResponse({
+        'message': 'Invalid username or password'
+    })
+
+
+@api_view(['POST'])
+def register(request):
+
+    username = request.data.get('username')
+
+    email = request.data.get('email')
+
+    password = request.data.get('password')
+
+    if CustomUser.objects.filter(username=username).exists():
+
+        return Response({
+            'message': 'Username already exists'
+        })
+
+    user = CustomUser.objects.create_user(
+        username=username,
+        email=email,
+        password=password
+    )
+
+    print(f"NEW USER CREATED -> {user.username}")
+
+    return Response({
+        'message': 'User created successfully'
+    })
+
+
+
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def profile(request):
+
+    return Response({
+
+        'username': request.user.username,
+
+        'email': request.user.email,
+
+        'is_seller': request.user.is_seller,
+
+        'is_customer': request.user.is_customer,
+
+    })
+
+
+class CategoryListCreateView(generics.ListCreateAPIView):
+
+    queryset = Category.objects.all()
+
+    serializer_class = CategorySerializer
+
+class ProductListCreateView(generics.ListCreateAPIView):
+
+    queryset = Product.objects.all()
+
+    serializer_class = ProductSerializer
+
+class CartView(generics.RetrieveAPIView):
+
+    serializer_class = CartSerializer
+
+    permission_classes = [IsAuthenticated]
+
+    def get_object(self):
+
+        cart, created = Cart.objects.get_or_create(
+            user=self.request.user
+        )
+
+        return cart
+
+
+
+
+class AddToCartView(APIView):
+
+    permission_classes = [IsAuthenticated]
+
+    def post(self, request):
+
+        product_id = request.data.get('product_id')
+
+        quantity = int(request.data.get('quantity', 1))
+
+        product = Product.objects.get(id=product_id)
+
+        cart, created = Cart.objects.get_or_create(
+            user=request.user
+        )
+
+        item, created = CartItem.objects.get_or_create(
+            cart=cart,
+            product=product
+        )
+
+        if not created:
+
+            item.quantity += quantity
+
+        else:
+
+            item.quantity = quantity
+
+        item.save()
+
+        return Response({
+            'message': 'Added to cart'
+        })
+
+class OrderListView(generics.ListAPIView):
+
+    serializer_class = OrderSerializer
+
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+
+        return Order.objects.filter(
+            user=self.request.user
+        )
+
+class PaymentListView(generics.ListAPIView):
+
+    serializer_class = PaymentSerializer
+
+    permission_classes = [IsAuthenticated]
+
+    def get_queryset(self):
+
+        return Payment.objects.all()
+    
+
+
+
+def product_details(request, id):
+
+    product = get_object_or_404(Product, id=id)
+
+    data = {
+
+        'id': product.id,
+        'name': product.name,
+        'description': product.description,
+        'price': str(product.price),
+        'stock_quantity': product.stock_quantity
+
+    }
+
+    return JsonResponse(data)
+
+
+@csrf_exempt
+def delete_cart_item(request, id):
+
+    if request.method != 'DELETE':
+
+        return JsonResponse({
+            'message': 'DELETE method required'
+        })
+
+    item = get_object_or_404(
+        CartItem,
+        id=id
+    )
+
+    item.delete()
+
+    return JsonResponse({
+        'message': 'Item deleted'
+    })
+
+
+@csrf_exempt
+def update_cart_item(request, id):
+
+    if request.method != 'PUT':
+
+        return JsonResponse({
+            'message': 'PUT method required'
+        })
+
+    item = get_object_or_404(
+        CartItem,
+        id=id
+    )
+
+    body = json.loads(request.body)
+
+    quantity = body.get('quantity')
+
+    item.quantity = quantity
+
+    item.save()
+
+    return JsonResponse({
+
+        'message': 'Quantity updated',
+        'quantity': item.quantity
+
+    })
+
+
+
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def checkout(request):
+
+    cart = Cart.objects.get(user=request.user)
+
+    items = cart.items.all()
+
+    if not items:
+        return Response({'message': 'Cart is empty'})
+
+    total = 0
+
+    for item in items:
+        total += item.product.price * item.quantity
+
+    order = Order.objects.create(
+        user=request.user,
+        total_price=total
+    )
+
+    for item in items:
+        OrderItem.objects.create(
+            order=order,
+            product=item.product,
+            quantity=item.quantity,
+            price=item.product.price
+        )
+
+    items.delete()
+
+    return Response({
+        'message': 'Checkout successful',
+        'order_id': order.id
+    })
+
+
+
+@csrf_exempt
+def payment_api(request):
+
+    if request.method != 'POST':
+
+        return JsonResponse({
+            'message': 'POST method required'
+        })
+
+    body = json.loads(request.body)
+
+    order_id = body.get('order_id')
+
+    payment_method = body.get(
+        'payment_method'
+    )
+
+    order = Order.objects.get(
+        id=order_id
+    )
+
+    payment = Payment.objects.create(
+
+        order=order,
+        amount=order.total_price,
+        payment_method=payment_method,
+        payment_status='completed'
+
+    )
+
+    order.status = 'paid'
+
+    order.save()
+
+    return JsonResponse({
+
+        'message': 'Payment successful',
+        'payment_id': payment.id
+
+    })
+
+
+
+def order_details(request, id):
+
+    order = get_object_or_404(
+        Order,
+        id=id
+    )
+
+    data = {
+
+        'id': order.id,
+        'status': order.status,
+        'total_price': str(order.total_price)
+
+    }
+
+    return JsonResponse(data)
+
+
+
+@csrf_exempt
+def cancel_order(request, id):
+
+    if request.method != 'PUT':
+
+        return JsonResponse({
+            'message': 'PUT method required'
+        })
+
+    order = get_object_or_404(
+        Order,
+        id=id
+    )
+
+    order.status = 'cancelled'
+
+    order.save()
+
+    return JsonResponse({
+        'message': 'Order cancelled'
+    })
+
+
+def search_products(request):
+
+    q = request.GET.get('q')
+
+    products = Product.objects.filter(
+        name__icontains=q
+    )
+
+    data = []
+
+    for product in products:
+
+        data.append({
+
+            'id': product.id,
+            'name': product.name,
+            'price': str(product.price)
+
+        })
+
+    return JsonResponse(
+        data,
+        safe=False
+    )
+
+
+
+def products_by_category(request, id):
+
+    products = Product.objects.filter(
+        category_id=id
+    )
+
+    data = []
+
+    for product in products:
+
+        data.append({
+
+            'id': product.id,
+            'name': product.name,
+            'price': str(product.price)
+
+        })
+
+    return JsonResponse(
+        data,
+        safe=False
+    )
+
+
+
+def server_status(request):
+
+    active_threads = threading.active_count()
+
+    status = "Normal"
+
+    if active_threads > 20:
+
+        status = "High Load"
+
+    return JsonResponse({
+
+        'active_threads': active_threads,
+        'server_status': status
+
+    })
+
+
+def queue_status(request):
+
+    return JsonResponse({
+
+        'waiting_requests': request_queue.qsize(),
+        'processed_requests': processed_requests
+
+    })
+
+
+
+def stats(request):
+
+    return JsonResponse({
+
+        'products': Product.objects.count(),
+
+        'orders': Order.objects.count(),
+
+        'users': CustomUser.objects.count(),
+
+        'active_threads': threading.active_count(),
+
+        'processed_requests': processed_requests
+
+    })
 ```
 
 ---
@@ -1409,10 +2137,4 @@ if __name__ == '__main__':
 ```
 
 ---
-
-## 🚫 Binary/Excluded Files
-
-The following files were not included in the text content:
-
-- `db.sqlite3`
 

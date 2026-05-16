@@ -1,15 +1,70 @@
 from django.db import models
-from django.contrib.auth.models import User
 
+from django.conf import settings
+
+from django.contrib.auth.models import AbstractUser
+
+
+# =========================================
+# Custom User
+# =========================================
+
+class CustomUser(AbstractUser):
+
+    phone = models.CharField(
+        max_length=20,
+        unique=True,
+        null=True,
+        blank=True
+    )
+
+    address = models.TextField(
+        null=True,
+        blank=True
+    )
+
+    profile_image = models.ImageField(
+        upload_to='profiles/',
+        null=True,
+        blank=True
+    )
+
+    is_customer = models.BooleanField(
+        default=True
+    )
+
+    is_seller = models.BooleanField(
+        default=False
+    )
+
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
+
+    def __str__(self):
+
+        return self.username
+
+
+# =========================================
+# Category
+# =========================================
 
 class Category(models.Model):
+
     name = models.CharField(max_length=100)
 
     def __str__(self):
+
         return self.name
 
 
+# =========================================
+# Product
+# =========================================
+
 class Product(models.Model):
+
     category = models.ForeignKey(
         Category,
         on_delete=models.CASCADE,
@@ -27,23 +82,41 @@ class Product(models.Model):
 
     stock_quantity = models.IntegerField(default=0)
 
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
 
     def __str__(self):
+
         return self.name
+
+
+# =========================================
+# Cart
+# =========================================
+
 class Cart(models.Model):
+
     user = models.OneToOneField(
-        User,
+        settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE
     )
 
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
 
     def __str__(self):
+
         return f"Cart - {self.user.username}"
 
 
+# =========================================
+# Cart Item
+# =========================================
+
 class CartItem(models.Model):
+
     cart = models.ForeignKey(
         Cart,
         on_delete=models.CASCADE,
@@ -58,7 +131,14 @@ class CartItem(models.Model):
     quantity = models.IntegerField(default=1)
 
     def __str__(self):
+
         return f"{self.product.name} x {self.quantity}"
+
+
+# =========================================
+# Order
+# =========================================
+
 class Order(models.Model):
 
     STATUS_CHOICES = [
@@ -69,7 +149,7 @@ class Order(models.Model):
     ]
 
     user = models.ForeignKey(
-        User,
+        settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
         related_name='orders'
     )
@@ -85,13 +165,21 @@ class Order(models.Model):
         default='pending'
     )
 
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
 
     def __str__(self):
+
         return f"Order {self.id}"
 
 
+# =========================================
+# Order Item
+# =========================================
+
 class OrderItem(models.Model):
+
     order = models.ForeignKey(
         Order,
         on_delete=models.CASCADE,
@@ -111,8 +199,13 @@ class OrderItem(models.Model):
     )
 
     def __str__(self):
+
         return self.product.name
 
+
+# =========================================
+# Payment
+# =========================================
 
 class Payment(models.Model):
 
@@ -148,7 +241,10 @@ class Payment(models.Model):
         default='pending'
     )
 
-    created_at = models.DateTimeField(auto_now_add=True)
+    created_at = models.DateTimeField(
+        auto_now_add=True
+    )
 
     def __str__(self):
+
         return f"Payment {self.id}"
