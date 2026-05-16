@@ -3,7 +3,7 @@
 ## 📊 Project Information
 
 - **Project Name**: `myproject`
-- **Generated On**: 2026-05-16 17:41:33 (Asia/Riyadh / GMT+03:00)
+- **Generated On**: 2026-05-16 17:56:41 (Asia/Riyadh / GMT+03:00)
 - **Total Files Processed**: 42
 - **Export Tool**: Easy Whole Project to Single Text File for LLMs v1.1.0
 - **Tool Author**: Jota / José Guilherme Pandolfi
@@ -71,7 +71,7 @@
 │   ├── 📄 tests.py (63 B)
 │   ├── 📄 urls.py (1.69 KB)
 │   ├── 📄 utils.py (367 B)
-│   └── 📄 views.py (14.12 KB)
+│   └── 📄 views.py (14.21 KB)
 ├── 📄 locustfile.py (193 B)
 └── 📄 manage.py (687 B)
 ```
@@ -112,7 +112,7 @@
 | Total Directories | 12 |
 | Text Files | 21 |
 | Binary Files | 21 |
-| Total Size | 97.27 KB |
+| Total Size | 97.36 KB |
 
 ### 📄 File Types Distribution
 
@@ -1410,15 +1410,15 @@ def process_product_purchase(product, quantity):
 ### <a id="📄-store-views-py"></a>📄 `store/views.py`
 
 **File Info:**
-- **Size**: 14.12 KB
+- **Size**: 14.21 KB
 - **Extension**: `.py`
 - **Language**: `python`
 - **Location**: `store/views.py`
 - **Relative Path**: `store`
 - **Created**: 2026-05-11 17:44:09 (Asia/Riyadh / GMT+03:00)
-- **Modified**: 2026-05-16 17:07:02 (Asia/Riyadh / GMT+03:00)
-- **MD5**: `44f968f4b1bc3573d6f84f1d27330273`
-- **SHA256**: `6e74c986b4b4c44668ce4dba9ab19a2fc57b708fd1070d10532a0089154d0cc3`
+- **Modified**: 2026-05-16 17:56:41 (Asia/Riyadh / GMT+03:00)
+- **MD5**: `294bb3ad6eb930025bf8233b6440a48f`
+- **SHA256**: `dcf1283e4588fb3441e7a86744913191171b9e30b84f65d3ce5ea71a538043e3`
 - **Encoding**: ASCII
 
 **File code content:**
@@ -1429,6 +1429,9 @@ from threading import Semaphore
 import threading
 import time
 import json
+from queue import Queue
+from concurrent.futures import ThreadPoolExecutor
+import threading
 
 from django.contrib.auth import authenticate, login
 from django.db import transaction
