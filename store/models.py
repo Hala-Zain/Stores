@@ -1,8 +1,6 @@
-from django.db import models
-
 from django.conf import settings
-
 from django.contrib.auth.models import AbstractUser
+from django.db import models
 
 
 # =========================================
@@ -52,7 +50,9 @@ class CustomUser(AbstractUser):
 
 class Category(models.Model):
 
-    name = models.CharField(max_length=100)
+    name = models.CharField(
+        max_length=100
+    )
 
     def __str__(self):
 
@@ -71,7 +71,9 @@ class Product(models.Model):
         related_name='products'
     )
 
-    name = models.CharField(max_length=200)
+    name = models.CharField(
+        max_length=200
+    )
 
     description = models.TextField()
 
@@ -80,7 +82,9 @@ class Product(models.Model):
         decimal_places=2
     )
 
-    stock_quantity = models.IntegerField(default=0)
+    stock_quantity = models.IntegerField(
+        default=0
+    )
 
     created_at = models.DateTimeField(
         auto_now_add=True
@@ -128,7 +132,9 @@ class CartItem(models.Model):
         on_delete=models.CASCADE
     )
 
-    quantity = models.IntegerField(default=1)
+    quantity = models.IntegerField(
+        default=1
+    )
 
     def __str__(self):
 
@@ -142,10 +148,12 @@ class CartItem(models.Model):
 class Order(models.Model):
 
     STATUS_CHOICES = [
+
         ('pending', 'Pending'),
         ('paid', 'Paid'),
         ('shipped', 'Shipped'),
         ('cancelled', 'Cancelled'),
+
     ]
 
     user = models.ForeignKey(
@@ -210,14 +218,18 @@ class OrderItem(models.Model):
 class Payment(models.Model):
 
     PAYMENT_METHODS = [
+
         ('cash', 'Cash'),
         ('card', 'Card'),
+
     ]
 
     PAYMENT_STATUS = [
+
         ('pending', 'Pending'),
         ('completed', 'Completed'),
         ('failed', 'Failed'),
+
     ]
 
     order = models.OneToOneField(
@@ -248,3 +260,21 @@ class Payment(models.Model):
     def __str__(self):
 
         return f"Payment {self.id}"
+
+
+# =========================================
+# Shared Purchase Logic
+# =========================================
+
+def process_product_purchase(product, quantity):
+
+    from django.db.models import F
+
+    updated = Product.objects.filter(
+        id=product.id,
+        stock_quantity__gte=quantity
+    ).update(
+        stock_quantity=F('stock_quantity') - quantity
+    )
+
+    return updated > 0

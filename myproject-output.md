@@ -3,8 +3,8 @@
 ## 📊 Project Information
 
 - **Project Name**: `myproject`
-- **Generated On**: 2026-05-16 05:26:53 (Asia/Riyadh / GMT+03:00)
-- **Total Files Processed**: 40
+- **Generated On**: 2026-05-16 17:41:33 (Asia/Riyadh / GMT+03:00)
+- **Total Files Processed**: 42
 - **Export Tool**: Easy Whole Project to Single Text File for LLMs v1.1.0
 - **Tool Author**: Jota / José Guilherme Pandolfi
 
@@ -39,10 +39,11 @@
 │   │   ├── 📄 __init__.cpython-313.pyc (147 B)
 │   │   ├── 📄 admin.cpython-313.pyc (1.01 KB)
 │   │   ├── 📄 apps.cpython-313.pyc (448 B)
-│   │   ├── 📄 models.cpython-313.pyc (6.44 KB)
+│   │   ├── 📄 models.cpython-313.pyc (6.92 KB)
 │   │   ├── 📄 serializers.cpython-313.pyc (3.6 KB)
 │   │   ├── 📄 urls.cpython-313.pyc (2.06 KB)
-│   │   └── 📄 views.cpython-313.pyc (19.79 KB)
+│   │   ├── 📄 utils.cpython-313.pyc (791 B)
+│   │   └── 📄 views.cpython-313.pyc (20.74 KB)
 │   ├── 📁 management/
 │   │   ├── 📁 __pycache__/
 │   │   │   └── 📄 __init__.cpython-313.pyc (158 B)
@@ -65,11 +66,12 @@
 │   ├── 📄 __init__.py
 │   ├── 📄 admin.py (493 B)
 │   ├── 📄 apps.py (90 B)
-│   ├── 📄 models.py (4.79 KB)
-│   ├── 📄 serializers.py (1.46 KB)
+│   ├── 📄 models.py (5.26 KB)
+│   ├── 📄 serializers.py (1.42 KB)
 │   ├── 📄 tests.py (63 B)
 │   ├── 📄 urls.py (1.69 KB)
-│   └── 📄 views.py (13.47 KB)
+│   ├── 📄 utils.py (367 B)
+│   └── 📄 views.py (14.12 KB)
 ├── 📄 locustfile.py (193 B)
 └── 📄 manage.py (687 B)
 ```
@@ -95,6 +97,7 @@
 - [📄 store/serializers.py](#📄-store-serializers-py)
 - [📄 store/tests.py](#📄-store-tests-py)
 - [📄 store/urls.py](#📄-store-urls-py)
+- [📄 store/utils.py](#📄-store-utils-py)
 - [📄 store/views.py](#📄-store-views-py)
 - [📄 locustfile.py](#📄-locustfile-py)
 - [📄 manage.py](#📄-manage-py)
@@ -105,18 +108,18 @@
 
 | Metric | Count |
 |--------|-------|
-| Total Files | 40 |
+| Total Files | 42 |
 | Total Directories | 12 |
-| Text Files | 20 |
-| Binary Files | 20 |
-| Total Size | 93.61 KB |
+| Text Files | 21 |
+| Binary Files | 21 |
+| Total Size | 97.27 KB |
 
 ### 📄 File Types Distribution
 
 | Extension | Count |
 |-----------|-------|
-| `.pyc` | 20 |
-| `.py` | 20 |
+| `.pyc` | 21 |
+| `.py` | 21 |
 
 ## 💻 File Code Contents
 
@@ -435,6 +438,7 @@ The following files were not included in the text content:
 - `store/__pycache__/models.cpython-313.pyc`
 - `store/__pycache__/serializers.cpython-313.pyc`
 - `store/__pycache__/urls.cpython-313.pyc`
+- `store/__pycache__/utils.cpython-313.pyc`
 - `store/__pycache__/views.cpython-313.pyc`
 
 ## 🚫 Binary/Excluded Files
@@ -834,25 +838,23 @@ class StoreConfig(AppConfig):
 ### <a id="📄-store-models-py"></a>📄 `store/models.py`
 
 **File Info:**
-- **Size**: 4.79 KB
+- **Size**: 5.26 KB
 - **Extension**: `.py`
 - **Language**: `python`
 - **Location**: `store/models.py`
 - **Relative Path**: `store`
 - **Created**: 2026-05-11 17:44:09 (Asia/Riyadh / GMT+03:00)
-- **Modified**: 2026-05-16 00:53:14 (Asia/Riyadh / GMT+03:00)
-- **MD5**: `1e112050b89689047e8160b21f3f77f1`
-- **SHA256**: `c4ecd0ad9258abc6dca3eae5293dc318d7415d7d88b14bf76b9af63241bfb83f`
+- **Modified**: 2026-05-16 16:28:31 (Asia/Riyadh / GMT+03:00)
+- **MD5**: `24b7de1087f4941da1b33aadebaca72c`
+- **SHA256**: `5635e9a110015ef8a51d2e30d1997e033aee2632fe7896d0b661cc314e4a5d93`
 - **Encoding**: ASCII
 
 **File code content:**
 
 ```python
-from django.db import models
-
 from django.conf import settings
-
 from django.contrib.auth.models import AbstractUser
+from django.db import models
 
 
 # =========================================
@@ -902,7 +904,9 @@ class CustomUser(AbstractUser):
 
 class Category(models.Model):
 
-    name = models.CharField(max_length=100)
+    name = models.CharField(
+        max_length=100
+    )
 
     def __str__(self):
 
@@ -921,7 +925,9 @@ class Product(models.Model):
         related_name='products'
     )
 
-    name = models.CharField(max_length=200)
+    name = models.CharField(
+        max_length=200
+    )
 
     description = models.TextField()
 
@@ -930,7 +936,9 @@ class Product(models.Model):
         decimal_places=2
     )
 
-    stock_quantity = models.IntegerField(default=0)
+    stock_quantity = models.IntegerField(
+        default=0
+    )
 
     created_at = models.DateTimeField(
         auto_now_add=True
@@ -978,7 +986,9 @@ class CartItem(models.Model):
         on_delete=models.CASCADE
     )
 
-    quantity = models.IntegerField(default=1)
+    quantity = models.IntegerField(
+        default=1
+    )
 
     def __str__(self):
 
@@ -992,10 +1002,12 @@ class CartItem(models.Model):
 class Order(models.Model):
 
     STATUS_CHOICES = [
+
         ('pending', 'Pending'),
         ('paid', 'Paid'),
         ('shipped', 'Shipped'),
         ('cancelled', 'Cancelled'),
+
     ]
 
     user = models.ForeignKey(
@@ -1060,14 +1072,18 @@ class OrderItem(models.Model):
 class Payment(models.Model):
 
     PAYMENT_METHODS = [
+
         ('cash', 'Cash'),
         ('card', 'Card'),
+
     ]
 
     PAYMENT_STATUS = [
+
         ('pending', 'Pending'),
         ('completed', 'Completed'),
         ('failed', 'Failed'),
+
     ]
 
     order = models.OneToOneField(
@@ -1098,6 +1114,24 @@ class Payment(models.Model):
     def __str__(self):
 
         return f"Payment {self.id}"
+
+
+# =========================================
+# Shared Purchase Logic
+# =========================================
+
+def process_product_purchase(product, quantity):
+
+    from django.db.models import F
+
+    updated = Product.objects.filter(
+        id=product.id,
+        stock_quantity__gte=quantity
+    ).update(
+        stock_quantity=F('stock_quantity') - quantity
+    )
+
+    return updated > 0
 ```
 
 ---
@@ -1105,15 +1139,15 @@ class Payment(models.Model):
 ### <a id="📄-store-serializers-py"></a>📄 `store/serializers.py`
 
 **File Info:**
-- **Size**: 1.46 KB
+- **Size**: 1.42 KB
 - **Extension**: `.py`
 - **Language**: `python`
 - **Location**: `store/serializers.py`
 - **Relative Path**: `store`
 - **Created**: 2026-05-16 03:08:01 (Asia/Riyadh / GMT+03:00)
-- **Modified**: 2026-05-16 03:09:15 (Asia/Riyadh / GMT+03:00)
-- **MD5**: `c59f6ff22aabf6f0509b5674253d4ba7`
-- **SHA256**: `7d6ddc45fd027279df8a88ed2dd1fe08c6a21422a921b51e5f69aae80eaa0d41`
+- **Modified**: 2026-05-16 05:27:00 (Asia/Riyadh / GMT+03:00)
+- **MD5**: `866d0245b06d920901a5f39936455d48`
+- **SHA256**: `b3de69f81c3aeb59fe1b3a9139caeafa6e51fd67a8deb8588c2350f05c168580`
 - **Encoding**: ASCII
 
 **File code content:**
@@ -1122,14 +1156,7 @@ class Payment(models.Model):
 from rest_framework import serializers
 
 from .models import (
-    Category,
-    Product,
-    Cart,
-    CartItem,
-    Order,
-    OrderItem,
-    Payment
-)
+    Category,Product,Cart,CartItem,Order,OrderItem, Payment)
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -1345,68 +1372,115 @@ urlpatterns = [
 
 ---
 
+### <a id="📄-store-utils-py"></a>📄 `store/utils.py`
+
+**File Info:**
+- **Size**: 367 B
+- **Extension**: `.py`
+- **Language**: `python`
+- **Location**: `store/utils.py`
+- **Relative Path**: `store`
+- **Created**: 2026-05-16 16:30:50 (Asia/Riyadh / GMT+03:00)
+- **Modified**: 2026-05-16 16:36:24 (Asia/Riyadh / GMT+03:00)
+- **MD5**: `b5a0e7895305122a307d9eee2f35bc42`
+- **SHA256**: `cc9d1868ae474a8bc1553550b346d44f27e38a6cf345619ef3688277b7cd0cb5`
+- **Encoding**: ASCII
+
+**File code content:**
+
+```python
+from django.db.models import F
+from .models import Product
+
+def process_product_purchase(product, quantity):
+    print(f"PROCESS PURCHASE -> {product.name}")
+
+    updated = Product.objects.filter(
+        id=product.id,
+        stock_quantity__gte=quantity
+    ).update(
+        stock_quantity=F('stock_quantity') - quantity
+    )
+
+    return updated > 0
+```
+
+---
+
 ### <a id="📄-store-views-py"></a>📄 `store/views.py`
 
 **File Info:**
-- **Size**: 13.47 KB
+- **Size**: 14.12 KB
 - **Extension**: `.py`
 - **Language**: `python`
 - **Location**: `store/views.py`
 - **Relative Path**: `store`
 - **Created**: 2026-05-11 17:44:09 (Asia/Riyadh / GMT+03:00)
-- **Modified**: 2026-05-16 04:57:35 (Asia/Riyadh / GMT+03:00)
-- **MD5**: `7d2f5bcfbee86e9978d087a0f9910181`
-- **SHA256**: `15f65562f833cbf446e07ad11b20f351958c3a1ddaab739afe4a03138e0109b7`
+- **Modified**: 2026-05-16 17:07:02 (Asia/Riyadh / GMT+03:00)
+- **MD5**: `44f968f4b1bc3573d6f84f1d27330273`
+- **SHA256**: `6e74c986b4b4c44668ce4dba9ab19a2fc57b708fd1070d10532a0089154d0cc3`
 - **Encoding**: ASCII
 
 **File code content:**
 
 ```python
 from concurrent.futures import ThreadPoolExecutor
-from rest_framework.decorators import permission_classes
-from rest_framework.response import Response
+from threading import Semaphore
+import threading
+import time
+import json
+
+from django.contrib.auth import authenticate, login
 from django.db import transaction
 from django.db.models import F
-from django.contrib.auth import authenticate, login
 from django.http import JsonResponse
-import json
-from threading import Semaphore
-import time
-from rest_framework.decorators import api_view
-from .models import Product
+from django.shortcuts import get_object_or_404
+
 from rest_framework import generics
-from rest_framework.permissions import IsAuthenticated
-from rest_framework.views import APIView, csrf_exempt
-from .models import (Category, Product , CustomUser,Cart, CartItem ,OrderItem, Order, Payment)
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
-from django.shortcuts import get_object_or_404
+from rest_framework.views import APIView
 
-
+from .models import (
+    Category,
+    Product,
+    CustomUser,
+    Cart,
+    CartItem,
+    Order,
+    OrderItem,
+    Payment
+)
 
 from .serializers import (
     CategorySerializer,
     ProductSerializer,
     CartSerializer,
-    CartItemSerializer,
     OrderSerializer,
     PaymentSerializer
 )
+
 
 purchase_semaphore = Semaphore(10)
 
 executor = ThreadPoolExecutor(max_workers=5)
 
+processed_requests = 0
+
+
 def background_task(product_id):
 
-    print("\nBACKGROUND TASK STARTED")
+    print("\n===== BACKGROUND TASK STARTED =====")
 
     print(f"Processing Product {product_id}")
 
     time.sleep(10)
 
-    print(f" TASK FINISHED FOR PRODUCT {product_id}")
+    print(f"TASK FINISHED FOR PRODUCT {product_id}")
+
+    print("===== BACKGROUND TASK FINISHED =====\n")
+
 
 @transaction.atomic
 def buy_product(request, product_id):
@@ -1415,27 +1489,25 @@ def buy_product(request, product_id):
 
     if not acquired:
 
-        print("SERVER BUSY")
-
         return JsonResponse({
-            'message': 'Server busy, try again later'
+            'message': 'Server busy'
         })
 
     try:
 
-        print("\n===== LOCK REQUEST STARTED =====")
+        print("\n===== LOCK PURCHASE STARTED =====")
 
         product = Product.objects.select_for_update().get(
             id=product_id
         )
 
-        print(f" Product Locked -> ID: {product.id}")
+        print(f"LOCKED PRODUCT -> {product.id}")
 
         time.sleep(5)
 
         if product.stock_quantity <= 0:
 
-            print(" OUT OF STOCK")
+            print("OUT OF STOCK")
 
             return JsonResponse({
                 'message': 'Out of stock'
@@ -1446,21 +1518,21 @@ def buy_product(request, product_id):
         product.save()
 
         print(
-            f" LOCK PURCHASE SUCCESS | Remaining: {product.stock_quantity}"
+            f"PURCHASE SUCCESS | Remaining: {product.stock_quantity}"
         )
 
-        print("===== LOCK REQUEST FINISHED =====\n")
+        print("===== LOCK PURCHASE FINISHED =====\n")
 
         return JsonResponse({
+
             'message': 'Purchase successful',
             'remaining_stock': product.stock_quantity
+
         })
 
     finally:
 
         purchase_semaphore.release()
-
-        print(" Semaphore Released")
 
 
 def buy_atomic(request, product_id):
@@ -1469,17 +1541,13 @@ def buy_atomic(request, product_id):
 
     if not acquired:
 
-        print("SERVER BUSY")
-
         return JsonResponse({
             'message': 'Server busy'
         })
 
     try:
 
-        print("\n===== ATOMIC REQUEST STARTED =====")
-
-        print(f" Trying Atomic Buy -> Product {product_id}")
+        print("\n===== ATOMIC BUY STARTED =====")
 
         updated = Product.objects.filter(
             id=product_id,
@@ -1488,11 +1556,11 @@ def buy_atomic(request, product_id):
             stock_quantity=F('stock_quantity') - 1
         )
 
-        print(f"📌 Rows Updated: {updated}")
+        print(f"ROWS UPDATED -> {updated}")
 
         if updated == 0:
 
-            print(" OUT OF STOCK")
+            print("OUT OF STOCK")
 
             return JsonResponse({
                 'message': 'Out of stock'
@@ -1501,21 +1569,22 @@ def buy_atomic(request, product_id):
         product = Product.objects.get(id=product_id)
 
         print(
-            f"ATOMIC PURCHASE SUCCESS | Remaining: {product.stock_quantity}"
+            f"ATOMIC SUCCESS | Remaining: {product.stock_quantity}"
         )
 
-        print("===== ATOMIC REQUEST FINISHED =====\n")
+        print("===== ATOMIC BUY FINISHED =====\n")
 
         return JsonResponse({
+
             'message': 'Atomic purchase successful',
             'remaining_stock': product.stock_quantity
+
         })
 
     finally:
 
         purchase_semaphore.release()
 
-        print(" Semaphore Released")
 
 def buy_f(request, product_id):
 
@@ -1523,18 +1592,13 @@ def buy_f(request, product_id):
 
     if not acquired:
 
-        print(" SERVER OVERLOADED")
-
         return JsonResponse({
             'message': 'Server busy'
         })
 
     try:
 
-        print("\n===== NEW BUY_F REQUEST =====")
-
-        print(f" Fast Processing Product {product_id}")
-
+        print("\n===== BUY_F STARTED =====")
 
         updated = Product.objects.filter(
             id=product_id,
@@ -1543,59 +1607,42 @@ def buy_f(request, product_id):
             stock_quantity=F('stock_quantity') - 1
         )
 
-        print(f"📌 Rows Updated: {updated}")
-
-
+        print(f"ROWS UPDATED -> {updated}")
 
         if updated == 0:
 
-            print(" OUT OF STOCK")
+            print("OUT OF STOCK")
 
             return JsonResponse({
                 'message': 'Out of stock'
             })
-
-     
-
-        print(" Sending Task To ThreadPool")
 
         executor.submit(
             background_task,
             product_id
         )
 
-        print(" Task Submitted To ThreadPool")
-
-     
+        print("BACKGROUND TASK SENT")
 
         product = Product.objects.get(id=product_id)
 
         print(
-            f" BUY_F SUCCESS | Remaining Stock: {product.stock_quantity}"
+            f"BUY_F SUCCESS | Remaining: {product.stock_quantity}"
         )
-
-        print(" FAST RESPONSE SENT")
 
         print("===== BUY_F FINISHED =====\n")
 
         return JsonResponse({
+
             'message': 'buy_f success',
             'remaining_stock': product.stock_quantity
-        })
 
-    except Exception as e:
-
-        print(f" ERROR: {e}")
-
-        return JsonResponse({
-            'message': 'Server error'
         })
 
     finally:
 
         purchase_semaphore.release()
 
-        print(" Semaphore Released")
 
 def login_user(request):
 
@@ -1624,11 +1671,11 @@ def login_user(request):
         print(f"USER LOGGED IN -> {user.username}")
 
         return JsonResponse({
+
             'message': 'Login successful',
             'username': user.username
-        })
 
-    print("INVALID LOGIN")
+        })
 
     return JsonResponse({
         'message': 'Invalid username or password'
@@ -1651,9 +1698,11 @@ def register(request):
         })
 
     user = CustomUser.objects.create_user(
+
         username=username,
         email=email,
         password=password
+
     )
 
     print(f"NEW USER CREATED -> {user.username}")
@@ -1663,7 +1712,6 @@ def register(request):
     })
 
 
-
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def profile(request):
@@ -1671,11 +1719,8 @@ def profile(request):
     return Response({
 
         'username': request.user.username,
-
         'email': request.user.email,
-
         'is_seller': request.user.is_seller,
-
         'is_customer': request.user.is_customer,
 
     })
@@ -1687,11 +1732,13 @@ class CategoryListCreateView(generics.ListCreateAPIView):
 
     serializer_class = CategorySerializer
 
+
 class ProductListCreateView(generics.ListCreateAPIView):
 
     queryset = Product.objects.all()
 
     serializer_class = ProductSerializer
+
 
 class CartView(generics.RetrieveAPIView):
 
@@ -1706,8 +1753,6 @@ class CartView(generics.RetrieveAPIView):
         )
 
         return cart
-
-
 
 
 class AddToCartView(APIView):
@@ -1741,9 +1786,14 @@ class AddToCartView(APIView):
 
         item.save()
 
+        print(
+            f"ADDED TO CART -> {product.name} | Qty: {item.quantity}"
+        )
+
         return Response({
             'message': 'Added to cart'
         })
+
 
 class OrderListView(generics.ListAPIView):
 
@@ -1757,6 +1807,7 @@ class OrderListView(generics.ListAPIView):
             user=self.request.user
         )
 
+
 class PaymentListView(generics.ListAPIView):
 
     serializer_class = PaymentSerializer
@@ -1765,9 +1816,9 @@ class PaymentListView(generics.ListAPIView):
 
     def get_queryset(self):
 
-        return Payment.objects.all()
-    
-
+        return Payment.objects.filter(
+            order__user=self.request.user
+        )
 
 
 def product_details(request, id):
@@ -1787,50 +1838,50 @@ def product_details(request, id):
     return JsonResponse(data)
 
 
-@csrf_exempt
+@api_view(['DELETE'])
+@permission_classes([IsAuthenticated])
 def delete_cart_item(request, id):
 
-    if request.method != 'DELETE':
-
-        return JsonResponse({
-            'message': 'DELETE method required'
-        })
-
     item = get_object_or_404(
+
         CartItem,
-        id=id
+        id=id,
+        cart__user=request.user
+
     )
 
     item.delete()
 
-    return JsonResponse({
+    print(f"CART ITEM DELETED -> {id}")
+
+    return Response({
         'message': 'Item deleted'
     })
 
 
-@csrf_exempt
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
 def update_cart_item(request, id):
 
-    if request.method != 'PUT':
-
-        return JsonResponse({
-            'message': 'PUT method required'
-        })
-
     item = get_object_or_404(
+
         CartItem,
-        id=id
+        id=id,
+        cart__user=request.user
+
     )
 
-    body = json.loads(request.body)
-
-    quantity = body.get('quantity')
+    quantity = request.data.get('quantity')
 
     item.quantity = quantity
 
     item.save()
 
-    return JsonResponse({
+    print(
+        f"CART ITEM UPDATED -> {item.product.name} | Qty: {item.quantity}"
+    )
+
+    return Response({
 
         'message': 'Quantity updated',
         'quantity': item.quantity
@@ -1838,64 +1889,129 @@ def update_cart_item(request, id):
     })
 
 
-
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def checkout(request):
 
-    cart = Cart.objects.get(user=request.user)
+    print("\n===== CHECKOUT STARTED =====")
+
+    cart = Cart.objects.get(
+        user=request.user
+    )
 
     items = cart.items.all()
 
     if not items:
-        return Response({'message': 'Cart is empty'})
+
+        print("CART EMPTY")
+
+        return Response({
+            'message': 'Cart is empty'
+        })
 
     total = 0
 
-    for item in items:
-        total += item.product.price * item.quantity
-
     order = Order.objects.create(
+
         user=request.user,
-        total_price=total
+        total_price=0
+
     )
 
+    print(f"ORDER CREATED -> {order.id}")
+
     for item in items:
+
+        print(
+            f"PROCESSING -> {item.product.name}"
+        )
+
+        updated = Product.objects.filter(
+
+            id=item.product.id,
+            stock_quantity__gte=item.quantity
+
+        ).update(
+
+            stock_quantity=F('stock_quantity') - item.quantity
+
+        )
+
+        print(f"ROWS UPDATED -> {updated}")
+
+        if updated == 0:
+
+            print("OUT OF STOCK")
+
+            return Response({
+                'message': f'{item.product.name} out of stock'
+            })
+
+        executor.submit(
+            background_task,
+            item.product.id
+        )
+
+        print("BACKGROUND TASK SENT")
+
         OrderItem.objects.create(
+
             order=order,
             product=item.product,
             quantity=item.quantity,
             price=item.product.price
+
         )
+
+        total += item.product.price * item.quantity
+
+        product = Product.objects.get(
+            id=item.product.id
+        )
+
+        print(
+            f"REMAINING STOCK -> {product.stock_quantity}"
+        )
+
+    order.total_price = total
+
+    order.save()
+
+    print(f"TOTAL -> {total}")
 
     items.delete()
 
+    print("CART CLEARED")
+
+    print("CHECKOUT SUCCESS")
+
+    print("===== CHECKOUT FINISHED =====\n")
+
     return Response({
+
         'message': 'Checkout successful',
-        'order_id': order.id
+        'order_id': order.id,
+        'total_price': total
+
     })
 
 
-
-@csrf_exempt
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
 def payment_api(request):
 
-    if request.method != 'POST':
+    order_id = request.data.get('order_id')
 
-        return JsonResponse({
-            'message': 'POST method required'
-        })
-
-    body = json.loads(request.body)
-
-    order_id = body.get('order_id')
-
-    payment_method = body.get(
+    payment_method = request.data.get(
         'payment_method'
     )
 
-    order = Order.objects.get(
-        id=order_id
+    order = get_object_or_404(
+
+        Order,
+        id=order_id,
+        user=request.user
+
     )
 
     payment = Payment.objects.create(
@@ -1911,7 +2027,9 @@ def payment_api(request):
 
     order.save()
 
-    return JsonResponse({
+    print(f"PAYMENT SUCCESS -> ORDER {order.id}")
+
+    return Response({
 
         'message': 'Payment successful',
         'payment_id': payment.id
@@ -1919,12 +2037,16 @@ def payment_api(request):
     })
 
 
-
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
 def order_details(request, id):
 
     order = get_object_or_404(
+
         Order,
-        id=id
+        id=id,
+        user=request.user
+
     )
 
     data = {
@@ -1935,29 +2057,30 @@ def order_details(request, id):
 
     }
 
-    return JsonResponse(data)
+    print(f"ORDER DETAILS VIEWED -> {order.id}")
+
+    return Response(data)
 
 
-
-@csrf_exempt
+@api_view(['PUT'])
+@permission_classes([IsAuthenticated])
 def cancel_order(request, id):
 
-    if request.method != 'PUT':
-
-        return JsonResponse({
-            'message': 'PUT method required'
-        })
-
     order = get_object_or_404(
+
         Order,
-        id=id
+        id=id,
+        user=request.user
+
     )
 
     order.status = 'cancelled'
 
     order.save()
 
-    return JsonResponse({
+    print(f"ORDER CANCELLED -> {order.id}")
+
+    return Response({
         'message': 'Order cancelled'
     })
 
@@ -1988,7 +2111,6 @@ def search_products(request):
     )
 
 
-
 def products_by_category(request, id):
 
     products = Product.objects.filter(
@@ -2013,7 +2135,6 @@ def products_by_category(request, id):
     )
 
 
-
 def server_status(request):
 
     active_threads = threading.active_count()
@@ -2036,11 +2157,10 @@ def queue_status(request):
 
     return JsonResponse({
 
-        'waiting_requests': request_queue.qsize(),
+        'waiting_requests': 0,
         'processed_requests': processed_requests
 
     })
-
 
 
 def stats(request):
@@ -2048,13 +2168,9 @@ def stats(request):
     return JsonResponse({
 
         'products': Product.objects.count(),
-
         'orders': Order.objects.count(),
-
         'users': CustomUser.objects.count(),
-
         'active_threads': threading.active_count(),
-
         'processed_requests': processed_requests
 
     })
