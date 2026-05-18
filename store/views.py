@@ -907,7 +907,7 @@ def checkoutLoadDistribution(request):
 
         result = AsyncResult(
             task_data['task_id']
-        ).get()
+        ).get(timeout=120)
 
         item = task_data['item']
 
