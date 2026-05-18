@@ -1,26 +1,34 @@
-from concurrent.futures import ThreadPoolExecutor
-from threading import Semaphore
+import json
 import threading
 import time
-import json
+from collections import defaultdict
+from concurrent.futures import ThreadPoolExecutor
+from datetime import timedelta
+from threading import Semaphore
+
+from celery import chord, group
+from celery.result import AsyncResult
 
 from django.contrib.auth import authenticate, login
 from django.db import transaction
 from django.db.models import F
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
+from django.utils import timezone
 
 from rest_framework import generics
 from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
-from .tasks import send_verification_email,process_sales_batch,process_checkout_item
-from datetime import timedelta
-from django.utils import timezone
-from collections import defaultdict
-from celery.result import AsyncResult
-import uuid
+
+from .models import Cart, Order, OrderItem
+from .tasks import (
+    process_checkout_item,
+    process_sales_batch,
+    send_verification_email,
+)
+
 
 from .models import (
     Category,
@@ -265,51 +273,71 @@ def login_user(request):
         'message': 'Invalid username or password'
     })
 
-
 @api_view(['POST'])
 def register(request):
 
     username = request.data.get('username')
-
     email = request.data.get('email')
-
     password = request.data.get('password')
+
     is_seller = request.data.get('is_seller', False)
-    if is_seller is True:
-        is_customer=False
-    
+    is_customer = True
+
+    if is_seller:
+        is_customer = False
 
     if CustomUser.objects.filter(username=username).exists():
-
         return Response({
             'message': 'Username already exists'
         })
-    token = str(uuid.uuid4())
 
-    # user = CustomUser.objects.create_user(
-
-    #     username=username,
-    #     email=email,
-    #     password=password,
-    #     is_seller=is_seller,
-    #     is_customer=is_customer
-
-    # )
     user = CustomUser.objects.create_user(
         username=username,
         email=email,
         password=password,
         is_seller=is_seller,
-        is_customer=is_customer,
-        email_token=token
+        is_customer=is_customer
     )
-    send_verification_email.delay(user.email, user.email_token)
-    print(f"NEW USER CREATED -> {user.username}")
+
+    send_verification_email.delay(user.email)
 
     return Response({
-        'message': 'User created successfully'
+        'message': 'User created successfully',
+        'user': user.id
     })
 
+# @api_view(['POST'])
+# def register(request):
+
+#     username = request.data.get('username')
+#     email = request.data.get('email')
+#     password = request.data.get('password')
+
+#     is_seller = request.data.get('is_seller', False)
+#     is_customer = True
+
+#     if is_seller:
+#         is_customer = False
+
+#     if CustomUser.objects.filter(username=username).exists():
+#         return Response({
+#             'message': 'Username already exists'
+#         })
+
+#     user = CustomUser.objects.create_user(
+#         username=username,
+#         email=email,
+#         password=password,
+#         is_seller=is_seller,
+#         is_customer=is_customer
+#     )
+
+#     send_verification_email.delay(user.email)
+
+#     return Response({
+#         'message': 'User created successfully',
+#         'user': user.id
+#     })
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -773,210 +801,95 @@ def stats(request):
         'processed_requests': processed_requests
 
     })
-@api_view(['GET'])
-@permission_classes([IsAuthenticated])
-def seller_sales_analytics(request):
-    user=request.user
-    if not user.is_seller:
-        return Response({'message':'denied if not user'},status=403)
-    period=request.GET.get('period','day')
-    now=timezone.now()
-    if period == 'day':
 
-        start_date = now - timedelta(days=1)
 
-    elif period == 'month':
-
-        start_date = now - timedelta(days=30)
-
-    elif period == 'year':
-
-        start_date = now - timedelta(days=365)
-
-    else:
-
-        return Response({
-            'message': 'Invalid period'
-        }, status=400)
-    order_items=OrderItem.objects.filter( product__seller=user,order__created_at__gte=start_date).values(
-
-        'price',
-        'quantity',
-        'order_id',
-        'product__name'
-
-    )
-    order_items = list(order_items)
-
-    # chunks = chunk_list(order_items, 5)
-    chunks=[
-
-        order_items[i:i+5]
-
-        for i in range(0, len(order_items), 5)]
-
-    
-    task_ids = []
-    for chunk in chunks:
-        task = process_sales_batch.delay(chunk)
-        task_ids.append(task.id)
-    final_total_sales = 0
-
-    final_total_orders = 0
-
-    final_products = {}
-    for task_id in task_ids:
-
-        result = AsyncResult(task_id).get()
-
-        final_total_sales += result['total_sales']
-
-        final_total_orders += result['total_orders']
-
-        for product, quantity in result['products'].items():
-
-            if product not in final_products:
-
-                final_products[product] = 0
-
-            final_products[product] += quantity
-
-    best_product = None
-
-    best_quantity = 0
-
-    for product, quantity in final_products.items():
-
-        if quantity > best_quantity:
-
-            best_product = product
-
-            best_quantity = quantity
-
-    return Response({
-
-        'period': period,
-        'total_sales': final_total_sales,
-        'total_orders': final_total_orders,
-        'best_selling_product': best_product,
-        'best_selling_quantity': best_quantity,
-        'batches_processed': len(chunks)
-
-    })
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def checkoutLoadDistribution(request):
 
     print("\n===== DISTRIBUTED CHECKOUT STARTED =====")
 
-    cart = Cart.objects.get(
-        user=request.user
-    )
-
-    items = cart.items.all()
+    cart = Cart.objects.get(user=request.user)
+    items = list(cart.items.all())
 
     if not items:
-
-        return Response({
-            'message': 'Cart is empty'
-        })
+        return Response({'message': 'Cart is empty'})
 
     order = Order.objects.create(
-
         user=request.user,
         total_price=0
-
     )
 
-    task_ids = []
-
-    for item in items:
-
-        task = process_checkout_item.delay({
-
+    job = group(
+        process_checkout_item.s({
             'product_id': item.product.id,
             'quantity': item.quantity
+        }) for item in items
+    )
 
-        })
+    async_result = job.apply_async()
 
-        task_ids.append({
+    cart.items.all().delete()
 
-            'task_id': task.id,
-            'item': item
-
-        })
-
-        print(f"TASK DISTRIBUTED -> {item.product.name}")
-
-    total_price = 0
-
-    failed_products = []
-
-    for task_data in task_ids:
-
-        result = AsyncResult(
-            task_data['task_id']
-        ).get(timeout=120)
-
-        item = task_data['item']
-
-        if not result['success']:
-
-            failed_products.append(
-                result['product']
-            )
-
-            continue
-
-        OrderItem.objects.create(
-
-            order=order,
-            product=item.product,
-            quantity=item.quantity,
-            price=item.product.price
-
-        )
-
-        total_price += result['total']
-
-        print(
-            f"WORKER FINISHED -> {result['product']}"
-        )
-
-    if failed_products:
-
-        order.delete()
-
-        return Response({
-
-            'message': 'Some products out of stock',
-            'failed_products': failed_products
-
-        })
-
-    order.total_price = total_price
-
-    order.save()
-
-    items.delete()
-
-    print("===== DISTRIBUTED CHECKOUT FINISHED =====")
+    print(f"TASK GROUP STARTED -> {async_result.id}")
 
     return Response({
-
-        'message': 'Distributed checkout successful',
-        'order_id': order.id,
-        'total_price': total_price,
-        'workers_used': len(task_ids)
-
+        "message": "Checkout started",
+        "order_id": order.id,
+        "task_group_id": async_result.id
     })
+
+
 @api_view(['GET'])
-def verify_email(request, token):
+@permission_classes([IsAuthenticated])
+def seller_sales_analytics(request):
 
-    user = get_object_or_404(CustomUser, email_token=token)
+    user = request.user
 
-    user.email_verified = True
-    user.email_token = None
-    user.save()
+    if not user.is_seller:
+        return Response({'message': 'denied'}, status=403)
 
-    return Response({"message": "Email verified successfully"})
+    period = request.GET.get('period', 'day')
+    now = timezone.now()
+
+    if period == 'day':
+        start_date = now - timedelta(days=1)
+    elif period == 'month':
+        start_date = now - timedelta(days=30)
+    elif period == 'year':
+        start_date = now - timedelta(days=365)
+    else:
+        return Response({'message': 'Invalid period'}, status=400)
+
+    order_items = list(
+        OrderItem.objects.filter(
+            product__seller=user,
+            order__created_at__gte=start_date
+        ).values(
+            'price',
+            'quantity',
+            'order_id',
+            'product__name'
+        )
+    )
+
+    chunks = [
+        order_items[i:i+5]
+        for i in range(0, len(order_items), 5)
+    ]
+
+    job = group(
+        process_sales_batch.s(chunk)
+        for chunk in chunks
+    )
+
+    async_result = job.apply_async()
+
+    print(f"ANALYTICS TASK STARTED -> {async_result.id}")
+
+    return Response({
+        "message": "Analytics processing started",
+        "task_group_id": async_result.id,
+        "chunks": len(chunks)
+    })
+

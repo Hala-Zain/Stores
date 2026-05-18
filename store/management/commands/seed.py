@@ -1,277 +1,99 @@
 from django.core.management.base import BaseCommand
-from django.contrib.auth.models import User
-from django.utils import timezone
 
-from datetime import timedelta
-
-# from store.models import Category, Product
-from django.core.management.base import BaseCommand
-
-from store.models import *
-
-from django.contrib.auth import get_user_model
-
-import random
-
-from decimal import Decimal
-
-
-import random
+from store.models import Product, Category, CustomUser
 
 
 class Command(BaseCommand):
 
-    help = 'Seed database with fake data'
+    help = "Seed products"
 
     def handle(self, *args, **kwargs):
 
-        # # حذف البيانات القديمة
-        # Product.objects.all().delete()
-        # Category.objects.all().delete()
+        seller, created = CustomUser.objects.get_or_create(
 
-        # # إنشاء تصنيفات
-        # categories = []
+            username="seller",
 
-        # for name in ['Electronics', 'Books', 'Clothes']:
+            defaults={
 
-        #     category = Category.objects.create(
-        #         name=name
-        #     )
+                "email": "seller@test.com",
+                "is_seller": True,
+                "is_customer": False
 
-        #     categories.append(category)
-
-        # # إنشاء منتجات
-        # for i in range(20):
-
-        #     Product.objects.create(
-        #         category=random.choice(categories),
-        #         name=f'Product {i}',
-        #         description='Test description',
-        #         price=random.randint(10, 500),
-        #         stock_quantity=random.randint(1, 100)
-        #     )
-
-        # self.stdout.write(
-        #     self.style.SUCCESS('Database seeded successfully!')
-        # )
-
-        # =====================================
-        # DELETE OLD DATA
-        # =====================================
-
-        OrderItem.objects.all().delete()
-
-        Order.objects.all().delete()
-
-        Product.objects.all().delete()
-
-        Category.objects.all().delete()
-
-        CustomUser.objects.all().delete()
-
-        # =====================================
-        # CREATE SELLER
-        # =====================================
-
-        seller = CustomUser.objects.create_user(
-
-            username='seller',
-
-            password='1234',
-
-            is_seller=True
+            }
 
         )
 
-        # =====================================
-        # CREATE CUSTOMER
-        # =====================================
+        if created:
 
-        customer = CustomUser.objects.create_user(
+            seller.set_password("123456")
 
-            username='customer',
+            seller.save()
 
-            password='1234',
+        category, _ = Category.objects.get_or_create(
 
-            is_customer=True
-
+            name="Electronics"
         )
 
-        # =====================================
-        # CREATE CATEGORIES
-        # =====================================
+        products = [
 
-        categories = []
+            {
+                "id": 1,
+                "name": "Laptop",
+                "description": "Gaming laptop",
+                "price": 1200,
+                "stock_quantity": 10000
+            },
 
-        for name in [
+            {
+                "id": 2,
+                "name": "Phone",
+                "description": "Smart phone",
+                "price": 800,
+                "stock_quantity": 10000
+            },
 
-            'Electronics',
-            'Books',
-            'Clothes'
+            {
+                "id": 3,
+                "name": "Headphones",
+                "description": "Wireless headphones",
+                "price": 200,
+                "stock_quantity": 10000
 
-        ]:
+            }
 
-            category = Category.objects.create(
-                name=name
-            )
+        ]
 
-            categories.append(category)
+        for data in products:
 
-        # =====================================
-        # CREATE PRODUCTS
-        # =====================================
+            product, created = Product.objects.update_or_create(
 
-        products = []
+                id=data["id"],
 
-        for i in range(200):
+                defaults={
 
-            product = Product.objects.create(
+                    "name": data["name"],
+                    "description": data["description"],
+                    "price": data["price"],
+                    "stock_quantity": data["stock_quantity"],
+                    "category": category,
+                    "seller": seller
 
-                category=random.choice(categories),
-
-                name=f'Product {i}',
-
-                description='Test description',
-
-                price=Decimal(random.randint(10, 500)),
-
-                stock_quantity=1000,
-                seller_id=seller.id
-
-
-            )
-
-            products.append(product)
-
-        self.stdout.write(
-
-            self.style.SUCCESS(
-                'Products created'
-            )
-        )
-
-        # =====================================
-        # CREATE ORDERS
-        # =====================================
-
-        for i in range(300):
-
-            random_days = random.randint(0, 365)
-
-            random_date = timezone.now() - timedelta(
-                days=random_days
-            )
-
-            order = Order.objects.create(
-
-                user=customer,
-
-                total_price=0,
-
-                status='paid'
+                }
 
             )
 
-            order.created_at = random_date
+            self.stdout.write(
 
-            order.save()
+                self.style.SUCCESS(
 
-            total = 0
-
-            for j in range(random.randint(1, 5)):
-
-                product = random.choice(products)
-
-                quantity = random.randint(1, 10)
-
-                OrderItem.objects.create(
-
-                    order=order,
-
-                    product=product,
-
-                    quantity=quantity,
-
-                    price=product.price
+                    f"Product seeded -> {product.name}"
 
                 )
 
-                total += product.price * quantity
-
-            order.total_price = total
-
-            order.save()
+            )
 
         self.stdout.write(
 
-            self.style.SUCCESS(
-                'Orders created'
-            )
-        )
+            self.style.SUCCESS("SEED COMPLETED")
 
-        self.stdout.write(
-
-            self.style.SUCCESS(
-                'Database seeded successfully!'
-            )
-        )
-        # =====================================
-        # CREATE CARTS WITH MANY ITEMS
-        # =====================================
-
-        customers = []
-
-        for i in range(20):
-
-            user = CustomUser.objects.create_user(
-
-                username=f'customer_{i}',
-
-                password='1234',
-
-                is_customer=True
-
-            )
-
-            customers.append(user)
-
-        self.stdout.write(
-
-            self.style.SUCCESS(
-                'Customers created'
-            )
-        )
-
-        # =====================================
-        # CREATE CARTS
-        # =====================================
-
-        for customer in customers:
-
-            cart = Cart.objects.create(
-                user=customer
-            )
-
-            selected_products = random.sample(
-                products,
-                20
-            )
-
-            for product in selected_products:
-
-                CartItem.objects.create(
-
-                    cart=cart,
-
-                    product=product,
-
-                    quantity=random.randint(1, 5)
-
-                )
-
-        self.stdout.write(
-
-            self.style.SUCCESS(
-                'Carts created'
-            )
         )
