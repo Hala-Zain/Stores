@@ -15,7 +15,7 @@ def send_verification_email(email):
 
         message='Welcome! Your account was created successfully.',
 
-        from_email='huda1812zain@gmail.com',
+        from_email='zhala36@gmail.com',
 
         recipient_list=[email],
 
