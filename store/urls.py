@@ -20,7 +20,8 @@ from .views import (
     queue_status,
     stats,
     profile,
-    checkoutLoadDistribution
+    checkoutLoadDistribution,
+    verify_email
 )
 
 from .views import (
@@ -81,6 +82,7 @@ urlpatterns = [
 
     path('stats/', stats),
     path('seller_sales', seller_sales_analytics),
-    path('checkout_distribution/', checkoutLoadDistribution)
+    path('checkout_distribution/', checkoutLoadDistribution),
+    path('verify-email/<str:token>/', verify_email)
 
 ]

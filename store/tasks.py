@@ -6,24 +6,20 @@ from django.db.models import F
 import time
 
 @shared_task
-def send_verification_email(email):
 
-    print(f"Sending email to {email}")
+def send_verification_email(email, token):
 
-    time.sleep(10)
-    send_mail(subject='Verify Your Account',
+    verify_link = f"http://127.0.0.1:8000/verify-email/{token}/"
 
-        message='Welcome! Your account was created successfully.',
-
-        from_email='zhala36@gmail.com',
-
+    send_mail(
+        subject="Verify Your Account",
+        message=f"Click this link to verify your account: {verify_link}",
+        from_email="zhala369@gmail.com",
         recipient_list=[email],
+        fail_silently=False,
+    )
 
-        fail_silently=False,) 
-
-    print(f"Verification email sent to {email}")
-
-    return "Done"
+    return "sent"
 @shared_task
 def process_sales_batch(batch):
     batch_total = 0

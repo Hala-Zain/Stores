@@ -20,6 +20,7 @@ from datetime import timedelta
 from django.utils import timezone
 from collections import defaultdict
 from celery.result import AsyncResult
+import uuid
 
 from .models import (
     Category,
@@ -283,22 +284,30 @@ def register(request):
         return Response({
             'message': 'Username already exists'
         })
+    token = str(uuid.uuid4())
 
+    # user = CustomUser.objects.create_user(
+
+    #     username=username,
+    #     email=email,
+    #     password=password,
+    #     is_seller=is_seller,
+    #     is_customer=is_customer
+
+    # )
     user = CustomUser.objects.create_user(
-
         username=username,
         email=email,
         password=password,
         is_seller=is_seller,
-        is_customer=is_customer
-
+        is_customer=is_customer,
+        email_token=token
     )
-    send_verification_email.delay(user.email)
-
+    send_verification_email.delay(user.email, user.email_token)
     print(f"NEW USER CREATED -> {user.username}")
 
     return Response({
-        'message': 'User created successfully',"user":user.id
+        'message': 'User created successfully'
     })
 
 
@@ -961,3 +970,13 @@ def checkoutLoadDistribution(request):
         'workers_used': len(task_ids)
 
     })
+@api_view(['GET'])
+def verify_email(request, token):
+
+    user = get_object_or_404(CustomUser, email_token=token)
+
+    user.email_verified = True
+    user.email_token = None
+    user.save()
+
+    return Response({"message": "Email verified successfully"})
