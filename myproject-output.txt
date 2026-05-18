@@ -5,7 +5,7 @@ PROJECT EXPORT FOR LLMs
 PROJECT INFORMATION:
 --------------------------------------------------
 Project Name: myproject
-Generated On: 2026-05-16 17:56:41 (Asia/Riyadh / GMT+03:00)
+Generated On: 2026-05-16 18:17:21 (Asia/Riyadh / GMT+03:00)
 Total Files Processed: 42
 Export Tool: Easy Whole Project to Single Text File for LLMs v1.1.0
 Tool Author: Jota / José Guilherme Pandolfi
@@ -73,7 +73,7 @@ PROJECT STRUCTURE
 │   ├── 📄 tests.py (63 B)
 │   ├── 📄 urls.py (1.69 KB)
 │   ├── 📄 utils.py (367 B)
-│   └── 📄 views.py (14.21 KB)
+│   └── 📄 views.py (14.12 KB)
 ├── 📄 locustfile.py (193 B)
 └── 📄 manage.py (687 B)
 
@@ -84,7 +84,7 @@ Total Files: 42
 Total Directories: 12
 Text Files: 21
 Binary Files: 21
-Total Size: 97.36 KB
+Total Size: 97.27 KB
 
 FILE TYPES DISTRIBUTION:
 ------------------------------
@@ -588,7 +588,7 @@ Language: python
 Location: store/migrations/0001_initial.py
 Relative Path: store/migrations
 Created: 2026-05-16 01:12:12 (Asia/Riyadh / GMT+03:00)
-Modified: 2026-05-16 01:12:12 (Asia/Riyadh / GMT+03:00)
+Modified: 2026-05-16 18:17:20 (Asia/Riyadh / GMT+03:00)
 MD5: 5b95953ae9f93c4e8cdc70394208cef6
 SHA256: e35febfeb405a9cfe219eb9c092a0aaefbe7e9569f04d8b05412f2339aa92569
 Encoding: ASCII
@@ -753,7 +753,7 @@ Language: python
 Location: store/admin.py
 Relative Path: store
 Created: 2026-05-11 17:44:09 (Asia/Riyadh / GMT+03:00)
-Modified: 2026-05-16 01:19:07 (Asia/Riyadh / GMT+03:00)
+Modified: 2026-05-16 18:17:19 (Asia/Riyadh / GMT+03:00)
 MD5: e6c853e3f060a1a242cd3c5d2a03accd
 SHA256: ac54297cba210e2a54ba07de7293f7982f3f444e37c9412d5b42bff49543dd1d
 Encoding: ASCII
@@ -833,7 +833,7 @@ Language: python
 Location: store/models.py
 Relative Path: store
 Created: 2026-05-11 17:44:09 (Asia/Riyadh / GMT+03:00)
-Modified: 2026-05-16 16:28:31 (Asia/Riyadh / GMT+03:00)
+Modified: 2026-05-16 18:17:18 (Asia/Riyadh / GMT+03:00)
 MD5: 24b7de1087f4941da1b33aadebaca72c
 SHA256: 5635e9a110015ef8a51d2e30d1997e033aee2632fe7896d0b661cc314e4a5d93
 Encoding: ASCII
@@ -1244,7 +1244,7 @@ Language: python
 Location: store/tests.py
 Relative Path: store
 Created: 2026-05-11 17:44:09 (Asia/Riyadh / GMT+03:00)
-Modified: 2026-05-11 17:44:09 (Asia/Riyadh / GMT+03:00)
+Modified: 2026-05-16 18:17:15 (Asia/Riyadh / GMT+03:00)
 MD5: e08f0582500f6562bf0a931ef9503b39
 SHA256: dae0da7efdcdb3a7fb572d5e914b60631099122d4a4727ac6434c016161c5fe1
 Encoding: ASCII
@@ -1270,7 +1270,7 @@ Language: python
 Location: store/urls.py
 Relative Path: store
 Created: 2026-05-11 18:46:43 (Asia/Riyadh / GMT+03:00)
-Modified: 2026-05-16 04:14:31 (Asia/Riyadh / GMT+03:00)
+Modified: 2026-05-16 18:17:04 (Asia/Riyadh / GMT+03:00)
 MD5: c4a39ed33450f1b8b3cec472c42f7414
 SHA256: c5d79eaebb8d3da673d528bb83abc5626a13e7ab39376098ed1fd87bed8f0500
 Encoding: ASCII
@@ -1404,15 +1404,15 @@ FILE: store/views.py
 
 FILE INFORMATION:
 ----------------------------------------
-Size: 14.21 KB
+Size: 14.12 KB
 Extension: .py
 Language: python
 Location: store/views.py
 Relative Path: store
 Created: 2026-05-11 17:44:09 (Asia/Riyadh / GMT+03:00)
-Modified: 2026-05-16 17:56:41 (Asia/Riyadh / GMT+03:00)
-MD5: 294bb3ad6eb930025bf8233b6440a48f
-SHA256: dcf1283e4588fb3441e7a86744913191171b9e30b84f65d3ce5ea71a538043e3
+Modified: 2026-05-16 18:15:55 (Asia/Riyadh / GMT+03:00)
+MD5: 44f968f4b1bc3573d6f84f1d27330273
+SHA256: 6e74c986b4b4c44668ce4dba9ab19a2fc57b708fd1070d10532a0089154d0cc3
 Encoding: ASCII
 
 FILE CONTENT:
@@ -1422,9 +1422,6 @@ from threading import Semaphore
 import threading
 import time
 import json
-from queue import Queue
-from concurrent.futures import ThreadPoolExecutor
-import threading
 
 from django.contrib.auth import authenticate, login
 from django.db import transaction
@@ -2185,7 +2182,7 @@ Language: python
 Location: locustfile.py
 Relative Path: root
 Created: 2026-05-15 01:11:20 (Asia/Riyadh / GMT+03:00)
-Modified: 2026-05-15 19:22:39 (Asia/Riyadh / GMT+03:00)
+Modified: 2026-05-16 18:17:10 (Asia/Riyadh / GMT+03:00)
 MD5: a638488f43053d3758d6dd34f741505e
 SHA256: 17037e35ad50a973b361a3b9b2ebff4e7906b8df9cf9e94f17559c522c714981
 Encoding: ASCII

@@ -8,6 +8,7 @@ from .views import (
     register,
     product_details,
     delete_cart_item,
+    seller_sales_analytics,
     update_cart_item,
     checkout,
     payment_api,
@@ -18,7 +19,8 @@ from .views import (
     server_status,
     queue_status,
     stats,
-    profile
+    profile,
+    checkoutLoadDistribution
 )
 
 from .views import (
@@ -78,5 +80,7 @@ urlpatterns = [
     path('queue-status/', queue_status),
 
     path('stats/', stats),
+    path('seller_sales', seller_sales_analytics),
+    path('checkout_distribution/', checkoutLoadDistribution)
 
 ]

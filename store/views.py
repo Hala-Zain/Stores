@@ -15,6 +15,11 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from .tasks import send_verification_email,process_sales_batch,process_checkout_item
+from datetime import timedelta
+from django.utils import timezone
+from collections import defaultdict
+from celery.result import AsyncResult
 
 from .models import (
     Category,
@@ -41,6 +46,10 @@ purchase_semaphore = Semaphore(10)
 executor = ThreadPoolExecutor(max_workers=5)
 
 processed_requests = 0
+def chunk_list(data,chunk_size):
+    for i in range(0,len(data),chunk_size):
+        yield data[i:i + chunk_size]
+
 
 
 def background_task(product_id):
@@ -264,6 +273,10 @@ def register(request):
     email = request.data.get('email')
 
     password = request.data.get('password')
+    is_seller = request.data.get('is_seller', False)
+    if is_seller is True:
+        is_customer=False
+    
 
     if CustomUser.objects.filter(username=username).exists():
 
@@ -275,14 +288,17 @@ def register(request):
 
         username=username,
         email=email,
-        password=password
+        password=password,
+        is_seller=is_seller,
+        is_customer=is_customer
 
     )
+    send_verification_email.delay(user.email)
 
     print(f"NEW USER CREATED -> {user.username}")
 
     return Response({
-        'message': 'User created successfully'
+        'message': 'User created successfully',"user":user.id
     })
 
 
@@ -746,5 +762,202 @@ def stats(request):
         'users': CustomUser.objects.count(),
         'active_threads': threading.active_count(),
         'processed_requests': processed_requests
+
+    })
+@api_view(['GET'])
+@permission_classes([IsAuthenticated])
+def seller_sales_analytics(request):
+    user=request.user
+    if not user.is_seller:
+        return Response({'message':'denied if not user'},status=403)
+    period=request.GET.get('period','day')
+    now=timezone.now()
+    if period == 'day':
+
+        start_date = now - timedelta(days=1)
+
+    elif period == 'month':
+
+        start_date = now - timedelta(days=30)
+
+    elif period == 'year':
+
+        start_date = now - timedelta(days=365)
+
+    else:
+
+        return Response({
+            'message': 'Invalid period'
+        }, status=400)
+    order_items=OrderItem.objects.filter( product__seller=user,order__created_at__gte=start_date).values(
+
+        'price',
+        'quantity',
+        'order_id',
+        'product__name'
+
+    )
+    order_items = list(order_items)
+
+    # chunks = chunk_list(order_items, 5)
+    chunks=[
+
+        order_items[i:i+5]
+
+        for i in range(0, len(order_items), 5)]
+
+    
+    task_ids = []
+    for chunk in chunks:
+        task = process_sales_batch.delay(chunk)
+        task_ids.append(task.id)
+    final_total_sales = 0
+
+    final_total_orders = 0
+
+    final_products = {}
+    for task_id in task_ids:
+
+        result = AsyncResult(task_id).get()
+
+        final_total_sales += result['total_sales']
+
+        final_total_orders += result['total_orders']
+
+        for product, quantity in result['products'].items():
+
+            if product not in final_products:
+
+                final_products[product] = 0
+
+            final_products[product] += quantity
+
+    best_product = None
+
+    best_quantity = 0
+
+    for product, quantity in final_products.items():
+
+        if quantity > best_quantity:
+
+            best_product = product
+
+            best_quantity = quantity
+
+    return Response({
+
+        'period': period,
+        'total_sales': final_total_sales,
+        'total_orders': final_total_orders,
+        'best_selling_product': best_product,
+        'best_selling_quantity': best_quantity,
+        'batches_processed': len(chunks)
+
+    })
+@api_view(['POST'])
+@permission_classes([IsAuthenticated])
+def checkoutLoadDistribution(request):
+
+    print("\n===== DISTRIBUTED CHECKOUT STARTED =====")
+
+    cart = Cart.objects.get(
+        user=request.user
+    )
+
+    items = cart.items.all()
+
+    if not items:
+
+        return Response({
+            'message': 'Cart is empty'
+        })
+
+    order = Order.objects.create(
+
+        user=request.user,
+        total_price=0
+
+    )
+
+    task_ids = []
+
+    for item in items:
+
+        task = process_checkout_item.delay({
+
+            'product_id': item.product.id,
+            'quantity': item.quantity
+
+        })
+
+        task_ids.append({
+
+            'task_id': task.id,
+            'item': item
+
+        })
+
+        print(f"TASK DISTRIBUTED -> {item.product.name}")
+
+    total_price = 0
+
+    failed_products = []
+
+    for task_data in task_ids:
+
+        result = AsyncResult(
+            task_data['task_id']
+        ).get()
+
+        item = task_data['item']
+
+        if not result['success']:
+
+            failed_products.append(
+                result['product']
+            )
+
+            continue
+
+        OrderItem.objects.create(
+
+            order=order,
+            product=item.product,
+            quantity=item.quantity,
+            price=item.product.price
+
+        )
+
+        total_price += result['total']
+
+        print(
+            f"WORKER FINISHED -> {result['product']}"
+        )
+
+    if failed_products:
+
+        order.delete()
+
+        return Response({
+
+            'message': 'Some products out of stock',
+            'failed_products': failed_products
+
+        })
+
+    order.total_price = total_price
+
+    order.save()
+
+    items.delete()
+
+    print("===== DISTRIBUTED CHECKOUT FINISHED =====")
+
+    return Response({
+
+        'message': 'Distributed checkout successful',
+        'order_id': order.id,
+        'total_price': total_price,
+        'workers_used': len(task_ids)
 
     })
