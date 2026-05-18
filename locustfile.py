@@ -12,19 +12,19 @@ class EcommerceUser(HttpUser):
         self.username = f"user_{uuid.uuid4().hex}"
         self.password = "123456"
 
+        self.user_type = random.choice(["seller", "customer"])
+
         register_response = self.client.post(
             "register/",
             json={
                 "username": self.username,
                 "email": f"{self.username}@test.com",
                 "password": self.password,
-                "is_seller": False
+                "user_type": self.user_type
             }
         )
 
-        print("REGISTER STATUS:", register_response.status_code)
-
-        if register_response.status_code != 200:
+        if register_response.status_code != 201:
             return
 
         login_response = self.client.post(
@@ -35,13 +35,10 @@ class EcommerceUser(HttpUser):
             }
         )
 
-        print("LOGIN STATUS:", login_response.status_code)
-
         if login_response.status_code != 200:
             return
 
-        data = login_response.json()
-        token = data["access"]
+        token = login_response.json()["access"]
 
         self.client.headers.update({
             "Authorization": f"Bearer {token}"
@@ -53,7 +50,7 @@ class EcommerceUser(HttpUser):
         product_id = random.randint(1, 3)
 
         # Add to cart
-        add_response = self.client.post(
+        self.client.post(
             "cart/add/",
             json={
                 "product_id": product_id,
@@ -61,31 +58,25 @@ class EcommerceUser(HttpUser):
             }
         )
 
-        print("ADD TO CART:", add_response.status_code)
+        # Checkout distributed
+        self.client.post(
+            "checkout_distribution/"
+        )
 
-        # # Traditional checkout (اختياري)
-        # with self.client.post(
-        #     "checkout/",
-        #     catch_response=True
-        # ) as checkout_response:
+    @task(1)
+    def seller_analytics(self):
 
-        #     print("CHECKOUT:", checkout_response.status_code)
+        if self.user_type != "seller":
+            return
 
-        #     if checkout_response.status_code != 200:
-        #         checkout_response.failure("Checkout failed")
-        #     else:
-        #         checkout_response.success()
+        period = random.choice(["day", "month", "year"])
 
-        # 🚀 Distributed checkout (الجديد)
-        with self.client.post(
-            "checkout_distribution/",
-            catch_response=True
-        ) as dist_response:
+        response = self.client.get(
+            "seller_sales",   # ✅ fixed endpoint
+            params={
+                "period": period
+            }
+        )
 
-            print("DISTRIBUTED CHECKOUT:", dist_response.status_code)
-            print("RESPONSE:", dist_response.text)
-
-            if dist_response.status_code != 200:
-                dist_response.failure("Distributed checkout failed")
-            else:
-                dist_response.success()
+        print("ANALYTICS STATUS:", response.status_code)
+        print("ANALYTICS RESPONSE:", response.text)

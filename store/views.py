@@ -280,16 +280,20 @@ def register(request):
     email = request.data.get('email')
     password = request.data.get('password')
 
-    is_seller = request.data.get('is_seller', False)
-    is_customer = True
+    user_type = request.data.get('user_type')  # "seller" or "customer"
 
-    if is_seller:
-        is_customer = False
+    if user_type not in ['seller', 'customer']:
+        return Response({
+            'message': 'user_type must be either seller or customer'
+        }, status=400)
+
+    is_seller = True if user_type == 'seller' else False
+    is_customer = True if user_type == 'customer' else False
 
     if CustomUser.objects.filter(username=username).exists():
         return Response({
             'message': 'Username already exists'
-        })
+        }, status=400)
 
     user = CustomUser.objects.create_user(
         username=username,
@@ -303,8 +307,9 @@ def register(request):
 
     return Response({
         'message': 'User created successfully',
-        'user': user.id
-    })
+        'user': user.id,
+        'type': user_type
+    }, status=201)
 
 # @api_view(['POST'])
 # def register(request):
