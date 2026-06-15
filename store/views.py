@@ -21,6 +21,7 @@ from rest_framework.decorators import api_view, permission_classes
 from rest_framework.permissions import IsAuthenticated
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from django.core.cache import cache
 
 from .models import Cart, Order, OrderItem
 from .tasks import (
@@ -48,6 +49,7 @@ from .serializers import (
     OrderSerializer,
     PaymentSerializer
 )
+from .decorators import track_product_view
 
 
 purchase_semaphore = Semaphore(10)
@@ -452,7 +454,7 @@ class PaymentListView(generics.ListAPIView):
             order__user=self.request.user
         )
 
-
+@track_product_view
 def product_details(request, id):
 
     product = get_object_or_404(Product, id=id)
@@ -715,18 +717,12 @@ def cancel_order(request, id):
     return Response({
         'message': 'Order cancelled'
     })
-
-
 def search_products(request):
-
     q = request.GET.get('q')
-
     products = Product.objects.filter(
         name__icontains=q
     )
-
     data = []
-
     for product in products:
 
         data.append({
@@ -736,13 +732,10 @@ def search_products(request):
             'price': str(product.price)
 
         })
-
     return JsonResponse(
         data,
         safe=False
     )
-
-
 def products_by_category(request, id):
 
     products = Product.objects.filter(
@@ -887,14 +880,55 @@ def seller_sales_analytics(request):
         process_sales_batch.s(chunk)
         for chunk in chunks
     )
-
     async_result = job.apply_async()
-
     print(f"ANALYTICS TASK STARTED -> {async_result.id}")
-
     return Response({
         "message": "Analytics processing started",
         "task_group_id": async_result.id,
         "chunks": len(chunks)
     })
+# def test(request):
+#     key = "product_views:2"
 
+#     value = cache.get(key, 0)
+
+#     return JsonResponse({
+#         "key": key,
+#         "value": value
+#     })
+
+#     # cache.set(
+#     #     "counter",
+#     #     cache.get("counter", 0) + 1,
+#     #     timeout=600
+#     # )
+
+#     # return JsonResponse({
+#     #     "counter": cache.get("counter")
+#     # })
+@api_view(['GET'])
+@permission_classes([IsAuthenticated]) 
+def trending_products(request):
+    cached_data=cache.get("trending_products")
+    if cached_data:
+        print("Cache Hit")
+        return JsonResponse(cached_data,safe=False)
+    print("Cache Miss")
+    products_data=[]
+    print("READING FROM DATABASE")
+    for product in Product.objects.all():
+        views = cache.get(f"product_views:{product.id}",0)
+        print(
+        f"PRODUCT {product.id} => {views}"
+    )
+
+        products_data.append({
+            "id": product.id,
+            "name": product.name,
+            "views": views
+
+        })
+    products_data.sort(key=lambda x: x["views"],reverse=True)
+    top_products = products_data[:10]
+    cache.set("trending_products",top_products,timeout=300)
+    return JsonResponse(top_products,safe=False)
