@@ -3,7 +3,7 @@
 ## 📊 Project Information
 
 - **Project Name**: `Stores`
-- **Generated On**: 2026-06-16 20:46:32 (Asia/Riyadh / GMT+03:00)
+- **Generated On**: 2026-06-16 20:53:43 (Asia/Riyadh / GMT+03:00)
 - **Total Files Processed**: 65
 - **Export Tool**: Easy Whole Project to Single Text File for LLMs v1.1.0
 - **Tool Author**: Jota / José Guilherme Pandolfi
@@ -21,7 +21,7 @@
 
 ```
 ├── 📁 __pycache__/
-│   └── 📄 locustfile.cpython-313.pyc (3.03 KB)
+│   └── 📄 locustfile.cpython-313.pyc (3 KB)
 ├── 📁 myproject/
 │   ├── 📁 __pycache__/
 │   │   ├── 📄 __init__.cpython-313.pyc (238 B)
@@ -139,7 +139,7 @@
 | Total Directories | 12 |
 | Text Files | 25 |
 | Binary Files | 40 |
-| Total Size | 973.27 KB |
+| Total Size | 973.24 KB |
 
 ### 📄 File Types Distribution
 
