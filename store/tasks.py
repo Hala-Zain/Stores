@@ -118,148 +118,74 @@ def process_sales_batch(batch):
 # 3. PROCESS CHECKOUT ITEM TASK
 # =====================================================
 
-@shared_task(
+from celery import shared_task
+from django.db import transaction
+from django.core.cache import cache
+from .models import Product
 
-    autoretry_for=(Exception,),
-
-    retry_kwargs={
-        'max_retries': 3
-    },
-
-    retry_backoff=True
-
-)
+@shared_task
 def process_checkout_item(item_data):
-
-    print("\n===== CHECKOUT ITEM TASK STARTED =====")
-
     product_id = item_data['product_id']
-
     quantity = item_data['quantity']
-
-    order_id = item_data['order_id']
-
-    print(
-        f"PROCESSING PRODUCT -> {product_id}"
-    )
+    
+    print(f"\n===== ADAPTIVE THRESHOLD CHECKOUT STARTED FOR PRODUCT {product_id} =====")
+    
+    redis_key = f"product_tokens:{product_id}"
+    
+    # 1. جلب المخزون الحالي من Redis (الشحن الديناميكي لآلاف المنتجات)
+    new_stock = cache.get(redis_key)
+    
+    if new_stock is None:
+        try:
+            with transaction.atomic():
+                product = Product.objects.get(id=product_id)
+                new_stock = product.stock_quantity
+                cache.set(redis_key, new_stock, timeout=None)
+        except Product.DoesNotExist:
+            return {"success": False, "reason": "PRODUCT_NOT_FOUND"}
 
     try:
+        # 🚨 [المرحلة الحرجة]: المخزون أصبح واطئاً جداً (5 قطع أو أقل) -> الانتقال فوراً للقفل التشاؤمي في MySQL
+        if new_stock <= 5:
+            print(f"⚠️ [CRITICAL STOCK DETECTED: {new_stock}]. SWITCHING TO STRICT MYSQL LOCK...")
+            
+            with transaction.atomic():
+                # قفل تشاؤمي صارم يحجز السطر لمنع أي تضارب نهائياً في القطع الأخيرة
+                product = Product.objects.select_for_update().get(id=product_id)
+                
+                if product.stock_quantity >= quantity:
+                    product.stock_quantity -= quantity
+                    product.save()
+                    
+                    # مزامنة الكاش فوراً بالقيمة الحقيقية بعد الخصم الآمن
+                    cache.set(redis_key, product.stock_quantity, timeout=None)
+                    print(f"✅ [PESSIMISTIC SUCCESS] Critical item sold safely. DB Stock: {product.stock_quantity}")
+                    return {"success": True, "product_id": product_id}
+                else:
+                    print(f"❌ [PESSIMISTIC FAIL] Product {product_id} is OUT OF STOCK.")
+                    return {"success": False, "product": product.name, "reason": "OUT_OF_STOCK"}
 
-        with transaction.atomic():
+        # 🚀 [المرحلة العادية]: المخزون وفير ومرتفع (> 5) -> الخصم السريع من Redis لحماية السيرفر
+        else:
+            if new_stock < quantity:
+                print(f"🛑 [REDIS SHIELD] Blocked by Redis pre-check. Out of stock.")
+                return {"success": False, "product_id": product_id, "reason": "OUT_OF_STOCK"}
 
-            updated = Product.objects.filter(
+            # خصم الكمية من الكاش
+            new_stock -= quantity
+            cache.set(redis_key, new_stock, timeout=None)
 
-                id=product_id,
-
-                stock_quantity__gte=quantity
-
-            ).update(
-
-                stock_quantity=F(
-                    'stock_quantity'
-                ) - quantity
-
-            )
-
-            print(
-                f"ROWS UPDATED -> {updated}"
-            )
-
-            if updated == 0:
-
-                product = Product.objects.filter(
-                    id=product_id
-                ).first()
-
-                print("OUT OF STOCK")
-
-                return {
-
-                    "success": False,
-
-                    "product": (
-                        product.name
-                        if product
-                        else "unknown"
-                    ),
-
-                    "reason": "OUT_OF_STOCK"
-
-                }
-
-            product = Product.objects.get(
-                id=product_id
-            )
-
-            OrderItem.objects.create(
-
-                order_id=order_id,
-
-                product=product,
-
-                quantity=quantity,
-
-                price=product.price
-
-            )
-
-            subtotal = (
-                float(product.price) * quantity
-            )
-
-            print(
-                f"SUCCESS -> {product.name}"
-            )
-
-            print(
-                f"REMAINING STOCK -> "
-                f"{product.stock_quantity}"
-            )
-
-            print(
-                f"SUBTOTAL -> {subtotal}"
-            )
-
-            print(
-                "===== CHECKOUT ITEM TASK FINISHED =====\n"
-            )
-
-            return {
-
-                "success": True,
-
-                "product_id": product.id,
-
-                "product": product.name,
-
-                "quantity": quantity,
-
-                "price": float(product.price),
-
-                "subtotal": subtotal
-
-            }
-
-    except Product.DoesNotExist:
-
-        print("PRODUCT NOT FOUND")
-
-        return {
-
-            "success": False,
-
-            "product": "unknown",
-
-            "reason": "NOT_FOUND"
-
-        }
+            # تحديث قاعدة البيانات في الخلفية بشكل سريع بدون أقفال ثقيلة لتوفير موارد السيرفر
+            Product.objects.filter(id=product_id).update(stock_quantity=new_stock)
+            print(f"⚡ [REDIS FAST SUCCESS] Subtracted {quantity} from RAM. New Stock: {new_stock}")
+            return {"success": True, "product_id": product_id}
 
     except Exception as e:
-
-        print(f"TASK ERROR -> {str(e)}")
-
-        raise e
-
+        # تراجع في Redis في حال حدوث أي خطأ بالخلفية لحماية دقة المخزون
+        if new_stock is not None and new_stock > 5:
+            cache.incr(redis_key, quantity)
+        print(f"💥 ERROR IN THRESHOLD TASK: {str(e)}")
+        return {"success": False, "reason": str(e)}
 
 # =====================================================
 # 4. FINALIZE ORDER TASK
@@ -267,83 +193,65 @@ def process_checkout_item(item_data):
 
 @shared_task
 def finalize_order(results, order_id, user_id):
-
     print("\n===== FINALIZE ORDER STARTED =====")
 
-    order = Order.objects.get(
-        id=order_id
-    )
+    try:
+        order = Order.objects.get(id=order_id)
+    except Order.DoesNotExist:
+        print(f"❌ Order {order_id} not found in database.")
+        return {"success": False, "reason": "ORDER_NOT_FOUND"}
 
     failed_items = []
-
     total = 0
 
+    # 🔄 فحص النتائج بحذر شديد لمنع الـ KeyError نهائياً
     for result in results:
+        # تأمين 1: التأكد من أن النتيجة ليست فارغة وأنها عبارة عن قاموس (Dictionary)
+        if not result or not isinstance(result, dict):
+            failed_items.append({"success": False, "reason": "INVALID_OR_EMPTY_RESULT"})
+            continue
 
-        if result['success']:
+        # تأمين 2: جلب قيمة success بأمان، إذا لم تكن موجودة نعتبرها False تلقائياً
+        is_success = result.get('success', False)
 
-            total += result['subtotal']
-
+        if is_success:
+            # نأخذ الحساب بأمان، وإذا لم يجد 'subtotal' يضع 0 بدلاً من الانهيار
+            total += result.get('subtotal', 0)
         else:
-
+            # إذا فشل المنتج (مثل الـ Headphones اللي خلص ستوكها بالـ Logs) نضيفه هنا
             failed_items.append(result)
 
+    # 🛑 إذا كان هناك أي منتج فاشل في الطلب
     if failed_items:
-
         print("CHECKOUT FAILED")
-
         order.status = 'failed'
-
         order.save()
 
-        print(
-            f"FAILED ITEMS -> {failed_items}"
-        )
-
-        print(
-            "===== FINALIZE ORDER FAILED =====\n"
-        )
+        print(f"FAILED ITEMS -> {failed_items}")
+        print("===== FINALIZE ORDER FAILED =====\n")
 
         return {
-
             "success": False,
-
             "order_id": order.id,
-
             "failed_items": failed_items
-
         }
 
+    #  إذا نجحت كل المنتجات وتم حجز مخزونها بالكامل
     order.total_price = total
-
     order.status = 'completed'
-
     order.save()
 
-    CartItem.objects.filter(
-        cart__user_id=user_id
-    ).delete()
+    # تفريغ سلة المستخدم الفعلي
+    CartItem.objects.filter(cart__user_id=user_id).delete()
 
-    print(
-        f"ORDER COMPLETED -> {order.id}"
-    )
-
-    print(
-        f"TOTAL PRICE -> {total}"
-    )
-
+    print(f"ORDER COMPLETED -> {order.id}")
+    print(f"TOTAL PRICE -> {total}")
     print("CART CLEARED")
-
-    print(
-        "===== FINALIZE ORDER FINISHED =====\n"
-    )
+    print("===== FINALIZE ORDER FINISHED =====\n")
 
     return {
-
         "success": True,
-
         "order_id": order.id,
-
         "total_price": total
-
     }
+    

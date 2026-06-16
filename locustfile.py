@@ -1,18 +1,18 @@
-from locust import HttpUser, task, between
 import random
 import uuid
+from locust import HttpUser, between, task
 
 
 class EcommerceUser(HttpUser):
-
     wait_time = between(1, 2)
 
     def on_start(self):
-
-        self.username = f"user_{uuid.uuid4().hex}"
+     
+        self.username = f"user_{uuid.uuid4().hex[:10]}"
         self.password = "123456"
-
         self.user_type = random.choice(["seller", "customer"])
+        
+        self.is_authenticated = False
 
         register_response = self.client.post(
             "register/",
@@ -35,21 +35,21 @@ class EcommerceUser(HttpUser):
             }
         )
 
-        if login_response.status_code != 200:
-            return
+        if login_response.status_code == 200:
+            token = login_response.json().get("access")
+            self.client.headers.update({
+                "Authorization": f"Bearer {token}"
+            })
+            self.is_authenticated = True
 
-        token = login_response.json()["access"]
-
-        self.client.headers.update({
-            "Authorization": f"Bearer {token}"
-        })
-
-    @task
+    @task(3)
     def ecommerce_flow(self):
+      
+        if not self.is_authenticated:
+            return
 
         product_id = random.randint(1, 3)
 
-        # Add to cart
         self.client.post(
             "cart/add/",
             json={
@@ -58,25 +58,18 @@ class EcommerceUser(HttpUser):
             }
         )
 
-        # Checkout distributed
-        self.client.post(
-            "checkout_distribution/"
-        )
+        self.client.post("checkout_distribution/")
 
     @task(1)
     def seller_analytics(self):
-
-        if self.user_type != "seller":
+        if not self.is_authenticated or self.user_type != "seller":
             return
 
         period = random.choice(["day", "month", "year"])
 
-        response = self.client.get(
-            "seller_sales",   # ✅ fixed endpoint
+        self.client.get(
+            "seller_sales",
             params={
                 "period": period
             }
         )
-
-        print("ANALYTICS STATUS:", response.status_code)
-        print("ANALYTICS RESPONSE:", response.text)

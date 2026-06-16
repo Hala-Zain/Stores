@@ -5,10 +5,10 @@ from collections import defaultdict
 from concurrent.futures import ThreadPoolExecutor
 from datetime import timedelta
 from threading import Semaphore
-
+from .utils import try_acquire, release
 from celery import chord, group
 from celery.result import AsyncResult
-
+from .tasks import finalize_order
 from django.contrib.auth import authenticate, login
 from django.db import transaction
 from django.db.models import F
@@ -274,6 +274,52 @@ def login_user(request):
     return JsonResponse({
         'message': 'Invalid username or password'
     })
+
+# @api_view(['POST'])
+# def register(request):
+
+#     username = request.data.get('username')
+#     email = request.data.get('email')
+#     password = request.data.get('password')
+
+#     user_type = request.data.get('user_type')  # "seller" or "customer"
+
+#     if user_type not in ['seller', 'customer']:
+#         return Response({
+#             'message': 'user_type must be either seller or customer'
+#         }, status=400)
+
+#     is_seller = True if user_type == 'seller' else False
+#     is_customer = True if user_type == 'customer' else False
+
+#     if CustomUser.objects.filter(username=username).exists():
+#         return Response({
+#             'message': 'Username already exists'
+#         }, status=400)
+
+#     user = CustomUser.objects.create_user(
+#         username=username,
+#         email=email,
+#         password=password,
+#         is_seller=is_seller,
+#         is_customer=is_customer
+#     )
+
+#     send_verification_email.delay(user.email)
+
+#     return Response({
+#         'message': 'User created successfully',
+#         'user': user.id,
+#         'type': user_type
+#     }, status=201)
+
+import json
+from django.http import JsonResponse
+from rest_framework.decorators import api_view, permission_classes
+from rest_framework.permissions import AllowAny
+from django.core.cache import cache
+
+from .utils import try_acquire, release
 
 @api_view(['POST'])
 def register(request):
@@ -801,42 +847,41 @@ def stats(request):
     })
 
 
+
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
 def checkoutLoadDistribution(request):
-
     print("\n===== DISTRIBUTED CHECKOUT STARTED =====")
 
     cart = Cart.objects.get(user=request.user)
     items = list(cart.items.all())
 
     if not items:
-        return Response({'message': 'Cart is empty'})
+        return Response({'message': 'Cart is empty'}, status=400)
 
     order = Order.objects.create(
         user=request.user,
-        total_price=0
+        total_price=0,
+        status='pending'
     )
 
-    job = group(
+    header = [
         process_checkout_item.s({
             'product_id': item.product.id,
-            'quantity': item.quantity
+            'quantity': item.quantity,
+            'order_id': order.id  
         }) for item in items
-    )
+    ]
 
-    async_result = job.apply_async()
+    callback = finalize_order.s(order_id=order.id, user_id=request.user.id)
 
-    cart.items.all().delete()
-
-    print(f"TASK GROUP STARTED -> {async_result.id}")
+    async_result = chord(header)(callback)
 
     return Response({
         "message": "Checkout started",
         "order_id": order.id,
         "task_group_id": async_result.id
     })
-
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])

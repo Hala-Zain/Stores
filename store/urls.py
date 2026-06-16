@@ -20,7 +20,7 @@ from .views import (
     queue_status,
     stats,
     profile,
-    checkoutLoadDistribution,test,trending_products
+    checkoutLoadDistribution,trending_products,#test,
 )
 
 from .views import (
