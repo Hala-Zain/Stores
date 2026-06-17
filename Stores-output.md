@@ -3,7 +3,7 @@
 ## 📊 Project Information
 
 - **Project Name**: `Stores`
-- **Generated On**: 2026-06-16 21:08:44 (Asia/Riyadh / GMT+03:00)
+- **Generated On**: 2026-06-17 17:12:50 (Asia/Riyadh / GMT+03:00)
 - **Total Files Processed**: 65
 - **Export Tool**: Easy Whole Project to Single Text File for LLMs v1.1.0
 - **Tool Author**: Jota / José Guilherme Pandolfi
@@ -21,7 +21,7 @@
 
 ```
 ├── 📁 __pycache__/
-│   └── 📄 locustfile.cpython-313.pyc (3 KB)
+│   └── 📄 locustfile.cpython-313.pyc (2.99 KB)
 ├── 📁 myproject/
 │   ├── 📁 __pycache__/
 │   │   ├── 📄 __init__.cpython-313.pyc (238 B)
@@ -139,7 +139,7 @@
 | Total Directories | 12 |
 | Text Files | 25 |
 | Binary Files | 40 |
-| Total Size | 973.24 KB |
+| Total Size | 973.22 KB |
 
 ### 📄 File Types Distribution
 
@@ -1500,7 +1500,7 @@ class PaymentSerializer(serializers.ModelSerializer):
 - **Location**: `store/tasks.py`
 - **Relative Path**: `store`
 - **Created**: 2026-06-15 22:36:40 (Asia/Riyadh / GMT+03:00)
-- **Modified**: 2026-06-16 20:43:50 (Asia/Riyadh / GMT+03:00)
+- **Modified**: 2026-06-17 17:12:32 (Asia/Riyadh / GMT+03:00)
 - **MD5**: `e43f1410075c0599288c47993e344869`
 - **SHA256**: `1e08aafc4490687686838efa3d18c53e564a7f57ca44957aa0aaf22a8e0b13a7`
 - **Encoding**: UTF-8
@@ -2947,7 +2947,7 @@ def trending_products(request):
 - **Location**: `locustfile.py`
 - **Relative Path**: `root`
 - **Created**: 2026-06-15 22:36:40 (Asia/Riyadh / GMT+03:00)
-- **Modified**: 2026-06-16 20:46:03 (Asia/Riyadh / GMT+03:00)
+- **Modified**: 2026-06-17 17:12:50 (Asia/Riyadh / GMT+03:00)
 - **MD5**: `f2a5ac215db5a39e2e58eed2edd7aabb`
 - **SHA256**: `6cdde8bccf06639996ad3ae16017f99be6ae343e5ba272dab6a8cfcdea2e4213`
 - **Encoding**: ASCII
