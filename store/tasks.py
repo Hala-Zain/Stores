@@ -15,7 +15,7 @@ import time
 
 # =====================================================
 # 1. EMAIL TASK
-# =====================================================
+
 
 @shared_task(
     autoretry_for=(Exception,),
@@ -28,7 +28,7 @@ def send_verification_email(email):
 
     print(f"SENDING EMAIL TO -> {email}")
 
-    time.sleep(2)  # احذفها بالإنتاج
+    time.sleep(2) 
 
     send_mail(
 
@@ -58,9 +58,6 @@ def send_verification_email(email):
     }
 
 
-# =====================================================
-# 2. SALES BATCH TASK
-# =====================================================
 
 @shared_task
 def process_sales_batch(batch):
@@ -132,7 +129,6 @@ def process_checkout_item(item_data):
     
     redis_key = f"product_tokens:{product_id}"
     
-    # 1. جلب المخزون الحالي من Redis (الشحن الديناميكي لآلاف المنتجات)
     new_stock = cache.get(redis_key)
     
     if new_stock is None:
@@ -145,19 +141,16 @@ def process_checkout_item(item_data):
             return {"success": False, "reason": "PRODUCT_NOT_FOUND"}
 
     try:
-        # 🚨 [المرحلة الحرجة]: المخزون أصبح واطئاً جداً (5 قطع أو أقل) -> الانتقال فوراً للقفل التشاؤمي في MySQL
         if new_stock <= 5:
             print(f"⚠️ [CRITICAL STOCK DETECTED: {new_stock}]. SWITCHING TO STRICT MYSQL LOCK...")
             
             with transaction.atomic():
-                # قفل تشاؤمي صارم يحجز السطر لمنع أي تضارب نهائياً في القطع الأخيرة
                 product = Product.objects.select_for_update().get(id=product_id)
                 
                 if product.stock_quantity >= quantity:
                     product.stock_quantity -= quantity
                     product.save()
                     
-                    # مزامنة الكاش فوراً بالقيمة الحقيقية بعد الخصم الآمن
                     cache.set(redis_key, product.stock_quantity, timeout=None)
                     print(f"✅ [PESSIMISTIC SUCCESS] Critical item sold safely. DB Stock: {product.stock_quantity}")
                     return {"success": True, "product_id": product_id}
@@ -165,23 +158,19 @@ def process_checkout_item(item_data):
                     print(f"❌ [PESSIMISTIC FAIL] Product {product_id} is OUT OF STOCK.")
                     return {"success": False, "product": product.name, "reason": "OUT_OF_STOCK"}
 
-        # 🚀 [المرحلة العادية]: المخزون وفير ومرتفع (> 5) -> الخصم السريع من Redis لحماية السيرفر
         else:
             if new_stock < quantity:
                 print(f"🛑 [REDIS SHIELD] Blocked by Redis pre-check. Out of stock.")
                 return {"success": False, "product_id": product_id, "reason": "OUT_OF_STOCK"}
 
-            # خصم الكمية من الكاش
             new_stock -= quantity
             cache.set(redis_key, new_stock, timeout=None)
 
-            # تحديث قاعدة البيانات في الخلفية بشكل سريع بدون أقفال ثقيلة لتوفير موارد السيرفر
             Product.objects.filter(id=product_id).update(stock_quantity=new_stock)
             print(f"⚡ [REDIS FAST SUCCESS] Subtracted {quantity} from RAM. New Stock: {new_stock}")
             return {"success": True, "product_id": product_id}
 
     except Exception as e:
-        # تراجع في Redis في حال حدوث أي خطأ بالخلفية لحماية دقة المخزون
         if new_stock is not None and new_stock > 5:
             cache.incr(redis_key, quantity)
         print(f"💥 ERROR IN THRESHOLD TASK: {str(e)}")

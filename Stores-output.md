@@ -3,7 +3,7 @@
 ## 📊 Project Information
 
 - **Project Name**: `Stores`
-- **Generated On**: 2026-06-17 17:15:42 (Asia/Riyadh / GMT+03:00)
+- **Generated On**: 2026-06-17 17:23:31 (Asia/Riyadh / GMT+03:00)
 - **Total Files Processed**: 65
 - **Export Tool**: Easy Whole Project to Single Text File for LLMs v1.1.0
 - **Tool Author**: Jota / José Guilherme Pandolfi
@@ -86,11 +86,11 @@
 │   ├── 📄 decorators.py (551 B)
 │   ├── 📄 models.py (5.41 KB)
 │   ├── 📄 serializers.py (2.58 KB)
-│   ├── 📄 tasks.py (8.32 KB)
+│   ├── 📄 tasks.py (7.08 KB)
 │   ├── 📄 tests.py (63 B)
 │   ├── 📄 urls.py (1.88 KB)
 │   ├── 📄 utils.py (783 B)
-│   └── 📄 views.py (20.85 KB)
+│   └── 📄 views.py (20.88 KB)
 ├── 📁 utils/
 ├── 📄 db.sqlite3 (200 KB)
 ├── 📄 locustfile.py (1.9 KB)
@@ -139,7 +139,7 @@
 | Total Directories | 12 |
 | Text Files | 25 |
 | Binary Files | 40 |
-| Total Size | 973.22 KB |
+| Total Size | 972.01 KB |
 
 ### 📄 File Types Distribution
 
@@ -1494,16 +1494,16 @@ class PaymentSerializer(serializers.ModelSerializer):
 ### <a id="📄-store-tasks-py"></a>📄 `store/tasks.py`
 
 **File Info:**
-- **Size**: 8.32 KB
+- **Size**: 7.08 KB
 - **Extension**: `.py`
 - **Language**: `python`
 - **Location**: `store/tasks.py`
 - **Relative Path**: `store`
 - **Created**: 2026-06-15 22:36:40 (Asia/Riyadh / GMT+03:00)
-- **Modified**: 2026-06-17 17:12:32 (Asia/Riyadh / GMT+03:00)
-- **MD5**: `e43f1410075c0599288c47993e344869`
-- **SHA256**: `1e08aafc4490687686838efa3d18c53e564a7f57ca44957aa0aaf22a8e0b13a7`
-- **Encoding**: UTF-8
+- **Modified**: 2026-06-17 17:23:31 (Asia/Riyadh / GMT+03:00)
+- **MD5**: `bf64c9fcd6081e2fc75243d6680c2466`
+- **SHA256**: `f6a8803956a36e872a46727cbafb2bbb00e9a6028ee340346a93d3525aa3de6a`
+- **Encoding**: ASCII
 
 **File code content:**
 
@@ -1525,7 +1525,7 @@ import time
 
 # =====================================================
 # 1. EMAIL TASK
-# =====================================================
+
 
 @shared_task(
     autoretry_for=(Exception,),
@@ -1538,7 +1538,7 @@ def send_verification_email(email):
 
     print(f"SENDING EMAIL TO -> {email}")
 
-    time.sleep(2)  # احذفها بالإنتاج
+    time.sleep(2) 
 
     send_mail(
 
@@ -1568,9 +1568,6 @@ def send_verification_email(email):
     }
 
 
-# =====================================================
-# 2. SALES BATCH TASK
-# =====================================================
 
 @shared_task
 def process_sales_batch(batch):
@@ -1642,7 +1639,6 @@ def process_checkout_item(item_data):
     
     redis_key = f"product_tokens:{product_id}"
     
-    # 1. جلب المخزون الحالي من Redis (الشحن الديناميكي لآلاف المنتجات)
     new_stock = cache.get(redis_key)
     
     if new_stock is None:
@@ -1655,19 +1651,16 @@ def process_checkout_item(item_data):
             return {"success": False, "reason": "PRODUCT_NOT_FOUND"}
 
     try:
-        # 🚨 [المرحلة الحرجة]: المخزون أصبح واطئاً جداً (5 قطع أو أقل) -> الانتقال فوراً للقفل التشاؤمي في MySQL
         if new_stock <= 5:
             print(f"⚠️ [CRITICAL STOCK DETECTED: {new_stock}]. SWITCHING TO STRICT MYSQL LOCK...")
             
             with transaction.atomic():
-                # قفل تشاؤمي صارم يحجز السطر لمنع أي تضارب نهائياً في القطع الأخيرة
                 product = Product.objects.select_for_update().get(id=product_id)
                 
                 if product.stock_quantity >= quantity:
                     product.stock_quantity -= quantity
                     product.save()
                     
-                    # مزامنة الكاش فوراً بالقيمة الحقيقية بعد الخصم الآمن
                     cache.set(redis_key, product.stock_quantity, timeout=None)
                     print(f"✅ [PESSIMISTIC SUCCESS] Critical item sold safely. DB Stock: {product.stock_quantity}")
                     return {"success": True, "product_id": product_id}
@@ -1675,23 +1668,19 @@ def process_checkout_item(item_data):
                     print(f"❌ [PESSIMISTIC FAIL] Product {product_id} is OUT OF STOCK.")
                     return {"success": False, "product": product.name, "reason": "OUT_OF_STOCK"}
 
-        # 🚀 [المرحلة العادية]: المخزون وفير ومرتفع (> 5) -> الخصم السريع من Redis لحماية السيرفر
         else:
             if new_stock < quantity:
                 print(f"🛑 [REDIS SHIELD] Blocked by Redis pre-check. Out of stock.")
                 return {"success": False, "product_id": product_id, "reason": "OUT_OF_STOCK"}
 
-            # خصم الكمية من الكاش
             new_stock -= quantity
             cache.set(redis_key, new_stock, timeout=None)
 
-            # تحديث قاعدة البيانات في الخلفية بشكل سريع بدون أقفال ثقيلة لتوفير موارد السيرفر
             Product.objects.filter(id=product_id).update(stock_quantity=new_stock)
             print(f"⚡ [REDIS FAST SUCCESS] Subtracted {quantity} from RAM. New Stock: {new_stock}")
             return {"success": True, "product_id": product_id}
 
     except Exception as e:
-        # تراجع في Redis في حال حدوث أي خطأ بالخلفية لحماية دقة المخزون
         if new_stock is not None and new_stock > 5:
             cache.incr(redis_key, quantity)
         print(f"💥 ERROR IN THRESHOLD TASK: {str(e)}")
@@ -1940,15 +1929,15 @@ def release(key):
 ### <a id="📄-store-views-py"></a>📄 `store/views.py`
 
 **File Info:**
-- **Size**: 20.85 KB
+- **Size**: 20.88 KB
 - **Extension**: `.py`
 - **Language**: `python`
 - **Location**: `store/views.py`
 - **Relative Path**: `store`
 - **Created**: 2026-06-15 22:36:40 (Asia/Riyadh / GMT+03:00)
-- **Modified**: 2026-06-16 20:46:31 (Asia/Riyadh / GMT+03:00)
-- **MD5**: `9ff2416d786e365bfb1a93d7dc5aa451`
-- **SHA256**: `9728d72ee5cd0655c2fb6b0eedbba0187d0eb050ec8d6becb3500d08eabac80f`
+- **Modified**: 2026-06-17 17:22:07 (Asia/Riyadh / GMT+03:00)
+- **MD5**: `d51593bbfa0a572de7cc672c8f837228`
+- **SHA256**: `37ce5927a149a4a99a1d80154ed7731f5ae21984c3e9cfce2bbe28206a115e3f`
 - **Encoding**: ASCII
 
 **File code content:**
@@ -1971,6 +1960,7 @@ from django.db.models import F
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
+#from django.utils import timezone2
 
 from rest_framework import generics
 from rest_framework.decorators import api_view, permission_classes
