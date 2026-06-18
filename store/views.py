@@ -16,6 +16,11 @@ from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
 #from django.utils import timezone2
+import redis 
+from django.conf import settings 
+from celery import chord
+from rest_framework.decorators import api_view, permission_classes, throttle_classes
+from .throttling import CheckoutRateThrottle 
 
 from rest_framework import generics
 from rest_framework.decorators import api_view, permission_classes
@@ -276,51 +281,8 @@ def login_user(request):
         'message': 'Invalid username or password'
     })
 
-# @api_view(['POST'])
-# def register(request):
 
-#     username = request.data.get('username')
-#     email = request.data.get('email')
-#     password = request.data.get('password')
 
-#     user_type = request.data.get('user_type')  # "seller" or "customer"
-
-#     if user_type not in ['seller', 'customer']:
-#         return Response({
-#             'message': 'user_type must be either seller or customer'
-#         }, status=400)
-
-#     is_seller = True if user_type == 'seller' else False
-#     is_customer = True if user_type == 'customer' else False
-
-#     if CustomUser.objects.filter(username=username).exists():
-#         return Response({
-#             'message': 'Username already exists'
-#         }, status=400)
-
-#     user = CustomUser.objects.create_user(
-#         username=username,
-#         email=email,
-#         password=password,
-#         is_seller=is_seller,
-#         is_customer=is_customer
-#     )
-
-#     send_verification_email.delay(user.email)
-
-#     return Response({
-#         'message': 'User created successfully',
-#         'user': user.id,
-#         'type': user_type
-#     }, status=201)
-
-import json
-from django.http import JsonResponse
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import AllowAny
-from django.core.cache import cache
-
-from .utils import try_acquire, release
 
 @api_view(['POST'])
 def register(request):
@@ -359,39 +321,6 @@ def register(request):
         'user': user.id,
         'type': user_type
     }, status=201)
-
-# @api_view(['POST'])
-# def register(request):
-
-#     username = request.data.get('username')
-#     email = request.data.get('email')
-#     password = request.data.get('password')
-
-#     is_seller = request.data.get('is_seller', False)
-#     is_customer = True
-
-#     if is_seller:
-#         is_customer = False
-
-#     if CustomUser.objects.filter(username=username).exists():
-#         return Response({
-#             'message': 'Username already exists'
-#         })
-
-#     user = CustomUser.objects.create_user(
-#         username=username,
-#         email=email,
-#         password=password,
-#         is_seller=is_seller,
-#         is_customer=is_customer
-#     )
-
-#     send_verification_email.delay(user.email)
-
-#     return Response({
-#         'message': 'User created successfully',
-#         'user': user.id
-#     })
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -617,11 +546,8 @@ def checkout(request):
             stock_quantity=F('stock_quantity') - item.quantity
 
         )
-
         print(f"ROWS UPDATED -> {updated}")
-
         if updated == 0:
-
             print("OUT OF STOCK")
 
             return Response({
@@ -851,8 +777,22 @@ def stats(request):
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
+@throttle_classes([CheckoutRateThrottle])  
 def checkoutLoadDistribution(request):
     print("\n===== DISTRIBUTED CHECKOUT STARTED =====")
+
+    try:
+        redis_conn = redis.Redis.from_url(settings.CELERY_BROKER_URL)
+        queue_length = redis_conn.llen('celery')
+
+        if queue_length > 500:
+            print(f" [CRITICAL BACKPRESSURE] Queue overloaded: {queue_length} tasks. Hard blocking request.")
+            return Response({
+                'message': 'The store is experiencing very high traffic. Please retry in a few seconds.'
+            }, status=503) 
+    except Exception as e:
+        print(f"Redis connection error during backpressure check: {str(e)}")
+
 
     cart = Cart.objects.get(user=request.user)
     items = list(cart.items.all())
@@ -866,6 +806,7 @@ def checkoutLoadDistribution(request):
         status='pending'
     )
 
+   
     header = [
         process_checkout_item.s({
             'product_id': item.product.id,
@@ -883,7 +824,6 @@ def checkoutLoadDistribution(request):
         "order_id": order.id,
         "task_group_id": async_result.id
     })
-
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def seller_sales_analytics(request):
@@ -933,25 +873,6 @@ def seller_sales_analytics(request):
         "task_group_id": async_result.id,
         "chunks": len(chunks)
     })
-# def test(request):
-#     key = "product_views:2"
-
-#     value = cache.get(key, 0)
-
-#     return JsonResponse({
-#         "key": key,
-#         "value": value
-#     })
-
-#     # cache.set(
-#     #     "counter",
-#     #     cache.get("counter", 0) + 1,
-#     #     timeout=600
-#     # )
-
-#     # return JsonResponse({
-#     #     "counter": cache.get("counter")
-#     # })
 @api_view(['GET'])
 @permission_classes([IsAuthenticated]) 
 def trending_products(request):
