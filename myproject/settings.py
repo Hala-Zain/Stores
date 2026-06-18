@@ -84,6 +84,7 @@ DATABASES = {
         'PASSWORD': 'password',
         'HOST': 'localhost',
         'PORT': '3306',
+        'CONN_MAX_AGE': 60,
     }
 }
 # DATABASES = {
@@ -164,5 +165,13 @@ CACHES = {
             "CLIENT_CLASS":
             "django_redis.client.DefaultClient",
         }
+        
     }
 }
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5), 
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),     
+}
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'

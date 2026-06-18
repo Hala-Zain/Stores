@@ -41,7 +41,7 @@ class Command(BaseCommand):
                 "name": "Laptop",
                 "description": "Gaming laptop",
                 "price": 1200,
-                "stock_quantity": 45
+                "stock_quantity": 4555
             },
 
             {
@@ -57,7 +57,7 @@ class Command(BaseCommand):
                 "name": "Headphones",
                 "description": "Wireless headphones",
                 "price": 200,
-                "stock_quantity": 5
+                "stock_quantity": 15
 
             }
 

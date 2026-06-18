@@ -3,12 +3,11 @@ from rest_framework import serializers
 from rest_framework import serializers
 from django.contrib.auth.password_validation import validate_password
 from .models import CustomUser
+from .models import (
+    Category,Product,Cart,CartItem,Order,OrderItem, Payment)
 
 class RegisterSerializer(serializers.ModelSerializer):
-    # إجبار المستخدم على إدخال كلمة مرور قوية، وإخفائها من الردود (write_only)
     password = serializers.CharField(write_only=True, validators=[validate_password])
-    
-    # حصر نوع المستخدم بخيارين فقط
     user_type = serializers.ChoiceField(choices=['seller', 'customer'], write_only=True)
 
     class Meta:
@@ -16,16 +15,11 @@ class RegisterSerializer(serializers.ModelSerializer):
         fields = ['id', 'username', 'email', 'password', 'user_type']
         
     def create(self, validated_data):
-        # سحب نوع المستخدم لتحديد الصلاحيات
         user_type = validated_data.pop('user_type')
         validated_data['is_seller'] = (user_type == 'seller')
         validated_data['is_customer'] = (user_type == 'customer')
-        
-        # إنشاء المستخدم وتشفير كلمة المرور تلقائياً
         user = CustomUser.objects.create_user(**validated_data)
         return user
-from .models import (
-    Category,Product,Cart,CartItem,Order,OrderItem, Payment)
 
 
 class CategorySerializer(serializers.ModelSerializer):

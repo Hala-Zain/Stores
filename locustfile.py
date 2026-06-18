@@ -1,17 +1,13 @@
 import random
 import uuid
-from locust import HttpUser, between, task
-
+from locust import HttpUser, task
 
 class EcommerceUser(HttpUser):
-    wait_time = between(1, 2)
 
     def on_start(self):
-     
         self.username = f"user_{uuid.uuid4().hex[:10]}"
         self.password = "123456"
         self.user_type = random.choice(["seller", "customer"])
-        
         self.is_authenticated = False
 
         register_response = self.client.post(
@@ -44,7 +40,6 @@ class EcommerceUser(HttpUser):
 
     @task(3)
     def ecommerce_flow(self):
-      
         if not self.is_authenticated:
             return
 
@@ -58,9 +53,16 @@ class EcommerceUser(HttpUser):
             }
         )
 
-        self.client.post("checkout_distribution/")
+        with self.client.post("checkout_distribution/", catch_response=True) as response:
+            if response.status_code in [200, 201]:
+                response.success()
+            elif response.status_code in [429, 503]:
+                response.success()
+            else:
+                response.failure(f" انهيار حقيقي بالسيرفر بكود: {response.status_code}")
 
     @task(1)
+ 
     def seller_analytics(self):
         if not self.is_authenticated or self.user_type != "seller":
             return
@@ -68,8 +70,31 @@ class EcommerceUser(HttpUser):
         period = random.choice(["day", "month", "year"])
 
         self.client.get(
-            "seller_sales",
+            "seller_sales", 
             params={
                 "period": period
             }
         )
+    @task(5)
+    def view_trending_products(self):
+        if not self.is_authenticated:
+            return
+
+        with self.client.get("trending_products/", catch_response=True) as response:
+            if response.status_code == 200:
+                response.success()
+            else:
+                response.failure(f"Failed to fetch trending products: {response.status_code}")
+
+    @task(4)
+    def view_product_details(self):
+        if not self.is_authenticated:
+            return
+            
+        product_id = random.randint(1, 3)
+        
+        with self.client.get(f"product/{product_id}/", catch_response=True) as response:
+             if response.status_code in [200, 404]:
+                 response.success() 
+             else:
+                 response.failure(f"Failed to fetch product details: {response.status_code}")

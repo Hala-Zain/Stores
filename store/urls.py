@@ -59,6 +59,6 @@ urlpatterns = [
     path('stats/', stats),
     path('seller_sales', seller_sales_analytics),
     path('checkout_distribution/', checkoutLoadDistribution),
-    path('trending_products',trending_products)
+    path('trending_products/',trending_products)
 
 ]

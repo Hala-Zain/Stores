@@ -28,7 +28,7 @@ def send_verification_email(email):
 
     print(f"SENDING EMAIL TO -> {email}")
 
-    time.sleep(2)   
+    time.sleep(2) 
 
     send_mail(
 
@@ -125,60 +125,89 @@ from .models import Product
 
 @shared_task
 def process_checkout_item(item_data):
-    product_id = item_data['product_id']
-    quantity = item_data['quantity']
-    
-    print(f"\n===== ADAPTIVE THRESHOLD CHECKOUT STARTED FOR PRODUCT {product_id} =====")
-    
+    product_id = item_data["product_id"]
+    quantity = item_data["quantity"]
+
+    print(
+        f"\n===== ADAPTIVE THRESHOLD CHECKOUT STARTED FOR PRODUCT {product_id} ====="
+    )
+
     redis_key = f"product_tokens:{product_id}"
-    
+
+    try:
+        product_obj = Product.objects.get(id=product_id)
+        price = float(product_obj.price)
+        subtotal = (
+            price * quantity
+        )
+    except Product.DoesNotExist:
+        return {"success": False, "reason": "PRODUCT_NOT_FOUND"}
+
     new_stock = cache.get(redis_key)
-    
+
     if new_stock is None:
-        try:
-            with transaction.atomic():
-                product = Product.objects.get(id=product_id)
-                new_stock = product.stock_quantity
-                cache.set(redis_key, new_stock, timeout=None)
-        except Product.DoesNotExist:
-            return {"success": False, "reason": "PRODUCT_NOT_FOUND"}
+        new_stock = product_obj.stock_quantity
+        cache.set(redis_key, new_stock, timeout=300)
 
     try:
         if new_stock <= 5:
-            print(f" [CRITICAL STOCK DETECTED: {new_stock}]. SWITCHING TO STRICT MYSQL LOCK...")
-            
+            print(
+                f" [CRITICAL STOCK DETECTED: {new_stock}]. SWITCHING TO STRICT MYSQL LOCK..."
+            )
+
             with transaction.atomic():
                 product = Product.objects.select_for_update().get(id=product_id)
-                
+
                 if product.stock_quantity >= quantity:
                     product.stock_quantity -= quantity
                     product.save()
-                    
-                    cache.set(redis_key, product.stock_quantity, timeout=None)
-                    print(f" [PESSIMISTIC SUCCESS] Critical item sold safely. DB Stock: {product.stock_quantity}")
-                    return {"success": True, "product_id": product_id}
+
+                    cache.set(redis_key, product.stock_quantity, timeout=300)
+                    print(
+                        f" [PESSIMISTIC SUCCESS] Critical item sold safely. DB Stock: {product.stock_quantity}"
+                    )
+                    return {
+                        "success": True,
+                        "product_id": product_id,
+                        "subtotal": subtotal,
+                    }
                 else:
-                    print(f"[PESSIMISTIC FAIL] Product {product_id} is OUT OF STOCK.")
-                    return {"success": False, "product": product.name, "reason": "OUT_OF_STOCK"}
+                    print(f" [PESSIMISTIC FAIL] Product {product_id} is OUT OF STOCK.")
+                    return {
+                        "success": False,
+                        "product": product.name,
+                        "reason": "OUT_OF_STOCK",
+                    }
 
         else:
             if new_stock < quantity:
                 print(f" [REDIS SHIELD] Blocked by Redis pre-check. Out of stock.")
-                return {"success": False, "product_id": product_id, "reason": "OUT_OF_STOCK"}
+                return {
+                    "success": False,
+                    "product": product_obj.name,
+                    "reason": "OUT_OF_STOCK",
+                }
 
             new_stock -= quantity
-            cache.set(redis_key, new_stock, timeout=None)
+            cache.set(redis_key, new_stock, timeout=300)
 
-            Product.objects.filter(id=product_id).update(stock_quantity=new_stock)
-            print(f" [REDIS FAST SUCCESS] Subtracted {quantity} from RAM. New Stock: {new_stock}")
-            return {"success": True, "product_id": product_id}
+            Product.objects.filter(id=product_id).update(
+                stock_quantity=new_stock
+            )
+            print(
+                f"[REDIS FAST SUCCESS] Subtracted {quantity} from RAM. New Stock: {new_stock}"
+            )
+            return {
+                "success": True,
+                "product_id": product_id,
+                "subtotal": subtotal,
+            }
 
     except Exception as e:
         if new_stock is not None and new_stock > 5:
             cache.incr(redis_key, quantity)
         print(f" ERROR IN THRESHOLD TASK: {str(e)}")
         return {"success": False, "reason": str(e)}
-
 # =====================================================
 # 4. FINALIZE ORDER TASK
 # =====================================================
@@ -190,7 +219,7 @@ def finalize_order(results, order_id, user_id):
     try:
         order = Order.objects.get(id=order_id)
     except Order.DoesNotExist:
-        print(f"❌ Order {order_id} not found in database.")
+        print(f" Order {order_id} not found in database.")
         return {"success": False, "reason": "ORDER_NOT_FOUND"}
 
     failed_items = []

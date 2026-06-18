@@ -5,8 +5,8 @@ PROJECT EXPORT FOR LLMs
 PROJECT INFORMATION:
 --------------------------------------------------
 Project Name: Stores
-Generated On: 2026-06-16 21:08:44 (Asia/Riyadh / GMT+03:00)
-Total Files Processed: 65
+Generated On: 2026-06-18 22:15:25 (Asia/Riyadh / GMT+03:00)
+Total Files Processed: 68
 Export Tool: Easy Whole Project to Single Text File for LLMs v1.1.0
 Tool Author: Jota / José Guilherme Pandolfi
 
@@ -23,14 +23,15 @@ Custom File Name Pattern: {workspaceName}-output
 PROJECT STRUCTURE
 ================================================================================
 ├── 📁 __pycache__/
-│   └── 📄 locustfile.cpython-313.pyc (3 KB)
+│   ├── 📄 loca.cpython-313.pyc (5.23 KB)
+│   └── 📄 locustfile.cpython-313.pyc (4.81 KB)
 ├── 📁 myproject/
 │   ├── 📁 __pycache__/
 │   │   ├── 📄 __init__.cpython-313.pyc (238 B)
 │   │   ├── 📄 __init__.cpython-314.pyc (220 B)
 │   │   ├── 📄 celery.cpython-313.pyc (670 B)
 │   │   ├── 📄 celery.cpython-314.pyc (658 B)
-│   │   ├── 📄 settings.cpython-313.pyc (3.35 KB)
+│   │   ├── 📄 settings.cpython-313.pyc (3.6 KB)
 │   │   ├── 📄 settings.cpython-314.pyc (3.36 KB)
 │   │   ├── 📄 urls.cpython-313.pyc (721 B)
 │   │   ├── 📄 urls.cpython-314.pyc (703 B)
@@ -39,7 +40,7 @@ PROJECT STRUCTURE
 │   ├── 📄 __init__.py (62 B)
 │   ├── 📄 asgi.py (411 B)
 │   ├── 📄 celery.py (324 B)
-│   ├── 📄 settings.py (4.27 KB)
+│   ├── 📄 settings.py (4.53 KB)
 │   ├── 📄 urls.py (388 B)
 │   └── 📄 wsgi.py (411 B)
 ├── 📁 store/
@@ -54,14 +55,15 @@ PROJECT STRUCTURE
 │   │   ├── 📄 decorators.cpython-314.pyc (1023 B)
 │   │   ├── 📄 models.cpython-313.pyc (7.06 KB)
 │   │   ├── 📄 models.cpython-314.pyc (7.35 KB)
-│   │   ├── 📄 serializers.cpython-313.pyc (4.86 KB)
+│   │   ├── 📄 serializers.cpython-313.pyc (4.84 KB)
 │   │   ├── 📄 serializers.cpython-314.pyc (3.57 KB)
-│   │   ├── 📄 tasks.cpython-313.pyc (7.27 KB)
+│   │   ├── 📄 tasks.cpython-313.pyc (7.23 KB)
 │   │   ├── 📄 tasks.cpython-314.pyc (6.47 KB)
+│   │   ├── 📄 throttling.cpython-313.pyc (2.29 KB)
 │   │   ├── 📄 urls.cpython-313.pyc (2.29 KB)
 │   │   ├── 📄 urls.cpython-314.pyc (2.32 KB)
 │   │   ├── 📄 utils.cpython-313.pyc (1.54 KB)
-│   │   ├── 📄 views.cpython-313.pyc (26.87 KB)
+│   │   ├── 📄 views.cpython-313.pyc (27.75 KB)
 │   │   └── 📄 views.cpython-314.pyc (27.63 KB)
 │   ├── 📁 management/
 │   │   ├── 📁 __pycache__/
@@ -71,7 +73,7 @@ PROJECT STRUCTURE
 │   │   │   ├── 📁 __pycache__/
 │   │   │   │   ├── 📄 __init__.cpython-313.pyc (180 B)
 │   │   │   │   ├── 📄 __init__.cpython-314.pyc (162 B)
-│   │   │   │   ├── 📄 seed.cpython-313.pyc (2.21 KB)
+│   │   │   │   ├── 📄 seed.cpython-313.pyc (2.19 KB)
 │   │   │   │   └── 📄 seed.cpython-314.pyc (2.3 KB)
 │   │   │   ├── 📄 __init__.py
 │   │   │   └── 📄 seed.py (2.08 KB)
@@ -87,15 +89,16 @@ PROJECT STRUCTURE
 │   ├── 📄 apps.py (90 B)
 │   ├── 📄 decorators.py (551 B)
 │   ├── 📄 models.py (5.41 KB)
-│   ├── 📄 serializers.py (2.58 KB)
-│   ├── 📄 tasks.py (8.32 KB)
+│   ├── 📄 serializers.py (2.22 KB)
+│   ├── 📄 tasks.py (6.94 KB)
 │   ├── 📄 tests.py (63 B)
+│   ├── 📄 throttling.py (1.37 KB)
 │   ├── 📄 urls.py (1.88 KB)
 │   ├── 📄 utils.py (783 B)
-│   └── 📄 views.py (20.85 KB)
+│   └── 📄 views.py (19.07 KB)
 ├── 📁 utils/
 ├── 📄 db.sqlite3 (200 KB)
-├── 📄 locustfile.py (1.9 KB)
+├── 📄 locustfile.py (3.03 KB)
 ├── 📄 manage.py (687 B)
 ├── 📄 report.pdf (584.15 KB)
 └── 📄 requirements.txt (127 B)
@@ -103,16 +106,16 @@ PROJECT STRUCTURE
 ================================================================================
 PROJECT STATISTICS
 ================================================================================
-Total Files: 65
+Total Files: 68
 Total Directories: 12
-Text Files: 25
-Binary Files: 40
-Total Size: 973.24 KB
+Text Files: 26
+Binary Files: 42
+Total Size: 982.85 KB
 
 FILE TYPES DISTRIBUTION:
 ------------------------------
-.pyc            : 38
-.py             : 24
+.pyc            : 40
+.py             : 25
 .sqlite3        : 1
 .pdf            : 1
 .txt            : 1
@@ -125,6 +128,7 @@ FILE CODE CONTENTS
 ================================================================================
 BINARY/EXCLUDED FILES (not included in text content)
 ================================================================================
+- __pycache__/loca.cpython-313.pyc
 - __pycache__/locustfile.cpython-313.pyc
 
 
@@ -253,15 +257,15 @@ FILE: myproject/settings.py
 
 FILE INFORMATION:
 ----------------------------------------
-Size: 4.27 KB
+Size: 4.53 KB
 Extension: .py
 Language: python
 Location: myproject/settings.py
 Relative Path: myproject
 Created: 2026-06-15 22:36:40 (Asia/Riyadh / GMT+03:00)
-Modified: 2026-06-15 22:36:40 (Asia/Riyadh / GMT+03:00)
-MD5: 8e15296d5a0bf419b774ad5cc98a8b2e
-SHA256: f502e0b30bc33358578c3ba1d7f466a51df9224c0ca3992e9f4b464ea4aedba9
+Modified: 2026-06-18 21:31:34 (Asia/Riyadh / GMT+03:00)
+MD5: 23e4821d2854f6f4d2be07309649fb8a
+SHA256: 633874a89cf257e1f86d11b7dc3186dcaab1cc711b2525e15ec8bf86c1f5a6bc
 Encoding: ASCII
 
 FILE CONTENT:
@@ -352,6 +356,7 @@ DATABASES = {
         'PASSWORD': 'password',
         'HOST': 'localhost',
         'PORT': '3306',
+        'CONN_MAX_AGE': 60,
     }
 }
 # DATABASES = {
@@ -432,8 +437,16 @@ CACHES = {
             "CLIENT_CLASS":
             "django_redis.client.DefaultClient",
         }
+        
     }
 }
+from datetime import timedelta
+
+SIMPLE_JWT = {
+    'ACCESS_TOKEN_LIFETIME': timedelta(minutes=5), 
+    'REFRESH_TOKEN_LIFETIME': timedelta(days=1),     
+}
+EMAIL_BACKEND = 'django.core.mail.backends.console.EmailBackend'
 ================================================================================
 
 
@@ -530,6 +543,7 @@ BINARY/EXCLUDED FILES (not included in text content)
 - store/__pycache__/serializers.cpython-314.pyc
 - store/__pycache__/tasks.cpython-313.pyc
 - store/__pycache__/tasks.cpython-314.pyc
+- store/__pycache__/throttling.cpython-313.pyc
 - store/__pycache__/urls.cpython-313.pyc
 - store/__pycache__/urls.cpython-314.pyc
 - store/__pycache__/utils.cpython-313.pyc
@@ -588,9 +602,9 @@ Language: python
 Location: store/management/commands/seed.py
 Relative Path: store/management/commands
 Created: 2026-06-15 22:36:40 (Asia/Riyadh / GMT+03:00)
-Modified: 2026-06-16 13:01:45 (Asia/Riyadh / GMT+03:00)
-MD5: f7e91cdc9a72b5e6f5c10daa1126151b
-SHA256: 242e3d5356dbc5f77e8b209cde2b808950245d7895c801ae03b2ef50da1a0826
+Modified: 2026-06-18 13:07:53 (Asia/Riyadh / GMT+03:00)
+MD5: 3e1a408c5d32d21fbe62a9f0f3db882b
+SHA256: 987d2132043b6db2854a8c4234b396e0601a19bff3fb6913ba9572ddc361c634
 Encoding: ASCII
 
 FILE CONTENT:
@@ -638,7 +652,7 @@ class Command(BaseCommand):
                 "name": "Laptop",
                 "description": "Gaming laptop",
                 "price": 1200,
-                "stock_quantity": 45
+                "stock_quantity": 4555
             },
 
             {
@@ -654,7 +668,7 @@ class Command(BaseCommand):
                 "name": "Headphones",
                 "description": "Wireless headphones",
                 "price": 200,
-                "stock_quantity": 5
+                "stock_quantity": 15
 
             }
 
@@ -1350,16 +1364,16 @@ FILE: store/serializers.py
 
 FILE INFORMATION:
 ----------------------------------------
-Size: 2.58 KB
+Size: 2.22 KB
 Extension: .py
 Language: python
 Location: store/serializers.py
 Relative Path: store
 Created: 2026-06-15 22:36:40 (Asia/Riyadh / GMT+03:00)
-Modified: 2026-06-16 20:26:13 (Asia/Riyadh / GMT+03:00)
-MD5: 68a760ccbac9b2fbf69498abe9e4796e
-SHA256: 97bf9c55d2b7c0d34bc1ede9ba60cbf946794832e06b0e798d3bf7e6423b43cc
-Encoding: UTF-8
+Modified: 2026-06-18 21:30:46 (Asia/Riyadh / GMT+03:00)
+MD5: c2dce1d73f6ec98b502f9d926489b5d6
+SHA256: 1a9664c6375015f959812ed563df4b6fc7c53c12e6a0b1b53cbc305aa8560f06
+Encoding: ASCII
 
 FILE CONTENT:
 ----------------------------------------
@@ -1368,12 +1382,11 @@ from rest_framework import serializers
 from rest_framework import serializers
 from django.contrib.auth.password_validation import validate_password
 from .models import CustomUser
+from .models import (
+    Category,Product,Cart,CartItem,Order,OrderItem, Payment)
 
 class RegisterSerializer(serializers.ModelSerializer):
-    # إجبار المستخدم على إدخال كلمة مرور قوية، وإخفائها من الردود (write_only)
     password = serializers.CharField(write_only=True, validators=[validate_password])
-    
-    # حصر نوع المستخدم بخيارين فقط
     user_type = serializers.ChoiceField(choices=['seller', 'customer'], write_only=True)
 
     class Meta:
@@ -1381,16 +1394,11 @@ class RegisterSerializer(serializers.ModelSerializer):
         fields = ['id', 'username', 'email', 'password', 'user_type']
         
     def create(self, validated_data):
-        # سحب نوع المستخدم لتحديد الصلاحيات
         user_type = validated_data.pop('user_type')
         validated_data['is_seller'] = (user_type == 'seller')
         validated_data['is_customer'] = (user_type == 'customer')
-        
-        # إنشاء المستخدم وتشفير كلمة المرور تلقائياً
         user = CustomUser.objects.create_user(**validated_data)
         return user
-from .models import (
-    Category,Product,Cart,CartItem,Order,OrderItem, Payment)
 
 
 class CategorySerializer(serializers.ModelSerializer):
@@ -1483,16 +1491,16 @@ FILE: store/tasks.py
 
 FILE INFORMATION:
 ----------------------------------------
-Size: 8.32 KB
+Size: 6.94 KB
 Extension: .py
 Language: python
 Location: store/tasks.py
 Relative Path: store
 Created: 2026-06-15 22:36:40 (Asia/Riyadh / GMT+03:00)
-Modified: 2026-06-16 20:43:50 (Asia/Riyadh / GMT+03:00)
-MD5: e43f1410075c0599288c47993e344869
-SHA256: 1e08aafc4490687686838efa3d18c53e564a7f57ca44957aa0aaf22a8e0b13a7
-Encoding: UTF-8
+Modified: 2026-06-18 21:30:06 (Asia/Riyadh / GMT+03:00)
+MD5: f7aebc18db90caf5771d2db846d4e5c4
+SHA256: edf34ca04bda8ea395c3270b81921deb8d3a55aebf614c2586794d7cbbc459e5
+Encoding: ASCII
 
 FILE CONTENT:
 ----------------------------------------
@@ -1526,7 +1534,7 @@ def send_verification_email(email):
 
     print(f"SENDING EMAIL TO -> {email}")
 
-    time.sleep(2)  # احذفها بالإنتاج
+    time.sleep(2) 
 
     send_mail(
 
@@ -1623,68 +1631,89 @@ from .models import Product
 
 @shared_task
 def process_checkout_item(item_data):
-    product_id = item_data['product_id']
-    quantity = item_data['quantity']
-    
-    print(f"\n===== ADAPTIVE THRESHOLD CHECKOUT STARTED FOR PRODUCT {product_id} =====")
-    
+    product_id = item_data["product_id"]
+    quantity = item_data["quantity"]
+
+    print(
+        f"\n===== ADAPTIVE THRESHOLD CHECKOUT STARTED FOR PRODUCT {product_id} ====="
+    )
+
     redis_key = f"product_tokens:{product_id}"
-    
-    # 1. جلب المخزون الحالي من Redis (الشحن الديناميكي لآلاف المنتجات)
-    new_stock = cache.get(redis_key)
-    
-    if new_stock is None:
-        try:
-            with transaction.atomic():
-                product = Product.objects.get(id=product_id)
-                new_stock = product.stock_quantity
-                cache.set(redis_key, new_stock, timeout=None)
-        except Product.DoesNotExist:
-            return {"success": False, "reason": "PRODUCT_NOT_FOUND"}
 
     try:
-        # 🚨 [المرحلة الحرجة]: المخزون أصبح واطئاً جداً (5 قطع أو أقل) -> الانتقال فوراً للقفل التشاؤمي في MySQL
+        product_obj = Product.objects.get(id=product_id)
+        price = float(product_obj.price)
+        subtotal = (
+            price * quantity
+        )
+    except Product.DoesNotExist:
+        return {"success": False, "reason": "PRODUCT_NOT_FOUND"}
+
+    new_stock = cache.get(redis_key)
+
+    if new_stock is None:
+        new_stock = product_obj.stock_quantity
+        cache.set(redis_key, new_stock, timeout=300)
+
+    try:
         if new_stock <= 5:
-            print(f"⚠️ [CRITICAL STOCK DETECTED: {new_stock}]. SWITCHING TO STRICT MYSQL LOCK...")
-            
+            print(
+                f" [CRITICAL STOCK DETECTED: {new_stock}]. SWITCHING TO STRICT MYSQL LOCK..."
+            )
+
             with transaction.atomic():
-                # قفل تشاؤمي صارم يحجز السطر لمنع أي تضارب نهائياً في القطع الأخيرة
                 product = Product.objects.select_for_update().get(id=product_id)
-                
+
                 if product.stock_quantity >= quantity:
                     product.stock_quantity -= quantity
                     product.save()
-                    
-                    # مزامنة الكاش فوراً بالقيمة الحقيقية بعد الخصم الآمن
-                    cache.set(redis_key, product.stock_quantity, timeout=None)
-                    print(f"✅ [PESSIMISTIC SUCCESS] Critical item sold safely. DB Stock: {product.stock_quantity}")
-                    return {"success": True, "product_id": product_id}
-                else:
-                    print(f"❌ [PESSIMISTIC FAIL] Product {product_id} is OUT OF STOCK.")
-                    return {"success": False, "product": product.name, "reason": "OUT_OF_STOCK"}
 
-        # 🚀 [المرحلة العادية]: المخزون وفير ومرتفع (> 5) -> الخصم السريع من Redis لحماية السيرفر
+                    cache.set(redis_key, product.stock_quantity, timeout=300)
+                    print(
+                        f" [PESSIMISTIC SUCCESS] Critical item sold safely. DB Stock: {product.stock_quantity}"
+                    )
+                    return {
+                        "success": True,
+                        "product_id": product_id,
+                        "subtotal": subtotal,
+                    }
+                else:
+                    print(f" [PESSIMISTIC FAIL] Product {product_id} is OUT OF STOCK.")
+                    return {
+                        "success": False,
+                        "product": product.name,
+                        "reason": "OUT_OF_STOCK",
+                    }
+
         else:
             if new_stock < quantity:
-                print(f"🛑 [REDIS SHIELD] Blocked by Redis pre-check. Out of stock.")
-                return {"success": False, "product_id": product_id, "reason": "OUT_OF_STOCK"}
+                print(f" [REDIS SHIELD] Blocked by Redis pre-check. Out of stock.")
+                return {
+                    "success": False,
+                    "product": product_obj.name,
+                    "reason": "OUT_OF_STOCK",
+                }
 
-            # خصم الكمية من الكاش
             new_stock -= quantity
-            cache.set(redis_key, new_stock, timeout=None)
+            cache.set(redis_key, new_stock, timeout=300)
 
-            # تحديث قاعدة البيانات في الخلفية بشكل سريع بدون أقفال ثقيلة لتوفير موارد السيرفر
-            Product.objects.filter(id=product_id).update(stock_quantity=new_stock)
-            print(f"⚡ [REDIS FAST SUCCESS] Subtracted {quantity} from RAM. New Stock: {new_stock}")
-            return {"success": True, "product_id": product_id}
+            Product.objects.filter(id=product_id).update(
+                stock_quantity=new_stock
+            )
+            print(
+                f"[REDIS FAST SUCCESS] Subtracted {quantity} from RAM. New Stock: {new_stock}"
+            )
+            return {
+                "success": True,
+                "product_id": product_id,
+                "subtotal": subtotal,
+            }
 
     except Exception as e:
-        # تراجع في Redis في حال حدوث أي خطأ بالخلفية لحماية دقة المخزون
         if new_stock is not None and new_stock > 5:
             cache.incr(redis_key, quantity)
-        print(f"💥 ERROR IN THRESHOLD TASK: {str(e)}")
+        print(f" ERROR IN THRESHOLD TASK: {str(e)}")
         return {"success": False, "reason": str(e)}
-
 # =====================================================
 # 4. FINALIZE ORDER TASK
 # =====================================================
@@ -1696,30 +1725,24 @@ def finalize_order(results, order_id, user_id):
     try:
         order = Order.objects.get(id=order_id)
     except Order.DoesNotExist:
-        print(f"❌ Order {order_id} not found in database.")
+        print(f" Order {order_id} not found in database.")
         return {"success": False, "reason": "ORDER_NOT_FOUND"}
 
     failed_items = []
     total = 0
 
-    # 🔄 فحص النتائج بحذر شديد لمنع الـ KeyError نهائياً
     for result in results:
-        # تأمين 1: التأكد من أن النتيجة ليست فارغة وأنها عبارة عن قاموس (Dictionary)
         if not result or not isinstance(result, dict):
             failed_items.append({"success": False, "reason": "INVALID_OR_EMPTY_RESULT"})
             continue
 
-        # تأمين 2: جلب قيمة success بأمان، إذا لم تكن موجودة نعتبرها False تلقائياً
         is_success = result.get('success', False)
 
         if is_success:
-            # نأخذ الحساب بأمان، وإذا لم يجد 'subtotal' يضع 0 بدلاً من الانهيار
             total += result.get('subtotal', 0)
         else:
-            # إذا فشل المنتج (مثل الـ Headphones اللي خلص ستوكها بالـ Logs) نضيفه هنا
             failed_items.append(result)
 
-    # 🛑 إذا كان هناك أي منتج فاشل في الطلب
     if failed_items:
         print("CHECKOUT FAILED")
         order.status = 'failed'
@@ -1734,12 +1757,10 @@ def finalize_order(results, order_id, user_id):
             "failed_items": failed_items
         }
 
-    #  إذا نجحت كل المنتجات وتم حجز مخزونها بالكامل
     order.total_price = total
     order.status = 'completed'
     order.save()
 
-    # تفريغ سلة المستخدم الفعلي
     CartItem.objects.filter(cart__user_id=user_id).delete()
 
     print(f"ORDER COMPLETED -> {order.id}")
@@ -1783,6 +1804,65 @@ from django.test import TestCase
 
 
 ================================================================================
+FILE: store/throttling.py
+================================================================================
+
+FILE INFORMATION:
+----------------------------------------
+Size: 1.37 KB
+Extension: .py
+Language: python
+Location: store/throttling.py
+Relative Path: store
+Created: 2026-06-18 13:42:13 (Asia/Riyadh / GMT+03:00)
+Modified: 2026-06-18 21:29:28 (Asia/Riyadh / GMT+03:00)
+MD5: 1dc0eafd3eef10ebde9d371e06c29e5b
+SHA256: f159bee9ae6a0bb898e23906979e9f103f09e76ab6f306ab39736248c053598c
+Encoding: ASCII
+
+FILE CONTENT:
+----------------------------------------
+import redis
+from django.conf import settings
+from rest_framework.throttling import UserRateThrottle
+
+REDIS_POOL = redis.ConnectionPool.from_url(settings.CELERY_BROKER_URL, max_connections=50)
+
+class CheckoutRateThrottle(UserRateThrottle):
+
+    def parse_rate(self, rate):
+        if rate is None:
+            return (None, None)
+        try:
+            num, period = rate.split('/')
+            num_requests = int(num)
+            if period.endswith('s') and period[:-1].isdigit():
+                duration = int(period[:-1])
+                return (num_requests, duration)
+        except (ValueError, IndexError):
+            pass
+        return super().parse_rate(rate)
+
+    def get_rate(self):
+        try:
+            redis_conn = redis.Redis(connection_pool=REDIS_POOL)
+            queue_length = redis_conn.llen('celery')
+
+            if queue_length > 400   :
+                print(f"[DYNAMIC THROTTLE] Heavy Load! Rate dropped to 1/25s (Queue: {queue_length})")
+                return '1/25s'
+            elif queue_length > 250:
+                print(f"[DYNAMIC THROTTLE] Medium Load! Rate adjusted to 3/25s (Queue: {queue_length})")
+                return '3/25s'
+            else:
+                return '15/25s'
+        except Exception as e:
+            print(f"Error in dynamic throttle, falling back to static rate: {str(e)}")
+            return '5/25s'
+================================================================================
+
+
+================================================================================
 FILE: store/urls.py
 ================================================================================
 
@@ -1794,9 +1874,9 @@ Language: python
 Location: store/urls.py
 Relative Path: store
 Created: 2026-06-15 22:36:40 (Asia/Riyadh / GMT+03:00)
-Modified: 2026-06-15 23:11:25 (Asia/Riyadh / GMT+03:00)
-MD5: e0650bb8867bca312ae703e64dff813e
-SHA256: 8299224d58d5494ba7a48dead5f5ae9d9ffad6a848115c4e508fc5a41fd4ba21
+Modified: 2026-06-18 21:50:34 (Asia/Riyadh / GMT+03:00)
+MD5: 2005c7b0492cb8de01f4463fe95d0df2
+SHA256: 56ceca512c54a0f7c2c1ffd9c1f48a19771998bae27f3605423e4a6aba10e588
 Encoding: ASCII
 
 FILE CONTENT:
@@ -1862,7 +1942,7 @@ urlpatterns = [
     path('stats/', stats),
     path('seller_sales', seller_sales_analytics),
     path('checkout_distribution/', checkoutLoadDistribution),
-    path('trending_products',trending_products)
+    path('trending_products/',trending_products)
 
 ]
 ================================================================================
@@ -1933,15 +2013,15 @@ FILE: store/views.py
 
 FILE INFORMATION:
 ----------------------------------------
-Size: 20.85 KB
+Size: 19.07 KB
 Extension: .py
 Language: python
 Location: store/views.py
 Relative Path: store
 Created: 2026-06-15 22:36:40 (Asia/Riyadh / GMT+03:00)
-Modified: 2026-06-16 20:46:31 (Asia/Riyadh / GMT+03:00)
-MD5: 9ff2416d786e365bfb1a93d7dc5aa451
-SHA256: 9728d72ee5cd0655c2fb6b0eedbba0187d0eb050ec8d6becb3500d08eabac80f
+Modified: 2026-06-18 21:29:12 (Asia/Riyadh / GMT+03:00)
+MD5: ae15ad58cfe2392be22c2b8337451b7f
+SHA256: e7a6b34912f47613cfda947ec0f9c20ad4bb99472db45c604b7fd73b8558ddca
 Encoding: ASCII
 
 FILE CONTENT:
@@ -1963,6 +2043,12 @@ from django.db.models import F
 from django.http import JsonResponse
 from django.shortcuts import get_object_or_404
 from django.utils import timezone
+#from django.utils import timezone2
+import redis 
+from django.conf import settings 
+from celery import chord
+from rest_framework.decorators import api_view, permission_classes, throttle_classes
+from .throttling import CheckoutRateThrottle 
 
 from rest_framework import generics
 from rest_framework.decorators import api_view, permission_classes
@@ -2223,51 +2309,8 @@ def login_user(request):
         'message': 'Invalid username or password'
     })
 
-# @api_view(['POST'])
-# def register(request):
 
-#     username = request.data.get('username')
-#     email = request.data.get('email')
-#     password = request.data.get('password')
 
-#     user_type = request.data.get('user_type')  # "seller" or "customer"
-
-#     if user_type not in ['seller', 'customer']:
-#         return Response({
-#             'message': 'user_type must be either seller or customer'
-#         }, status=400)
-
-#     is_seller = True if user_type == 'seller' else False
-#     is_customer = True if user_type == 'customer' else False
-
-#     if CustomUser.objects.filter(username=username).exists():
-#         return Response({
-#             'message': 'Username already exists'
-#         }, status=400)
-
-#     user = CustomUser.objects.create_user(
-#         username=username,
-#         email=email,
-#         password=password,
-#         is_seller=is_seller,
-#         is_customer=is_customer
-#     )
-
-#     send_verification_email.delay(user.email)
-
-#     return Response({
-#         'message': 'User created successfully',
-#         'user': user.id,
-#         'type': user_type
-#     }, status=201)
-
-import json
-from django.http import JsonResponse
-from rest_framework.decorators import api_view, permission_classes
-from rest_framework.permissions import AllowAny
-from django.core.cache import cache
-
-from .utils import try_acquire, release
 
 @api_view(['POST'])
 def register(request):
@@ -2306,39 +2349,6 @@ def register(request):
         'user': user.id,
         'type': user_type
     }, status=201)
-
-# @api_view(['POST'])
-# def register(request):
-
-#     username = request.data.get('username')
-#     email = request.data.get('email')
-#     password = request.data.get('password')
-
-#     is_seller = request.data.get('is_seller', False)
-#     is_customer = True
-
-#     if is_seller:
-#         is_customer = False
-
-#     if CustomUser.objects.filter(username=username).exists():
-#         return Response({
-#             'message': 'Username already exists'
-#         })
-
-#     user = CustomUser.objects.create_user(
-#         username=username,
-#         email=email,
-#         password=password,
-#         is_seller=is_seller,
-#         is_customer=is_customer
-#     )
-
-#     send_verification_email.delay(user.email)
-
-#     return Response({
-#         'message': 'User created successfully',
-#         'user': user.id
-#     })
 
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
@@ -2564,11 +2574,8 @@ def checkout(request):
             stock_quantity=F('stock_quantity') - item.quantity
 
         )
-
         print(f"ROWS UPDATED -> {updated}")
-
         if updated == 0:
-
             print("OUT OF STOCK")
 
             return Response({
@@ -2798,8 +2805,22 @@ def stats(request):
 
 @api_view(['POST'])
 @permission_classes([IsAuthenticated])
+@throttle_classes([CheckoutRateThrottle])  
 def checkoutLoadDistribution(request):
     print("\n===== DISTRIBUTED CHECKOUT STARTED =====")
+
+    try:
+        redis_conn = redis.Redis.from_url(settings.CELERY_BROKER_URL)
+        queue_length = redis_conn.llen('celery')
+
+        if queue_length > 500:
+            print(f" [CRITICAL BACKPRESSURE] Queue overloaded: {queue_length} tasks. Hard blocking request.")
+            return Response({
+                'message': 'The store is experiencing very high traffic. Please retry in a few seconds.'
+            }, status=503) 
+    except Exception as e:
+        print(f"Redis connection error during backpressure check: {str(e)}")
+
 
     cart = Cart.objects.get(user=request.user)
     items = list(cart.items.all())
@@ -2813,6 +2834,7 @@ def checkoutLoadDistribution(request):
         status='pending'
     )
 
+   
     header = [
         process_checkout_item.s({
             'product_id': item.product.id,
@@ -2830,7 +2852,6 @@ def checkoutLoadDistribution(request):
         "order_id": order.id,
         "task_group_id": async_result.id
     })
-
 @api_view(['GET'])
 @permission_classes([IsAuthenticated])
 def seller_sales_analytics(request):
@@ -2880,25 +2901,6 @@ def seller_sales_analytics(request):
         "task_group_id": async_result.id,
         "chunks": len(chunks)
     })
-# def test(request):
-#     key = "product_views:2"
-
-#     value = cache.get(key, 0)
-
-#     return JsonResponse({
-#         "key": key,
-#         "value": value
-#     })
-
-#     # cache.set(
-#     #     "counter",
-#     #     cache.get("counter", 0) + 1,
-#     #     timeout=600
-#     # )
-
-#     # return JsonResponse({
-#     #     "counter": cache.get("counter")
-#     # })
 @api_view(['GET'])
 @permission_classes([IsAuthenticated]) 
 def trending_products(request):
@@ -2935,33 +2937,29 @@ FILE: locustfile.py
 
 FILE INFORMATION:
 ----------------------------------------
-Size: 1.9 KB
+Size: 3.03 KB
 Extension: .py
 Language: python
 Location: locustfile.py
 Relative Path: root
 Created: 2026-06-15 22:36:40 (Asia/Riyadh / GMT+03:00)
-Modified: 2026-06-16 20:46:03 (Asia/Riyadh / GMT+03:00)
-MD5: f2a5ac215db5a39e2e58eed2edd7aabb
-SHA256: 6cdde8bccf06639996ad3ae16017f99be6ae343e5ba272dab6a8cfcdea2e4213
+Modified: 2026-06-18 22:00:26 (Asia/Riyadh / GMT+03:00)
+MD5: 08aa9ebd954a9b58e07d3e94567c1b7c
+SHA256: 5bc05caf8d972de11509a87396d23e8d34a5756fd796424ae14b22523c59a450
 Encoding: ASCII
 
 FILE CONTENT:
 ----------------------------------------
 import random
 import uuid
-from locust import HttpUser, between, task
-
+from locust import HttpUser, task
 
 class EcommerceUser(HttpUser):
-    wait_time = between(1, 2)
 
     def on_start(self):
-     
         self.username = f"user_{uuid.uuid4().hex[:10]}"
         self.password = "123456"
         self.user_type = random.choice(["seller", "customer"])
-        
         self.is_authenticated = False
 
         register_response = self.client.post(
@@ -2994,7 +2992,6 @@ class EcommerceUser(HttpUser):
 
     @task(3)
     def ecommerce_flow(self):
-      
         if not self.is_authenticated:
             return
 
@@ -3008,9 +3005,16 @@ class EcommerceUser(HttpUser):
             }
         )
 
-        self.client.post("checkout_distribution/")
+        with self.client.post("checkout_distribution/", catch_response=True) as response:
+            if response.status_code in [200, 201]:
+                response.success()
+            elif response.status_code in [429, 503]:
+                response.success()
+            else:
+                response.failure(f" انهيار حقيقي بالسيرفر بكود: {response.status_code}")
 
     @task(1)
+ 
     def seller_analytics(self):
         if not self.is_authenticated or self.user_type != "seller":
             return
@@ -3018,11 +3022,34 @@ class EcommerceUser(HttpUser):
         period = random.choice(["day", "month", "year"])
 
         self.client.get(
-            "seller_sales",
+            "seller_sales", 
             params={
                 "period": period
             }
         )
+    @task(5)
+    def view_trending_products(self):
+        if not self.is_authenticated:
+            return
+
+        with self.client.get("trending_products/", catch_response=True) as response:
+            if response.status_code == 200:
+                response.success()
+            else:
+                response.failure(f"Failed to fetch trending products: {response.status_code}")
+
+    @task(4)
+    def view_product_details(self):
+        if not self.is_authenticated:
+            return
+            
+        product_id = random.randint(1, 3)
+        
+        with self.client.get(f"product/{product_id}/", catch_response=True) as response:
+             if response.status_code in [200, 404]:
+                 response.success() 
+             else:
+                 response.failure(f"Failed to fetch product details: {response.status_code}")
 ================================================================================
 
 
